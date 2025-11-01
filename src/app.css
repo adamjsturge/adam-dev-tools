@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "@catppuccin/tailwindcss/mocha.css";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  @apply bg-ctp-base text-ctp-text min-h-screen;
+}
