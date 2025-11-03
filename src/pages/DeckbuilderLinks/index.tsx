@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import TextArea from "../../components/TextArea";
 import { useReactPersist } from "../../utils/Storage";
+import {
+  normalizeSimCodes,
+  parseSimDecklist,
+  SimCard,
+} from "../../utils/simCodes";
 
 interface GeneratedLinks {
   gumgum: string;
   egman: string;
   cardkaizoku: string;
-}
-
-interface Card {
-  code: string;
-  quantity: number;
 }
 
 const DeckbuilderLinks = () => {
@@ -29,32 +29,12 @@ const DeckbuilderLinks = () => {
 
   useEffect(() => {
     if (content) {
-      generateLinks();
+      generateLinks(content);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const parseDecklist = (): Card[] => {
-    if (!content.trim()) return [];
-
-    return content
-      .split("\n")
-      .map((line) => line.trim())
-      .filter((line) => line !== "")
-      .map((line) => {
-        const match = line.match(/^(\d+)x([A-Z0-9-]+)/);
-        if (match) {
-          return {
-            code: match[2],
-            quantity: Number.parseInt(match[1]),
-          };
-        }
-        return null;
-      })
-      .filter((item): item is Card => item !== null);
-  };
-
-  const generateGumgumUrl = (cards: Card[]): string => {
+  const generateGumgumUrl = (cards: SimCard[]): string => {
     if (cards.length === 0) return "";
 
     const deckString = cards
@@ -64,7 +44,7 @@ const DeckbuilderLinks = () => {
     return `https://gumgum.gg/deckbuilder?deck=${deckString}`;
   };
 
-  const generateEgmanUrl = (cards: Card[]): string => {
+  const generateEgmanUrl = (cards: SimCard[]): string => {
     if (cards.length === 0) return "";
 
     const deckString = cards
@@ -74,7 +54,7 @@ const DeckbuilderLinks = () => {
     return `https://deckbuilder.egmanevents.com/?deck=${deckString}&type=optcg`;
   };
 
-  const generateCardkaizokuUrl = (cards: Card[]): string => {
+  const generateCardkaizokuUrl = (cards: SimCard[]): string => {
     if (cards.length === 0) return "";
 
     const deckObject: Record<string, number> = {};
@@ -88,8 +68,8 @@ const DeckbuilderLinks = () => {
     return `https://deckbuilder.cardkaizoku.com/?deck=${base64String}`;
   };
 
-  const generateLinks = () => {
-    const cards = parseDecklist();
+  const generateLinks = (normalizedContent: string) => {
+    const cards = parseSimDecklist(normalizedContent);
 
     setGeneratedLinks({
       gumgum: generateGumgumUrl(cards),
@@ -100,12 +80,13 @@ const DeckbuilderLinks = () => {
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newContent = event.target.value;
-    setContent(newContent);
+    const normalized = normalizeSimCodes(newContent);
+    setContent(normalized);
 
-    if (newContent === "") {
+    if (normalized === "") {
       setGeneratedLinks({ gumgum: "", egman: "", cardkaizoku: "" });
     } else {
-      generateLinks();
+      generateLinks(normalized);
     }
   };
 

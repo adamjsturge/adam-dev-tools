@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import TextArea from "../../components/TextArea";
 import { useReactPersist } from "../../utils/Storage";
+import { normalizeSimCodes } from "../../utils/simCodes";
 
 const SimCodeConverter = () => {
   const [content, setContent] = useReactPersist(
@@ -13,25 +14,10 @@ const SimCodeConverter = () => {
     textAreaRef.current?.focus();
   }, []);
 
-  const convertSimCodes = () => {
-    const converted = content
-      .split("\n")
-      .map((line) => {
-        const trimmedLine = line.trim();
-        if (trimmedLine === "") return trimmedLine;
-
-        const match = trimmedLine.match(/^(\d+)(x|\s)([^\s]+)/);
-        if (match) {
-          const quantity = match[1];
-          const cardCode = match[3];
-          return `${quantity}x${cardCode}`;
-        }
-
-        return line;
-      })
-      .join("\n");
-
-    setContent(converted);
+  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newContent = event.target.value;
+    const normalized = normalizeSimCodes(newContent);
+    setContent(normalized);
   };
 
   return (
@@ -39,18 +25,14 @@ const SimCodeConverter = () => {
       <h1 className="text-ctp-text mb-4 text-2xl font-bold">
         Sim Code Converter
       </h1>
-      <div className="mb-4 flex justify-end">
-        <button
-          className="bg-ctp-blue text-ctp-base hover:bg-ctp-sapphire rounded px-4 py-2"
-          onClick={convertSimCodes}
-        >
-          Convert to Standard Format
-        </button>
-      </div>
+      <p className="text-ctp-subtext0 mb-4 text-sm">
+        Paste your deck list and it will automatically convert to standard
+        format (e.g., 4 OP01-001 → 4xOP01-001)
+      </p>
       <TextArea
         ref={textAreaRef}
         value={content}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={handleInput}
         customClass="h-[70vh] w-full"
       />
     </main>

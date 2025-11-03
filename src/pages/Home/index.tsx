@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ToolLink from "../../components/ToolLink";
 import { fuzzySearch } from "../../utils/fuzzySearch";
+import storage from "../../utils/Storage";
 
 interface Tool {
   href: string;
   title: string;
   meta: string;
   category: string;
+  hidden?: boolean;
 }
 
 const tools: Tool[] = [
@@ -91,14 +93,16 @@ const tools: Tool[] = [
   {
     href: "/sim-code-converter",
     title: "Sim Code Converter",
-    meta: "sim,code,convert,tool",
+    meta: "sim,code,convert,tool,one-piece-tcg,otcg",
     category: "utilities",
+    hidden: true,
   },
   {
     href: "/deckbuilder-links",
     title: "Deckbuilder Links",
-    meta: "deck,deckbuilder,links,egman,cardkaizoku,gumgum,tool",
+    meta: "deck,deckbuilder,links,egman,cardkaizoku,gumgum,tool,one-piece-tcg,otcg",
     category: "games",
+    hidden: true,
   },
   {
     href: "/compare",
@@ -129,10 +133,60 @@ const categoryColors: Record<string, string> = {
   design: "ctp-peach",
 };
 
+const EASTER_EGG_KEY = "bounty_unlocked";
+
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [easterEggUnlocked, setEasterEggUnlocked] = useState(() => {
+    const stored = storage.load(EASTER_EGG_KEY, false);
+    if (stored) return true;
 
-  const filteredTools = tools.filter(
+    const params = new URLSearchParams(globalThis.location.search);
+    const urlUnlock = params.get("bounty") === "cards";
+    if (urlUnlock) {
+      storage.save(EASTER_EGG_KEY, true);
+    }
+    return urlUnlock;
+  });
+  const [showUnlockMessage, setShowUnlockMessage] = useState(() => {
+    const params = new URLSearchParams(globalThis.location.search);
+    return (
+      params.get("bounty") === "cards" && !storage.load(EASTER_EGG_KEY, false)
+    );
+  });
+  const [clickCount, setClickCount] = useState(0);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (showUnlockMessage) {
+      const timer = setTimeout(() => setShowUnlockMessage(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showUnlockMessage]);
+
+  const unlockEasterEgg = useCallback(() => {
+    storage.save(EASTER_EGG_KEY, true);
+    setEasterEggUnlocked(true);
+    setShowUnlockMessage(true);
+  }, []);
+
+  const handleSearchClick = () => {
+    if (easterEggUnlocked) return;
+
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+
+    if (newCount >= 5) {
+      unlockEasterEgg();
+      setClickCount(0);
+    }
+  };
+
+  const visibleTools = tools.filter(
+    (tool) => !tool.hidden || easterEggUnlocked,
+  );
+
+  const filteredTools = visibleTools.filter(
     (tool) =>
       fuzzySearch(tool.title, searchQuery, 0.4) ||
       fuzzySearch(tool.href, searchQuery, 0.4) ||
@@ -141,13 +195,13 @@ const Home = () => {
 
   return (
     <div className="min-h-[calc(100vh-4rem)]">
-      <div className="from-ctp-surface0 via-ctp-base to-ctp-mantle relative overflow-hidden bg-gradient-to-br">
+      <div className="from-ctp-surface0 via-ctp-base to-ctp-mantle relative overflow-hidden bg-linear-to-br">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(137,180,250,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(245,194,231,0.1),transparent_50%)]" />
 
         <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="from-ctp-blue via-ctp-mauve to-ctp-pink mb-4 bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent sm:text-6xl">
+            <h1 className="from-ctp-blue via-ctp-mauve to-ctp-pink mb-4 bg-linear-to-r bg-clip-text text-5xl font-bold text-transparent sm:text-6xl">
               Developer Tools
             </h1>
             <p className="text-ctp-subtext0 mx-auto mb-8 max-w-2xl text-lg">
@@ -172,16 +226,36 @@ const Home = () => {
                 </svg>
               </div>
               <input
+                ref={searchInputRef}
                 type="text"
                 placeholder="Search tools..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onClick={handleSearchClick}
                 className="border-ctp-surface2 bg-ctp-surface0 text-ctp-text placeholder:text-ctp-subtext0 focus:border-ctp-mauve focus:ring-ctp-mauve/20 w-full rounded-xl border-2 py-4 pr-4 pl-12 shadow-lg transition-all duration-200 focus:ring-4 focus:outline-none"
               />
             </div>
           </div>
         </div>
       </div>
+
+      {showUnlockMessage && (
+        <div className="fixed top-20 left-1/2 z-50 -translate-x-1/2 animate-[slideDown_0.5s_ease-out]">
+          <div className="from-ctp-pink to-ctp-mauve border-ctp-pink/50 rounded-xl border-2 bg-linear-to-r px-6 py-4 shadow-2xl backdrop-blur-sm">
+            <div className="flex items-center gap-3">
+              <span className="text-3xl">🎴</span>
+              <div>
+                <p className="text-ctp-base text-lg font-bold">
+                  Bounty Cards Tools Unlocked!
+                </p>
+                <p className="text-ctp-base/90 text-sm">
+                  Card game tools are now visible
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {filteredTools.length === 0 ? (
