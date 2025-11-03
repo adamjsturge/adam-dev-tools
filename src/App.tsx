@@ -46,7 +46,7 @@ const App = () => (
       <Route path="/deckbuilder-links" component={DeckbuilderLinks} />
       <Route path="/compare" component={TextCompare} />
       <Route path="/ev-charging" component={EVCharging} />
-      <Route path="/color-opacity" component={ColorOpacity} />
+      <Route path="/opacifier" component={ColorOpacity} />
 
       <Route path="/home">
         <Redirect to="/" />

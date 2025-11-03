@@ -70,10 +70,6 @@ function rgbaToHex(r: number, g: number, b: number, opacity: number): string {
   return "#" + hexR + hexG + hexB;
 }
 
-function rgbaString(r: number, g: number, b: number, opacity: number): string {
-  return `rgba(${r}, ${g}, ${b}, ${opacity.toFixed(2)})`;
-}
-
 const opacityLevels = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05];
 
 const ColorOpacity = () => {
@@ -156,12 +152,6 @@ const ColorOpacity = () => {
                 parsedColor.b,
                 opacity,
               );
-              const rgbaCode = rgbaString(
-                parsedColor.r,
-                parsedColor.g,
-                parsedColor.b,
-                opacity,
-              );
 
               return (
                 <div
@@ -185,17 +175,6 @@ const ColorOpacity = () => {
                         onClick={() => copyToClipboard(hexCode, index * 2)}
                       >
                         {copiedIndex === index * 2 ? "✓ Copied" : "Copy"}
-                      </button>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <code className="bg-ctp-surface1 text-ctp-text flex-1 rounded px-3 py-2 font-mono text-sm">
-                        {rgbaCode}
-                      </code>
-                      <button
-                        className="bg-ctp-blue text-ctp-base hover:bg-ctp-sapphire rounded px-3 py-2 text-sm"
-                        onClick={() => copyToClipboard(rgbaCode, index * 2 + 1)}
-                      >
-                        {copiedIndex === index * 2 + 1 ? "✓ Copied" : "Copy"}
                       </button>
                     </div>
                   </div>

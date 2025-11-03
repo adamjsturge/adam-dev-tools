@@ -6,6 +6,7 @@ import storage from "../../utils/Storage";
 interface Tool {
   href: string;
   title: string;
+  desc?: string;
   meta: string;
   category: string;
   hidden?: boolean;
@@ -117,21 +118,13 @@ const tools: Tool[] = [
     category: "utilities",
   },
   {
-    href: "/color-opacity",
-    title: "Color Opacity",
+    href: "/opacifier",
+    title: "Opacifier",
+    // desc: "Get hex codes for disabled buttons and more",
     meta: "color,opacity,alpha,hex,rgba,transparency,tool",
     category: "design",
   },
 ];
-
-const categoryColors: Record<string, string> = {
-  encoding: "ctp-blue",
-  text: "ctp-green",
-  media: "ctp-mauve",
-  utilities: "ctp-yellow",
-  games: "ctp-pink",
-  design: "ctp-peach",
-};
 
 const EASTER_EGG_KEY = "bounty_unlocked";
 
@@ -268,13 +261,12 @@ const Home = () => {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredTools.map((tool) => (
               <div key={tool.href} className="group relative">
-                <div
-                  className={`absolute -inset-0.5 rounded-2xl bg-${categoryColors[tool.category]} opacity-0 blur transition duration-300 group-hover:opacity-20`}
-                />
+                <div className="bg-ctp-mauve absolute -inset-0.5 rounded-2xl opacity-0 blur transition duration-300 group-hover:opacity-20" />
                 <ToolLink
                   href={tool.href}
                   title={tool.title}
                   category={tool.category}
+                  desc={tool.desc}
                 />
               </div>
             ))}

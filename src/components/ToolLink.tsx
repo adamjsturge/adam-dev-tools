@@ -3,10 +3,11 @@ import { Link } from "wouter";
 interface ToolLinkProps {
   href: string;
   title: string;
+  desc?: string;
   category?: string;
 }
 
-const ToolLink = ({ href, title }: ToolLinkProps) => {
+const ToolLink = ({ href, title, desc }: ToolLinkProps) => {
   return (
     <Link
       href={href}
@@ -14,10 +15,15 @@ const ToolLink = ({ href, title }: ToolLinkProps) => {
     >
       <div className="relative h-full p-6">
         <div className="flex h-full flex-col">
-          <h3 className="text-ctp-text group-hover/link:text-ctp-mauve flex-grow text-lg font-bold transition-colors">
+          <h3 className="text-ctp-text group-hover/link:text-ctp-mauve grow text-lg font-bold transition-colors">
             {title}
           </h3>
-
+          {/* Looks pretty ugly since it makes the tile taller than other tiles and all tiles on its own row. */}
+          {desc && (
+            <p className="text-ctp-overlay0 mt-2 text-xs leading-relaxed">
+              {desc}
+            </p>
+          )}
           <div className="text-ctp-subtext0 group-hover/link:text-ctp-mauve mt-4 flex items-center gap-2 text-sm font-medium transition-all group-hover/link:gap-3">
             <span>Open</span>
             <svg
