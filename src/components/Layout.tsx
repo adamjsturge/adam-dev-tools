@@ -50,7 +50,7 @@ const Layout = ({ children }: LayoutProps) => {
             />
           </a>
           <a
-            href="https://github.com/adamjsturge/dev-tools"
+            href="https://github.com/adamjsturge/adam-dev-tools"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-shrink-0"
