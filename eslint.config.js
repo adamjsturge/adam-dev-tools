@@ -34,6 +34,7 @@ export default tseslint.config({
     },
   },
   rules: {
+    "@typescript-eslint/unified-signatures": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

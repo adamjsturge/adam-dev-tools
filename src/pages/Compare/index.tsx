@@ -58,8 +58,10 @@ function computeDiff(text1: string, text2: string): DiffLine[] {
       }
 
       if (!found) {
-        result.push({ type: "removed", content: lines1[i] });
-        result.push({ type: "added", content: lines2[j] });
+        result.push(
+          { type: "removed", content: lines1[i] },
+          { type: "added", content: lines2[j] },
+        );
         i++;
         j++;
       }
@@ -108,40 +110,7 @@ const TextCompare = () => {
         </button>
       </div>
 
-      {!showDiff ? (
-        <div className="flex flex-1 gap-4">
-          <div className="flex flex-1 flex-col">
-            <h2 className="text-ctp-text mb-2 text-lg font-semibold">
-              Text 1 (Original)
-            </h2>
-            <TextArea
-              ref={textArea1Ref}
-              value={text1}
-              onChange={(e) => {
-                setText1(e.target.value);
-                setShowDiff(false);
-              }}
-              customClass="h-full"
-              placeholder="Paste your first text here..."
-              autoFocus
-            />
-          </div>
-          <div className="flex flex-1 flex-col">
-            <h2 className="text-ctp-text mb-2 text-lg font-semibold">
-              Text 2 (Compare to)
-            </h2>
-            <TextArea
-              value={text2}
-              onChange={(e) => {
-                setText2(e.target.value);
-                setShowDiff(false);
-              }}
-              customClass="h-full"
-              placeholder="Paste your second text here..."
-            />
-          </div>
-        </div>
-      ) : (
+      {showDiff ? (
         <div className="flex-1 overflow-auto">
           <div className="mb-4 flex items-center gap-4">
             <h2 className="text-ctp-text text-lg font-semibold">
@@ -195,6 +164,38 @@ const TextCompare = () => {
                 );
               }
             })}
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-1 gap-4">
+          <div className="flex flex-1 flex-col">
+            <h2 className="text-ctp-text mb-2 text-lg font-semibold">
+              Text 1 (Original)
+            </h2>
+            <TextArea
+              ref={textArea1Ref}
+              value={text1}
+              onChange={(e) => {
+                setText1(e.target.value);
+                setShowDiff(false);
+              }}
+              customClass="h-full"
+              placeholder="Paste your first text here..."
+            />
+          </div>
+          <div className="flex flex-1 flex-col">
+            <h2 className="text-ctp-text mb-2 text-lg font-semibold">
+              Text 2 (Compare to)
+            </h2>
+            <TextArea
+              value={text2}
+              onChange={(e) => {
+                setText2(e.target.value);
+                setShowDiff(false);
+              }}
+              customClass="h-full"
+              placeholder="Paste your second text here..."
+            />
           </div>
         </div>
       )}

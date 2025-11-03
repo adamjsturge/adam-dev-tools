@@ -13,7 +13,7 @@ interface TextStats {
 function calculateStats(input: string): TextStats {
   return {
     characters: input.length,
-    charactersNoSpaces: input.replace(/\s/g, "").length,
+    charactersNoSpaces: input.replaceAll(/\s/g, "").length,
     words: input.trim() === "" ? 0 : input.trim().split(/\s+/).length,
     lines: input.split("\n").length,
     sentences:

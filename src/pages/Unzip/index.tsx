@@ -62,13 +62,13 @@ const Unzip = () => {
     a.download = filename;
     document.body.append(a);
     a.click();
-    document.body.removeChild(a);
+    a.remove();
     URL.revokeObjectURL(url);
   };
 
   const downloadAll = async () => {
     try {
-      if (!("showDirectoryPicker" in window)) {
+      if (!("showDirectoryPicker" in globalThis)) {
         alert(
           "Your browser doesn't support folder downloads. Files will download individually.",
         );
@@ -79,7 +79,7 @@ const Unzip = () => {
       }
 
       const rootHandle = await (
-        window as Window & {
+        globalThis as Window & {
           showDirectoryPicker: () => Promise<FileSystemDirectoryHandle>;
         }
       ).showDirectoryPicker();
@@ -96,13 +96,14 @@ const Unzip = () => {
           const folderPath = pathParts
             .slice(0, pathParts.indexOf(folder) + 1)
             .join("/");
-          if (!processedFolders.has(folderPath)) {
+          const cachedHandle = processedFolders.get(folderPath);
+          if (cachedHandle) {
+            currentHandle = cachedHandle;
+          } else {
             currentHandle = await currentHandle.getDirectoryHandle(folder, {
               create: true,
             });
             processedFolders.set(folderPath, currentHandle);
-          } else {
-            currentHandle = processedFolders.get(folderPath)!;
           }
         }
 

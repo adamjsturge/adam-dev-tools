@@ -245,125 +245,7 @@ const EVCharging = () => {
         </p>
       </div>
 
-      {!showResults ? (
-        <>
-          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="bg-ctp-surface0 rounded-xl p-6">
-              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
-                Battery Information
-              </h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="currentCharge"
-                    className="text-ctp-text mb-2 block text-sm font-medium"
-                  >
-                    Current Charge (%)
-                  </label>
-                  <input
-                    id="currentCharge"
-                    type="number"
-                    min={0}
-                    max={100}
-                    value={currentCharge}
-                    onChange={(e) => setCurrentCharge(Number(e.target.value))}
-                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="targetCharge"
-                    className="text-ctp-text mb-2 block text-sm font-medium"
-                  >
-                    Target Charge (%)
-                  </label>
-                  <input
-                    id="targetCharge"
-                    type="number"
-                    min={0}
-                    max={100}
-                    value={targetCharge}
-                    onChange={(e) => setTargetCharge(Number(e.target.value))}
-                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-ctp-surface0 rounded-xl p-6">
-              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
-                Charging Time
-              </h2>
-              <label
-                htmlFor="estimatedMinutes"
-                className="text-ctp-text mb-2 block text-sm font-medium"
-              >
-                Estimated Time (minutes)
-              </label>
-              <input
-                id="estimatedMinutes"
-                type="number"
-                min={1}
-                value={estimatedMinutes}
-                onChange={(e) => setEstimatedMinutes(Number(e.target.value))}
-                placeholder="45"
-                className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
-              />
-              <p className="text-ctp-subtext1 mt-2 text-sm">
-                Time your car estimates to reach target charge
-              </p>
-            </div>
-
-            <div className="bg-ctp-surface0 rounded-xl p-6 md:col-span-2">
-              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
-                Start Time
-              </h2>
-              <div className="flex items-end gap-2">
-                <div className="flex-1">
-                  <label
-                    htmlFor="startTime"
-                    className="text-ctp-text mb-2 block text-sm font-medium"
-                  >
-                    Start Time (optional)
-                  </label>
-                  <input
-                    id="startTime"
-                    type="time"
-                    value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
-                  />
-                </div>
-                <button
-                  className="bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base h-10 rounded px-4 py-2"
-                  onClick={setCurrentTime}
-                >
-                  Now
-                </button>
-              </div>
-              <p className="text-ctp-subtext1 mt-2 text-sm">
-                Set to see actual completion times (times will display in AM/PM
-                format)
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-8 flex justify-center gap-4">
-            <button
-              className="bg-ctp-green hover:bg-ctp-teal text-ctp-base rounded-lg px-6 py-3 font-semibold"
-              onClick={calculateCharging}
-            >
-              Calculate Charging
-            </button>
-            <button
-              className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded-lg px-6 py-3"
-              onClick={reset}
-            >
-              Reset
-            </button>
-          </div>
-        </>
-      ) : (
+      {showResults ? (
         <div className="flex flex-1 flex-col">
           <div className="mb-4 flex items-center justify-between">
             <div>
@@ -522,6 +404,124 @@ const EVCharging = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <>
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="bg-ctp-surface0 rounded-xl p-6">
+              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
+                Battery Information
+              </h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="currentCharge"
+                    className="text-ctp-text mb-2 block text-sm font-medium"
+                  >
+                    Current Charge (%)
+                  </label>
+                  <input
+                    id="currentCharge"
+                    type="number"
+                    min={0}
+                    max={100}
+                    value={currentCharge}
+                    onChange={(e) => setCurrentCharge(Number(e.target.value))}
+                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="targetCharge"
+                    className="text-ctp-text mb-2 block text-sm font-medium"
+                  >
+                    Target Charge (%)
+                  </label>
+                  <input
+                    id="targetCharge"
+                    type="number"
+                    min={0}
+                    max={100}
+                    value={targetCharge}
+                    onChange={(e) => setTargetCharge(Number(e.target.value))}
+                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-ctp-surface0 rounded-xl p-6">
+              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
+                Charging Time
+              </h2>
+              <label
+                htmlFor="estimatedMinutes"
+                className="text-ctp-text mb-2 block text-sm font-medium"
+              >
+                Estimated Time (minutes)
+              </label>
+              <input
+                id="estimatedMinutes"
+                type="number"
+                min={1}
+                value={estimatedMinutes}
+                onChange={(e) => setEstimatedMinutes(Number(e.target.value))}
+                placeholder="45"
+                className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
+              />
+              <p className="text-ctp-subtext1 mt-2 text-sm">
+                Time your car estimates to reach target charge
+              </p>
+            </div>
+
+            <div className="bg-ctp-surface0 rounded-xl p-6 md:col-span-2">
+              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
+                Start Time
+              </h2>
+              <div className="flex items-end gap-2">
+                <div className="flex-1">
+                  <label
+                    htmlFor="startTime"
+                    className="text-ctp-text mb-2 block text-sm font-medium"
+                  >
+                    Start Time (optional)
+                  </label>
+                  <input
+                    id="startTime"
+                    type="time"
+                    value={startTime}
+                    onChange={(e) => setStartTime(e.target.value)}
+                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
+                  />
+                </div>
+                <button
+                  className="bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base h-10 rounded px-4 py-2"
+                  onClick={setCurrentTime}
+                >
+                  Now
+                </button>
+              </div>
+              <p className="text-ctp-subtext1 mt-2 text-sm">
+                Set to see actual completion times (times will display in AM/PM
+                format)
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 flex justify-center gap-4">
+            <button
+              className="bg-ctp-green hover:bg-ctp-teal text-ctp-base rounded-lg px-6 py-3 font-semibold"
+              onClick={calculateCharging}
+            >
+              Calculate Charging
+            </button>
+            <button
+              className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded-lg px-6 py-3"
+              onClick={reset}
+            >
+              Reset
+            </button>
+          </div>
+        </>
       )}
     </main>
   );
