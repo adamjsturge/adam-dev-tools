@@ -18,10 +18,7 @@ export const normalizeSimCodeLine = (line: string): string => {
 };
 
 export const normalizeSimCodes = (content: string): string => {
-  return content
-    .split("\n")
-    .map(normalizeSimCodeLine)
-    .join("\n");
+  return content.split("\n").map(normalizeSimCodeLine).join("\n");
 };
 
 export const parseSimDecklist = (content: string): SimCard[] => {
@@ -43,4 +40,3 @@ export const parseSimDecklist = (content: string): SimCard[] => {
     })
     .filter((item): item is SimCard => item !== null);
 };
-

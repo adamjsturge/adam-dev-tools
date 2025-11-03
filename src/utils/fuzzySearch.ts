@@ -12,4 +12,3 @@ export function fuzzySearch(
   }
   return matches / string.length >= ratio || term === "";
 }
-
