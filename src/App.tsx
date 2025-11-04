@@ -10,6 +10,7 @@ import DeckDrawOdds from "./pages/DeckDrawOdds";
 import EVCharging from "./pages/EVCharging";
 import ExtraLineRemoval from "./pages/ExtraLineRemoval";
 import Home from "./pages/Home";
+import JWTDebugger from "./pages/JWT";
 import NotFound from "./pages/NotFound";
 import QRCodeGenerator from "./pages/QRCode/Generator";
 import QRCodeScanner from "./pages/QRCode/Scanner";
@@ -47,6 +48,7 @@ const App = () => (
       <Route path="/compare" component={TextCompare} />
       <Route path="/ev-charging" component={EVCharging} />
       <Route path="/opacifier" component={ColorOpacity} />
+      <Route path="/jwt" component={JWTDebugger} />
 
       <Route path="/home">
         <Redirect to="/" />

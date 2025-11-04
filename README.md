@@ -1,8 +1,64 @@
-# **PROJECT_NAME**
+# **Adam Dev Tools**
 
 A React application created with create-react-adam.
 
-## Getting Started
+## List of things to add
+
+We will be making a desktop version that has more things in it, but for now we will focus on the web version.
+
+Desktop Only Things to Add:
+
+- [ ] Brute Force URL Fuzzer
+
+Future Things:
+
+- [ ] Unix Time Converter
+- [ ] JSON Format/Validate
+- [x] Base64 String Encode/Decode
+- [ ] Base64 Image Encode/Decode
+- [x] JWT Debugger
+- [ ] RegExp Tester
+- [ ] URL Encode/Decode
+- [ ] URL Parser
+- [ ] HTML Entity Encode/Decode
+- [ ] Backslash Escape/Unescape
+- [ ] UUID/ULID Generate/Decode
+- [ ] HTML Preview
+- [ ] Text Diff Checker
+- [ ] YAML to JSON
+- [ ] JSON to YAML
+- [ ] Number Base Converter
+- [ ] HTML Beautify/Minify
+- [ ] CSS Beautify/Minify
+- [ ] JS Beautify/Minify
+- [ ] ERB Beautify/Minify
+- [ ] LESS Beautify/Minify
+- [ ] SCSS Beautify/Minify
+- [ ] XML Beautify/Minify
+- [ ] Lorem Ipsum Generator
+- [x] QR Code Reader/Generator
+- [ ] String Inspector
+- [ ] JSON to CSV
+- [ ] CSV to JSON
+- [ ] Hash Generator
+- [ ] HTML to JSX
+- [ ] Markdown Preview
+- [ ] Cron Job Parser
+- [ ] Color Converter
+- [ ] PHP to JSON
+- [ ] JSON to PHP
+- [ ] PHP Serializer
+- [ ] PHP Unserializer
+- [ ] Random String Generator
+- [ ] SVG to CSS
+- [ ] cURL to Code
+- [ ] JSON to Code
+- [ ] Certificate Decoder (X.509)
+- [ ] Hex to ASCII
+- [ ] ASCII to Hex
+- [ ] Line Sort/Dedupe
+
+## Getting Started as a Developer
 
 ```bash
 npm run dev
@@ -39,45 +95,3 @@ Runs ESLint to check for code quality issues.
 ### `npm run format`
 
 Formats all files with Prettier, organizing imports and sorting Tailwind classes.
-
-## Tech Stack
-
-- **React** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Build tool and dev server
-- **Wouter** - Lightweight routing
-- **Tailwind CSS** - Utility-first CSS framework
-- **ESLint & Prettier** - Code quality and formatting
-
-## Project Structure
-
-```
-src/
-  ├── pages/          # Page components
-  │   ├── Home/index.tsx
-  │   └── About/index.tsx
-  ├── App.tsx         # Main app with routes
-  ├── main.tsx        # Entry point
-  └── app.css         # Global styles (Tailwind imports)
-```
-
-## Adding New Pages
-
-1. Create a new component in `src/pages/`
-2. Import and add a route in `src/App.tsx`
-
-Example:
-
-```tsx
-import NewPage from "./pages/NewPage";
-
-// In the Switch component:
-<Route path="/new" component={NewPage} />;
-```
-
-## Learn More
-
-- [React Documentation](https://react.dev)
-- [Vite Documentation](https://vitejs.dev)
-- [Wouter Documentation](https://github.com/molefrog/wouter)
-- [Tailwind CSS Documentation](https://tailwindcss.com)

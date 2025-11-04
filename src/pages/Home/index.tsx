@@ -124,6 +124,12 @@ const tools: Tool[] = [
     meta: "color,opacity,alpha,hex,rgba,transparency,tool",
     category: "design",
   },
+  {
+    href: "/jwt",
+    title: "JWT Debugger",
+    meta: "jwt,json,web,token,decode,debug,auth,tool",
+    category: "encoding",
+  },
 ];
 
 const EASTER_EGG_KEY = "bounty_unlocked";

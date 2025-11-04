@@ -79,7 +79,7 @@ const Unzip = () => {
       }
 
       const rootHandle = await (
-        globalThis as Window & {
+        globalThis as unknown as Window & {
           showDirectoryPicker: () => Promise<FileSystemDirectoryHandle>;
         }
       ).showDirectoryPicker();
