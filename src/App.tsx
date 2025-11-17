@@ -1,5 +1,6 @@
 import { Redirect, Route, Switch } from "wouter";
 import Layout from "./components/Layout";
+import BackgroundRemoval from "./pages/BackgroundRemoval";
 import Base64Decode from "./pages/Base64/Decode";
 import Base64Encode from "./pages/Base64/Encode";
 import CardAssumption from "./pages/CardAssumption";
@@ -37,6 +38,7 @@ const App = () => (
       <Route path="/url/decode" component={URLDecode} />
 
       <Route path="/webp" component={WebPConverter} />
+      <Route path="/background-removal" component={BackgroundRemoval} />
       <Route path="/textbin" component={TextBin} />
       <Route path="/extra-line-removal" component={ExtraLineRemoval} />
       <Route path="/word-counter" component={WordCounter} />

@@ -55,6 +55,12 @@ const tools: Tool[] = [
     meta: "webp,convert,tool",
     category: "media",
   },
+  // {
+  //   href: "/background-removal",
+  //   title: "Background Removal",
+  //   meta: "background,remove,ai,transparent,png,tool",
+  //   category: "media",
+  // },
   {
     href: "/textbin",
     title: "TextBin",

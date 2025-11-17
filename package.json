@@ -19,6 +19,7 @@
     "test:e2e:report": "allure generate ./allure-results --clean && allure open"
   },
   "dependencies": {
+    "@imgly/background-removal": "1.7.0",
     "@types/jszip": "3.4.0",
     "@types/qrcode": "1.5.6",
     "jszip": "3.10.1",
