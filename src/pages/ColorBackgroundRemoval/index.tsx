@@ -6,6 +6,8 @@ const ColorBackgroundRemoval = () => {
   const [resultUrl, setResultUrl] = useState<string>("");
   const [tolerance, setTolerance] = useState(30);
   const [isPickerMode, setIsPickerMode] = useState(false);
+  const [useCustomBackground, setUseCustomBackground] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState("#000000");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const originalCanvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -226,7 +228,7 @@ const ColorBackgroundRemoval = () => {
 
         {/* Tolerance Slider */}
         {file && (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
             <label className="flex flex-col">
               <span className="text-ctp-text mb-2 text-sm font-medium">
                 Tolerance: {tolerance}
@@ -243,6 +245,41 @@ const ColorBackgroundRemoval = () => {
                 Higher tolerance removes more similar colors
               </span>
             </label>
+
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={useCustomBackground}
+                  onChange={(e) => setUseCustomBackground(e.target.checked)}
+                  className="accent-ctp-mauve"
+                />
+                <span className="text-ctp-text text-sm">
+                  Use custom background color
+                </span>
+              </label>
+
+              {useCustomBackground && (
+                <div className="flex items-center gap-3">
+                  <label
+                    htmlFor="bg-color-picker"
+                    className="text-ctp-text text-sm"
+                  >
+                    Background color:
+                  </label>
+                  <input
+                    id="bg-color-picker"
+                    type="color"
+                    value={backgroundColor}
+                    onChange={(e) => setBackgroundColor(e.target.value)}
+                    className="h-10 w-20 cursor-pointer rounded border-2 border-ctp-surface2"
+                  />
+                  <span className="text-ctp-subtext0 text-xs">
+                    {backgroundColor}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
@@ -272,8 +309,9 @@ const ColorBackgroundRemoval = () => {
             <div
               className="rounded-lg p-4"
               style={{
-                background:
-                  "repeating-conic-gradient(#808080 0% 25%, #ffffff 0% 50%) 50% / 20px 20px",
+                background: useCustomBackground
+                  ? backgroundColor
+                  : "repeating-conic-gradient(#808080 0% 25%, #ffffff 0% 50%) 50% / 20px 20px",
               }}
             >
               <canvas
