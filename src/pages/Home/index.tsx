@@ -62,6 +62,12 @@ const tools: Tool[] = [
   //   category: "media",
   // },
   {
+    href: "/color-background-removal",
+    title: "Color Background Removal",
+    meta: "color,background,remove,magic,wand,eraser,dropper,picker,transparent,png,tool",
+    category: "media",
+  },
+  {
     href: "/textbin",
     title: "TextBin",
     meta: "text,bin,tool",

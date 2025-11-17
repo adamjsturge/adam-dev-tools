@@ -4,6 +4,7 @@ import BackgroundRemoval from "./pages/BackgroundRemoval";
 import Base64Decode from "./pages/Base64/Decode";
 import Base64Encode from "./pages/Base64/Encode";
 import CardAssumption from "./pages/CardAssumption";
+import ColorBackgroundRemoval from "./pages/ColorBackgroundRemoval";
 import ColorOpacity from "./pages/ColorOpacity";
 import TextCompare from "./pages/Compare";
 import DeckbuilderLinks from "./pages/DeckbuilderLinks";
@@ -39,6 +40,10 @@ const App = () => (
 
       <Route path="/webp" component={WebPConverter} />
       <Route path="/background-removal" component={BackgroundRemoval} />
+      <Route
+        path="/color-background-removal"
+        component={ColorBackgroundRemoval}
+      />
       <Route path="/textbin" component={TextBin} />
       <Route path="/extra-line-removal" component={ExtraLineRemoval} />
       <Route path="/word-counter" component={WordCounter} />
