@@ -404,11 +404,16 @@ const ColorBackgroundRemoval = () => {
               Optional: Enable custom background color to see leftover pixels
               (e.g., use black background when removing white)
             </li>
+            <li>
+              Optional: Enable aggressive cleanup to remove ALL matching pixels
+              in the image (not just connected ones) - great for eliminating
+              stray edge pixels
+            </li>
             <li>Click "Activate Color Picker"</li>
             <li>Click on any color in the image to remove it</li>
             <li>
               The tool removes the clicked color and all connected pixels of
-              similar color
+              similar color (or all matching pixels if aggressive mode is on)
             </li>
             <li>Click multiple times to remove different areas</li>
             <li>Download your result as a PNG with transparency</li>
