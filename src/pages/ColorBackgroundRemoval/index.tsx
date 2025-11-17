@@ -8,6 +8,7 @@ const ColorBackgroundRemoval = () => {
   const [isPickerMode, setIsPickerMode] = useState(false);
   const [useCustomBackground, setUseCustomBackground] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("#000000");
+  const [aggressiveCleanup, setAggressiveCleanup] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const originalCanvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -73,6 +74,7 @@ const ColorBackgroundRemoval = () => {
     x: number,
     y: number,
     tolerance: number,
+    aggressive: boolean = false,
   ) => {
     const width = imageData.width;
     const height = imageData.height;
@@ -121,6 +123,15 @@ const ColorBackgroundRemoval = () => {
       );
     }
 
+    // Aggressive cleanup: Remove ALL matching pixels, not just connected ones
+    if (aggressive) {
+      for (let i = 0; i < data.length; i += 4) {
+        if (colorMatch(data, i, targetR, targetG, targetB, tolerance)) {
+          data[i + 3] = 0;
+        }
+      }
+    }
+
     const newImageData = new ImageData(data, width, height);
     return newImageData;
   };
@@ -146,7 +157,13 @@ const ColorBackgroundRemoval = () => {
       canvas.width,
       canvas.height,
     );
-    const newImageData = floodFill(currentImageData, x, y, tolerance);
+    const newImageData = floodFill(
+      currentImageData,
+      x,
+      y,
+      tolerance,
+      aggressiveCleanup,
+    );
 
     ctx.putImageData(newImageData, 0, 0);
 
@@ -272,12 +289,30 @@ const ColorBackgroundRemoval = () => {
                     type="color"
                     value={backgroundColor}
                     onChange={(e) => setBackgroundColor(e.target.value)}
-                    className="h-10 w-20 cursor-pointer rounded border-2 border-ctp-surface2"
+                    className="border-ctp-surface2 h-10 w-20 cursor-pointer rounded border-2"
                   />
                   <span className="text-ctp-subtext0 text-xs">
                     {backgroundColor}
                   </span>
                 </div>
+              )}
+
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={aggressiveCleanup}
+                  onChange={(e) => setAggressiveCleanup(e.target.checked)}
+                  className="accent-ctp-mauve"
+                />
+                <span className="text-ctp-text text-sm">
+                  🧪 Aggressive cleanup (experimental)
+                </span>
+              </label>
+              {aggressiveCleanup && (
+                <p className="text-ctp-subtext0 ml-6 text-xs">
+                  Removes ALL matching pixels across the entire image, not just
+                  connected areas. Great for eliminating leftover edge pixels.
+                </p>
               )}
             </div>
           </div>
@@ -365,6 +400,10 @@ const ColorBackgroundRemoval = () => {
           <ol className="text-ctp-subtext0 list-inside list-decimal space-y-1 text-sm">
             <li>Upload an image</li>
             <li>Adjust the tolerance slider (higher = more similar colors)</li>
+            <li>
+              Optional: Enable custom background color to see leftover pixels
+              (e.g., use black background when removing white)
+            </li>
             <li>Click "Activate Color Picker"</li>
             <li>Click on any color in the image to remove it</li>
             <li>
