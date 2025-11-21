@@ -13,6 +13,7 @@ import EVCharging from "./pages/EVCharging";
 import ExtraLineRemoval from "./pages/ExtraLineRemoval";
 import Home from "./pages/Home";
 import JWTDebugger from "./pages/JWT";
+import MultiDeckConverter from "./pages/MultiDeckConverter";
 import NotFound from "./pages/NotFound";
 import QRCodeGenerator from "./pages/QRCode/Generator";
 import QRCodeScanner from "./pages/QRCode/Scanner";
@@ -52,6 +53,7 @@ const App = () => (
       <Route path="/card-assumption" component={CardAssumption} />
       <Route path="/sim-code-converter" component={SimCodeConverter} />
       <Route path="/deckbuilder-links" component={DeckbuilderLinks} />
+      <Route path="/multi-deck-converter" component={MultiDeckConverter} />
       <Route path="/compare" component={TextCompare} />
       <Route path="/ev-charging" component={EVCharging} />
       <Route path="/opacifier" component={ColorOpacity} />

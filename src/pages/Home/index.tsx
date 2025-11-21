@@ -118,6 +118,13 @@ const tools: Tool[] = [
     hidden: true,
   },
   {
+    href: "/multi-deck-converter",
+    title: "Multi-Deck Converter",
+    meta: "deck,deckbuilder,links,convert,bulk,tool,one-piece-tcg,otcg",
+    category: "games",
+    hidden: true,
+  },
+  {
     href: "/compare",
     title: "Text Compare",
     meta: "text,compare,diff,tool",
