@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import TextArea from "../../components/TextArea";
 import classNames from "../../utils/classNames";
 import { parseBatchInput } from "../../utils/multiDeckParser";
@@ -39,28 +39,56 @@ const DeckPrice = () => {
   const [content, setContent] = useReactPersist("deck-price-content", "");
   const [cardData, setCardData] = useState<CardData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCustomData, setIsCustomData] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const loadDefaultData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        "https://cdn.cardkaizoku.com/card_data.json?v=2",
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch card data");
+      }
+      const data = await response.json();
+      setCardData(data);
+      setIsCustomData(false);
+    } catch (error) {
+      console.error("Error fetching card data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchCardData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          "https://cdn.cardkaizoku.com/card_data.json?v=2",
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch card data");
-        }
-        const data = await response.json();
-        setCardData(data);
-      } catch (error) {
-        console.error("Error fetching card data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchCardData();
+    loadDefaultData();
   }, []);
+
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const json = JSON.parse(text);
+      if (Array.isArray(json)) {
+        setCardData(json);
+        setIsCustomData(true);
+      } else {
+        alert("Invalid JSON format: Expected an array of card data.");
+      }
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      alert("Error parsing JSON file.");
+    }
+  };
+
+  const triggerFileUpload = () => {
+    fileInputRef.current?.click();
+  };
 
   const results = useMemo(() => {
     if (cardData.length === 0) return [];
@@ -143,16 +171,34 @@ const DeckPrice = () => {
 
           <div className="bg-ctp-surface0 flex flex-col rounded-xl p-6 shadow-lg">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-ctp-text text-xl font-semibold">
-                Prices{" "}
-                {isLoading && (
-                  <span className="text-ctp-overlay0 ml-2 animate-pulse text-sm">
-                    (Loading prices...)
-                  </span>
-                )}
-              </h2>
+              <div className="flex items-center gap-4">
+                <h2 className="text-ctp-text text-xl font-semibold">
+                  Prices{" "}
+                  {isLoading && (
+                    <span className="text-ctp-overlay0 ml-2 animate-pulse text-sm">
+                      (Loading...)
+                    </span>
+                  )}
+                </h2>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                  className="hidden"
+                  accept=".json"
+                />
+                <button
+                  onClick={isCustomData ? loadDefaultData : triggerFileUpload}
+                  className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded px-3 py-1 text-xs transition-colors"
+                >
+                  {isCustomData
+                    ? "Reset to Default Data"
+                    : "Upload Custom JSON"}
+                </button>
+              </div>
               <div className="text-ctp-subtext0 text-sm">
-                Source: CardKaizoku / TCGPlayer
+                Source:{" "}
+                {isCustomData ? "Custom Data" : "CardKaizoku / TCGPlayer"}
               </div>
             </div>
 
