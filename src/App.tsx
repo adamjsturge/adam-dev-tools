@@ -9,6 +9,7 @@ import ColorOpacity from "./pages/ColorOpacity";
 import TextCompare from "./pages/Compare";
 import DeckbuilderLinks from "./pages/DeckbuilderLinks";
 import DeckDrawOdds from "./pages/DeckDrawOdds";
+import DeckPrice from "./pages/DeckPrice";
 import EVCharging from "./pages/EVCharging";
 import ExtraLineRemoval from "./pages/ExtraLineRemoval";
 import Home from "./pages/Home";
@@ -54,6 +55,7 @@ const App = () => (
       <Route path="/sim-code-converter" component={SimCodeConverter} />
       <Route path="/deckbuilder-links" component={DeckbuilderLinks} />
       <Route path="/multi-deck-converter" component={MultiDeckConverter} />
+      <Route path="/deck-price" component={DeckPrice} />
       <Route path="/compare" component={TextCompare} />
       <Route path="/ev-charging" component={EVCharging} />
       <Route path="/opacifier" component={ColorOpacity} />

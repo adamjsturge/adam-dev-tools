@@ -125,6 +125,13 @@ const tools: Tool[] = [
     hidden: true,
   },
   {
+    href: "/deck-price",
+    title: "Deck Price Calculator",
+    meta: "deck,price,calculator,cost,money,value,tool,one-piece-tcg,otcg",
+    category: "games",
+    hidden: true,
+  },
+  {
     href: "/compare",
     title: "Text Compare",
     meta: "text,compare,diff,tool",

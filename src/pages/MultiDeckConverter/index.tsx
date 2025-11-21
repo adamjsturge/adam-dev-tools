@@ -1,10 +1,11 @@
 import TextArea from "../../components/TextArea";
 import classNames from "../../utils/classNames";
 import { ExportFormat, generateUrl } from "../../utils/deckExporter";
-import { processInput } from "../../utils/deckImporter";
+import { parseBatchInput } from "../../utils/multiDeckParser";
 import { useReactPersist } from "../../utils/Storage";
 
 interface ProcessedDeck {
+  title: string;
   original: string;
   generated: string;
   valid: boolean;
@@ -24,15 +25,15 @@ const MultiDeckConverter = () => {
     inputContent: string,
     targetFormat: ExportFormat,
   ): ProcessedDeck[] => {
-    const lines = inputContent.split("\n").filter((line) => line.trim());
+    const decks = parseBatchInput(inputContent);
 
-    return lines.map((line) => {
-      const cards = processInput(line);
-      const generated = generateUrl(cards, targetFormat);
+    return decks.map((deck) => {
+      const generated = generateUrl(deck.cards, targetFormat);
       return {
-        original: line,
+        title: deck.title,
+        original: deck.original,
         generated,
-        valid: cards.length > 0 && generated !== "",
+        valid: deck.cards.length > 0 && generated !== "",
       };
     });
   };
@@ -68,13 +69,12 @@ const MultiDeckConverter = () => {
                 Input Links
               </h2>
               <p className="text-ctp-subtext0 mb-4 text-sm">
-                Paste your deck links here (one per line). Supports One Piece
-                Top Decks, Egman Events, GumGum, and CardKaizoku.
+                Paste your deck links or custom card lists here.
               </p>
               <TextArea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="https://gumgum.gg/deckbuilder?deck=...&#10;https://deckbuilder.egmanevents.com/?deck=..."
+                placeholder="https://gumgum.gg/deckbuilder?deck=...&#10;My Deck:&#10;4xOP01-001&#10;..."
                 customClass="h-96 font-mono text-sm resize-none"
               />
             </div>
@@ -138,7 +138,11 @@ const MultiDeckConverter = () => {
                     )}
                   >
                     <div className="text-ctp-subtext0 mb-2 truncate text-xs">
-                      Input: {result.original}
+                      {result.title &&
+                      result.title !== "Untitled Deck" &&
+                      result.title !== "Imported Deck (Link)"
+                        ? `${result.title} (${result.original.slice(0, 30)}...)`
+                        : `Input: ${result.original.slice(0, 50)}...`}
                     </div>
                     {result.valid ? (
                       <div className="flex items-center gap-3">
