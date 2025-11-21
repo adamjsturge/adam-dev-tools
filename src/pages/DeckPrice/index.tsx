@@ -16,6 +16,8 @@ interface CardProduct {
 interface CardData {
   cardNumber: string;
   cardName: string;
+  cardType: string;
+  cardSet: string;
   products?: CardProduct[];
 }
 
@@ -26,6 +28,11 @@ interface DeckPriceResult {
   valid: boolean;
   cardCount: number;
   error?: string;
+  leader?: {
+    name: string;
+    set: string;
+    price: number;
+  };
 }
 
 const DeckPrice = () => {
@@ -73,13 +80,28 @@ const DeckPrice = () => {
       }
 
       let total = 0;
+      let leader: { name: string; set: string; price: number } | undefined;
 
       for (const card of deck.cards) {
         const cardInfo = cardData.find((c) => c.cardNumber === card.cardCode);
-        if (cardInfo && cardInfo.products && cardInfo.products.length > 0) {
-          // Use the first product price, which seems to be the standard behavior
-          const price = cardInfo.products[0].marketPrice || 0;
-          total += price * card.minQuantity;
+        if (cardInfo) {
+          let price = 0;
+          if (cardInfo.products && cardInfo.products.length > 0) {
+            // Use the first product price, which seems to be the standard behavior
+            price = cardInfo.products[0].marketPrice || 0;
+            total += price * card.minQuantity;
+          }
+
+          if (!leader && cardInfo.cardType === "LEADER") {
+            leader = {
+              name: cardInfo.cardName,
+              set:
+                cardInfo.cardSet ||
+                (cardInfo.products && cardInfo.products[0]?.cardSet) ||
+                "",
+              price: price,
+            };
+          }
         }
       }
 
@@ -89,6 +111,7 @@ const DeckPrice = () => {
         totalPrice: total,
         valid: true,
         cardCount: deck.cards.reduce((acc, c) => acc + c.minQuantity, 0),
+        leader,
       };
     });
   }, [content, cardData]);
@@ -159,6 +182,12 @@ const DeckPrice = () => {
                           <div className="text-ctp-text text-lg font-bold">
                             ${result.totalPrice.toFixed(2)}
                           </div>
+                          {result.leader && (
+                            <div className="text-ctp-green text-sm font-medium">
+                              {result.leader.set} {result.leader.name} ($
+                              {result.leader.price.toFixed(2)})
+                            </div>
+                          )}
                           <div className="text-ctp-overlay0 text-xs">
                             {result.cardCount} Cards
                           </div>

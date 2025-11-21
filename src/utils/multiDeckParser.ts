@@ -1,4 +1,4 @@
-import { ImportOptions, CardEntry, processInput } from "./deckImporter";
+import { CardEntry, processInput } from "./deckImporter";
 
 export interface ParsedDeck {
   title: string;
