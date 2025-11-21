@@ -47,22 +47,21 @@ export function parseBatchInput(input: string): ParsedDeck[] {
           original: "",
         };
       }
-      
+
       // Append to original string
       currentDeck.original += (currentDeck.original ? "\n" : "") + trimmed;
 
       // Parse just this line using existing logic (it returns array, we merge)
       const lineCards = processInput(trimmed);
       // We need to merge manually or use the reducer logic later
-      // Let's just push for now and consolidate later if needed, 
+      // Let's just push for now and consolidate later if needed,
       // but processInput typically returns consolidated for the input given.
       // Since we are feeding line by line, we get single entries.
       currentDeck.cards.push(...lineCards);
-
     } else {
       // It's a text line that is NOT a card and NOT a URL.
       // Treat as a title for a NEW deck.
-      
+
       // Finish current deck
       if (currentDeck) {
         decks.push(currentDeck);
@@ -74,10 +73,10 @@ export function parseBatchInput(input: string): ParsedDeck[] {
       currentDeck = {
         title,
         cards: [],
-        original: trimmed, // Title is part of the original text block for this deck? 
-                           // Or should original include just cards? 
-                           // Let's include title for completeness or just start empty?
-                           // If we want "original" to be re-processable, maybe keep it.
+        original: trimmed, // Title is part of the original text block for this deck?
+        // Or should original include just cards?
+        // Let's include title for completeness or just start empty?
+        // If we want "original" to be re-processable, maybe keep it.
       };
     }
   }
@@ -88,9 +87,9 @@ export function parseBatchInput(input: string): ParsedDeck[] {
   }
 
   // Post-process to consolidate cards within each deck
-  return decks.map(deck => ({
+  return decks.map((deck) => ({
     ...deck,
-    cards: consolidateCards(deck.cards)
+    cards: consolidateCards(deck.cards),
   }));
 }
 
@@ -101,7 +100,7 @@ function consolidateCards(entries: CardEntry[]): CardEntry[] {
     if (existingEntry) {
       existingEntry.minQuantity = Math.min(
         existingEntry.minQuantity + entry.minQuantity,
-        4
+        4,
       );
     } else {
       acc.push({
@@ -113,4 +112,3 @@ function consolidateCards(entries: CardEntry[]): CardEntry[] {
     return acc;
   }, []);
 }
-

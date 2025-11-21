@@ -38,7 +38,7 @@ export type ExportFormat = "gumgum" | "egman" | "cardkaizoku";
 
 export const generateUrl = (
   cards: CardEntry[],
-  format: ExportFormat
+  format: ExportFormat,
 ): string => {
   switch (format) {
     case "gumgum":
@@ -51,4 +51,3 @@ export const generateUrl = (
       return "";
   }
 };
-

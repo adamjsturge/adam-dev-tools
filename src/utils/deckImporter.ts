@@ -149,7 +149,7 @@ export function processInput(input: string): CardEntry[] {
     if (existingEntry) {
       existingEntry.minQuantity = Math.min(
         existingEntry.minQuantity + entry.minQuantity,
-        4
+        4,
       );
     } else {
       acc.push({
@@ -163,4 +163,3 @@ export function processInput(input: string): CardEntry[] {
 
   return consolidatedEntries;
 }
-
