@@ -132,6 +132,12 @@ const tools: Tool[] = [
     hidden: true,
   },
   {
+    href: "/bracket-maker",
+    title: "Bracket Maker",
+    meta: "bracket,tournament,seeding,elimination,matchup,tool",
+    category: "games",
+  },
+  {
     href: "/compare",
     title: "Text Compare",
     meta: "text,compare,diff,tool",
