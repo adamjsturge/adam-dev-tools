@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import BackgroundRemoval from "./pages/BackgroundRemoval";
 import Base64Decode from "./pages/Base64/Decode";
 import Base64Encode from "./pages/Base64/Encode";
+import BracketMaker from "./pages/BracketMaker";
 import CardAssumption from "./pages/CardAssumption";
 import ColorBackgroundRemoval from "./pages/ColorBackgroundRemoval";
 import ColorOpacity from "./pages/ColorOpacity";
@@ -56,6 +57,7 @@ const App = () => (
       <Route path="/deckbuilder-links" component={DeckbuilderLinks} />
       <Route path="/multi-deck-converter" component={MultiDeckConverter} />
       <Route path="/deck-price" component={DeckPrice} />
+      <Route path="/bracket-maker" component={BracketMaker} />
       <Route path="/compare" component={TextCompare} />
       <Route path="/ev-charging" component={EVCharging} />
       <Route path="/opacifier" component={ColorOpacity} />
