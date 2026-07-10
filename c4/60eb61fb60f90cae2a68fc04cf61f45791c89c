@@ -1,0 +1,254 @@
+src/components/Layout.tsx
+  s_0e37bb56c48843::t_a1cf2b987b64dc 3
+  s_0e37bb56c48843::t_674ff40f8ea24a 11,14,16,26-30,45-46
+index.html
+  s_0e37bb56c48843::t_1eb088a3afb1f4 7-12
+src/pages/BackgroundRemoval/index.tsx
+  s_0e37bb56c48843::t_4f306de2421a10 150,155,159-160,162
+  s_0e37bb56c48843::t_c6f41f8e13fb11 183
+  s_0e37bb56c48843::t_24667d521d9f8c 93
+  s_0e37bb56c48843::t_3c0a0269f536a5 107,111
+  s_0e37bb56c48843::t_c2afaa36cb2086 3-4
+  s_0e37bb56c48843::t_ac9de7d33d76e3 122,132,135
+  s_0e37bb56c48843::t_1c954390462252 81-84
+  s_0e37bb56c48843::t_d4c220fedeea4e 168
+src/pages/DeckPrice/index.tsx
+  s_0e37bb56c48843::t_674ff40f8ea24a 196-198,202-211,214-220,222-231,233-235,238-275
+  s_0e37bb56c48843::t_a26aae99a8fd66 151-169,171-180,182-187,189-195
+  s_0e37bb56c48843::t_a75e46695d02c1 2-4
+  s_0e37bb56c48843::t_7fb6d6f74c55b2 276,278
+src/pages/ColorOpacity/index.tsx
+  s_0e37bb56c48843::t_00817f65174691 5
+  s_0e37bb56c48843::t_4ad4344c9bcd03 79
+  s_0e37bb56c48843::t_1d1c55152ca840 160
+  s_0e37bb56c48843::t_959de7b6485e09 137,143,148,151
+  s_0e37bb56c48843::t_b1ced314492454 1-4
+  s_0e37bb56c48843::t_0a8ae096971a1b 89-92,96-105
+  s_0e37bb56c48843::t_dd29a7e97d0ccb 108
+src/pages/EVCharging/index.tsx
+  s_0e37bb56c48843::t_75d839922bd180 361
+  s_0e37bb56c48843::t_b9cb9e334b3174 401-402,404-421,423,425-426,428,438,440,442-450,452,458,462-463,465,469
+  s_0e37bb56c48843::t_6ee6291fad309c 380
+  s_0e37bb56c48843::t_fc5c2ab2092c32 389
+  s_0e37bb56c48843::t_d59d5aad067df9 257,259,262
+  s_0e37bb56c48843::t_cfd44cd567ffb7 367
+  s_0e37bb56c48843::t_4f3342a560371a 2-5
+  s_0e37bb56c48843::t_a6065a8a344b7c 6
+  s_0e37bb56c48843::t_8205bbc67b0270 229-234
+  s_0e37bb56c48843::t_66382a38192cd3 333
+  s_0e37bb56c48843::t_2a8cba4ee5a602 397
+  s_0e37bb56c48843::t_93a5687036d8b7 27-30
+  s_0e37bb56c48843::t_09e7b6ca10d884 267
+src/components/TextArea.tsx
+  s_0e37bb56c48843::t_c603497c623f23 26
+  s_0e37bb56c48843::t_c4aec8d8131a9a 8-9,13,15-17
+  s_0e37bb56c48843::t_f188ae4f7194de 34
+src/pages/QRCode/Scanner.tsx
+  s_0e37bb56c48843::t_182077dc92d9cd 142
+  s_0e37bb56c48843::t_cce9fbfa1500bc 259,262,266
+  s_0e37bb56c48843::t_67a019acd891f5 169
+  s_0e37bb56c48843::t_b7479293b42bc3 304-306,321-322,329
+  s_0e37bb56c48843::t_f843edbbc7e2e4 206
+  s_0e37bb56c48843::t_055132d6027100 101-105,107
+  s_0e37bb56c48843::t_c894d2c41a69d9 233
+  s_0e37bb56c48843::t_1f4ea0a6064a7e 273,277
+  s_0e37bb56c48843::t_1b10b319ea31e3 353,355,360
+  s_0e37bb56c48843::t_1a5439a8a00e3b 9
+  s_0e37bb56c48843::t_a2eab010bcd70f 108
+  s_0e37bb56c48843::t_c03ed16941e192 240
+  s_0e37bb56c48843::t_827db370b6ca29 298
+  s_0e37bb56c48843::t_de253282f67880 3-6
+src/utils/useUrlState.ts
+  s_0e37bb56c48843::t_15fd30f207b10f 28,60,93
+e2e/tools.spec.ts
+  s_0e37bb56c48843::t_bc4e6d81dab308 32,34-35
+  s_0e37bb56c48843::t_e4470fb831c537 1
+  s_0e37bb56c48843::t_247a761412bf5f 2-4,7-9,12-15,30-31,36,47-49,72,95
+  s_0e37bb56c48843::t_674ff40f8ea24a 5-6,10-11,16-29,33,37-46,50-71,73-94
+src/pages/ExtraLineRemoval/index.tsx
+  s_0e37bb56c48843::t_cb58754a6d3850 39
+  s_0e37bb56c48843::t_b8d32e9e5c3543 2-3
+  s_0e37bb56c48843::t_674ff40f8ea24a 27-31,33,41
+src/pages/CardAssumption/index.tsx
+  s_0e37bb56c48843::t_281d268de89d6b 187,189
+  s_0e37bb56c48843::t_18cfd4537d91ea 248
+  s_0e37bb56c48843::t_051ef4204c7172 158,160-161,165,175,177-178,182
+  s_0e37bb56c48843::t_f69d3317aff4eb 145-149
+  s_0e37bb56c48843::t_0582f8cec9e8ad 1,3
+  s_0e37bb56c48843::t_d3f887a69e54a1 22-24,27-29,32-33
+  s_0e37bb56c48843::t_44962e04a66351 6
+src/components/CopyButton.tsx
+  s_0e37bb56c48843::t_674ff40f8ea24a 5-7,11-15,17,19-27
+  s_0e37bb56c48843::t_68b538e44fe36d 1-4,8-10,16,18,28-30
+src/components/PageShell.tsx
+  s_0e37bb56c48843::t_f73b98fe4ae196 1-5,11-13,19,23,47-49
+  s_0e37bb56c48843::t_674ff40f8ea24a 6-10,14-18,20-22,24-46
+src/pages/WebP/index.tsx
+  s_0e37bb56c48843::t_3a350efd38de90 2-3
+  s_0e37bb56c48843::t_9358aca175bd41 4,8,10
+  s_0e37bb56c48843::t_24728123802a7d 70-73
+  s_0e37bb56c48843::t_56e432955443c0 116,120,122
+  s_0e37bb56c48843::t_4247143eed5b57 81
+  s_0e37bb56c48843::t_674ff40f8ea24a 9
+  s_0e37bb56c48843::t_18eb8c8face6f7 100,110
+  s_0e37bb56c48843::t_4b9188d2461d0f 89,93-99
+src/components/ToolLink.tsx
+  s_0e37bb56c48843::t_0090ea0adaabf0 24,26-27
+  s_0e37bb56c48843::t_674ff40f8ea24a 12,28-29
+  s_0e0863910b37f6::t_ef841b81766de8 8,14-23,25
+src/pages/Unzip/index.tsx
+  s_0e37bb56c48843::t_8c784117fecb38 201,203
+  s_0e37bb56c48843::t_87b53dcbc52411 133-136
+  s_0e37bb56c48843::t_773b4c3d969105 3-4
+  s_0e37bb56c48843::t_3f9db3d9910f2c 142
+  s_0e37bb56c48843::t_d323af55b81e9f 209,215-216,221
+  s_0e37bb56c48843::t_51fc03226f93de 227
+src/components/Input.tsx
+  s_0e37bb56c48843::t_0cfb73ca8a59f7 32-33
+  s_0e37bb56c48843::t_d70ae0cfc96289 1,4
+src/pages/Base64/Encode.tsx
+  s_0e37bb56c48843::t_c7c0343e49157c 15
+src/pages/ColorBackgroundRemoval/index.tsx
+  s_0e37bb56c48843::t_405dbcd0aeeb02 358
+  s_0e37bb56c48843::t_e14ba5f2a88111 293
+  s_0e37bb56c48843::t_71771e8f2e79d1 239
+  s_0e37bb56c48843::t_8e387e766330c4 2-3
+  s_0e37bb56c48843::t_c8e2733dfb0bdf 228-231
+  s_0e37bb56c48843::t_a7a089e80ef4fa 326-327,331-333,338
+  s_0e37bb56c48843::t_674ff40f8ea24a 376
+  s_0e37bb56c48843::t_dac64b5ae62196 260,273,306
+  s_0e37bb56c48843::t_853663f9baec32 385
+  s_0e37bb56c48843::t_46cf0e4aa73e6f 412
+  s_0e37bb56c48843::t_4b3bde8316b6e9 378,380
+  s_0e37bb56c48843::t_8b673cb0123a7e 342,352
+src/pages/Home/index.tsx
+  s_0e37bb56c48843::t_069155b10b0229 115
+  s_0e37bb56c48843::t_f87c97ed23f19d 139-145,148-149,151-161
+  s_0e37bb56c48843::t_0b0cd58af1b81b 146-147,150
+  s_0e37bb56c48843::t_b48f48fbde0c3a 131
+  s_0e37bb56c48843::t_6422fa06c61544 5
+  s_0e37bb56c48843::t_1d65851067f010 106
+  s_0e37bb56c48843::t_6d35da03b4a656 73,75,78
+  s_0e37bb56c48843::t_b73199df5d80e8 68
+src/pages/URL/Encode.tsx
+  s_0e37bb56c48843::t_16609e2b019245 15
+src/pages/Base64/Decode.tsx
+  s_0e37bb56c48843::t_c591ec79f12354 15
+src/components/IOwithCopy.tsx
+  s_0e37bb56c48843::t_6f2be150ee77c2 30-40,42,48-56,58
+  s_0e37bb56c48843::t_73f7fa06099ef4 2-4
+  s_0e37bb56c48843::t_674ff40f8ea24a 9,17,43,45,59-61,63,66
+src/pages/JWT/index.tsx
+  s_0e37bb56c48843::t_28422ff041c75b 182
+  s_0e37bb56c48843::t_35c2c92d83a07f 2-4
+  s_0e37bb56c48843::t_8938c012120157 205
+  s_0e37bb56c48843::t_46e25040b6f902 262,264
+  s_0e37bb56c48843::t_b4c37e4fc8303c 313,321,326
+  s_0e37bb56c48843::t_ab77045d615132 177
+  s_0e37bb56c48843::t_58bb6979b6d584 131-142,145
+  s_0e37bb56c48843::t_22fce4076d0945 158
+  s_0e37bb56c48843::t_3774290547a533 232
+  s_0e37bb56c48843::t_d611e8a7eca3eb 294,296
+  s_0e37bb56c48843::t_9125e3e14cad9a 227
+src/app.css
+  s_0e37bb56c48843::t_56d7ef36322f8b 5
+src/components/Section.tsx
+  s_0e37bb56c48843::t_612cc6035936a8 8,18-19,24
+src/pages/SimCodeConverter/index.tsx
+  s_0e37bb56c48843::t_b9e83c2b34c8f6 2
+  s_0e37bb56c48843::t_37982535e2afce 30
+  s_0e37bb56c48843::t_674ff40f8ea24a 25-29,31
+src/pages/MultiDeckConverter/index.tsx
+  s_0e37bb56c48843::t_396e10de3230c6 56-73,75-87,89-100,103-120,122-154,156
+  s_0e37bb56c48843::t_2d76951d68fc80 1-5
+src/components/Select.tsx
+  s_0e37bb56c48843::t_674ff40f8ea24a 5-7,11-15,17-44
+  s_0e37bb56c48843::t_7e858860c5faed 1-4,8-10,16,45-47
+src/pages/BracketMaker/StandingsImport.tsx
+  s_0e37bb56c48843::t_091ff3ace27890 2
+  s_0e37bb56c48843::t_9a7fd0c48318f6 71,73,79
+src/pages/QRCode/Generator.tsx
+  s_0e37bb56c48843::t_76558bab9fa057 389,403,423,450,456,473,479,500,504,510,558,617,631,689,779,789,798,805,826,854,860
+  s_0e37bb56c48843::t_21845ea5873e52 359-379,382
+  s_0e37bb56c48843::t_2654e4e6e3452c 3-4
+  s_0e37bb56c48843::t_ade2ed8e67146b 924
+src/utils/useClipboard.ts
+  s_0e37bb56c48843::t_3b88f8b2281368 1-3,8,10,24,26
+  s_0e37bb56c48843::t_674ff40f8ea24a 4-7,9,11-23,25
+src/pages/NotFound/index.tsx
+  s_0e37bb56c48843::t_674ff40f8ea24a 4,15
+src/pages/BracketMaker/index.tsx
+  s_0e37bb56c48843::t_f6ea69e695c0e5 3-4,6
+  s_0e37bb56c48843::t_9b84edba6fd825 192-193
+  s_0e37bb56c48843::t_353ddb4e51798a 198-203
+  s_0e37bb56c48843::t_0401e0566d76d9 237-239
+  s_0e37bb56c48843::t_da9b62eccabdbd 128-139,141-144,149-154
+  s_0e37bb56c48843::t_674ff40f8ea24a 155-177,180-191,204-236
+playwright.config.ts
+  s_0e37bb56c48843::t_6d8cececb0a648 11,22
+.claude/CLAUDE.md
+  s_0e37bb56c48843::t_4222daa17eb284 12
+src/pages/Home/tools.ts
+  s_0e37bb56c48843::t_704860e023ab60 1,8-9,16-18,25-27,176
+  s_0e37bb56c48843::t_674ff40f8ea24a 2-7,10-15,20-24,28-175
+  s_0e37bb56c48843::t_fc9808389cc719 19
+src/pages/DeckbuilderLinks/index.tsx
+  s_0e37bb56c48843::t_be6cb44f75f16a 2-4
+  s_0e37bb56c48843::t_0da579116411ce 64-68,71-90,92-110,112-134,137
+src/pages/URL/Decode.tsx
+  s_0e37bb56c48843::t_761022d8817177 15
+src/components/Tile.tsx
+  s_0e37bb56c48843::t_5f276af60ff820 14,16-17,20-23,25-36
+src/components/Button.tsx
+  s_0e37bb56c48843::t_b1042599920a7e 1-4,8-10,14-16,19-21,26,39-41
+  s_0e37bb56c48843::t_674ff40f8ea24a 5-7,11-13,17-18,22-25,27-38
+src/pages/DeckDrawOdds/index.tsx
+  s_0e37bb56c48843::t_7c4e684674b838 1,3
+  s_0e37bb56c48843::t_528d37c0be9b48 288,290
+  s_0e37bb56c48843::t_b057ce0577a5d9 337,339
+  s_0e37bb56c48843::t_511f8d1669c2e0 259,261-262,266,276,278-279,283
+  s_0e37bb56c48843::t_e4d042a2a5129f 6
+  s_0e37bb56c48843::t_d1fd0c1bfc4ce0 29-34,37-38,41-42,46-47,50-51,54-55,58-59
+  s_0e37bb56c48843::t_8ad73029652b2f 382
+  s_0e37bb56c48843::t_4c2bf67e2a62b5 246-250
+src/pages/TextBin/index.tsx
+  s_0e37bb56c48843::t_d7cee1a075a189 27
+  s_0e37bb56c48843::t_464838dc29af46 2
+  s_0e37bb56c48843::t_674ff40f8ea24a 22-26,28
+src/pages/WordCounter/index.tsx
+  s_0e37bb56c48843::t_79e43684f136e4 33-36
+  s_0e37bb56c48843::t_e772c0cc208f04 2
+  s_0e37bb56c48843::t_cdb7e5d01cc1a2 45,49,55,59,63,67
+  s_0e37bb56c48843::t_75e374759cbd15 72
+src/pages/Compare/index.tsx
+  s_0e37bb56c48843::t_06815f55dfda49 115-117,121
+  s_0e37bb56c48843::t_47cfccce707986 2-3
+  s_0e37bb56c48843::t_f48783f8d99edc 97-101,103-104,106
+  s_0e37bb56c48843::t_a0b52d8ae8e1e9 133
+  s_0e37bb56c48843::t_213dfb0e27ae07 167-168,179,183,193
+  s_0e37bb56c48843::t_f82acabfc44829 199
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c460eb61fb60f90cae2a68fc04cf61f45791c89c",
+  "prompts": {},
+  "sessions": {
+    "s_0e0863910b37f6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d4c50452-9bb4-43e2-bb7c-92a9777b04de",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    },
+    "s_0e37bb56c48843": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c50d6528-ade2-4cc5-93ef-840b26f423c3",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
