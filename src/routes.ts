@@ -1,6 +1,27 @@
-import { ComponentType } from "react";
+import { ComponentType, lazy } from "react";
 
 type RouteLoader = () => Promise<{ default: ComponentType }>;
+
+const RELOAD_FLAG = "chunk_reload";
+
+// Recovers from a deploy replacing hashed chunks under an open tab: the
+// stale import 404s, so reload once to pick up the new build.
+export const lazyRoute = (path: keyof typeof routeLoaders) =>
+  lazy(() =>
+    routeLoaders[path]().then(
+      (module) => {
+        sessionStorage.removeItem(RELOAD_FLAG);
+        return module;
+      },
+      (error) => {
+        if (!sessionStorage.getItem(RELOAD_FLAG)) {
+          sessionStorage.setItem(RELOAD_FLAG, "1");
+          globalThis.location.reload();
+        }
+        throw error;
+      },
+    ),
+  );
 
 export const routeLoaders = {
   "/background-removal": () => import("./pages/BackgroundRemoval"),
