@@ -1,0 +1,59 @@
+vite.config.ts
+  s_0e37bb56c48843::t_41d328b941a7eb 9-11
+src/pages/WordCounter/index.tsx
+  s_0e37bb56c48843::t_6ca1a1bff1c964 32-40,45,47-54,56-65
+src/pages/DeckDrawOdds/index.tsx
+  s_0e37bb56c48843::t_b3a92f5d78c18c 382-383
+  s_0e37bb56c48843::t_b554be366b8779 329-334,336
+  s_0e37bb56c48843::t_e5961cb27fd929 253-269,271-291,295-327,337-341,343-376,378-381
+  s_0e37bb56c48843::t_145af46caeb45d 251-252
+public/favicon.svg
+  s_0e37bb56c48843::t_f6acd1050d6819 1-12
+src/components/Layout.tsx
+  s_0e37bb56c48843::t_640ecf9ee31a64 12-17,28,34-36,43,50-52
+src/pages/ColorOpacity/index.tsx
+  s_0e37bb56c48843::t_6ec3f38840eb64 90
+  s_0e37bb56c48843::t_7d7759c63daf34 125,136,140,143-146
+  s_0e37bb56c48843::t_e5961cb27fd929 135
+src/pages/QRCode/Generator.tsx
+  s_0e37bb56c48843::t_594e5efcee550e 2,4,6,39-191,221-222,224-230,261-262,293-301,306-313,329-330,333-334,339-357,370-371,390-394,415-773,780-781,798-802,804-805,808-813
+  s_0e37bb56c48843::t_c17371662af1bd 358-369
+  s_0e37bb56c48843::t_e5961cb27fd929 412-414
+  s_0e37bb56c48843::t_610c485bec5d42 395-396
+src/app.css
+  s_0e37bb56c48843::t_d6e9395c82567b 4-12,17-22
+  s_0e37bb56c48843::t_1b60efb0edcdc2 23
+src/App.tsx
+  s_0e37bb56c48843::t_d6a53358620f10 1,6-32,36-38,40-41,43-44,46-47,49-69,71-76
+index.html
+  s_0e37bb56c48843::t_63aeacb429ee19 6-18,20-24,26
+src/pages/EVCharging/index.tsx
+  s_0e37bb56c48843::t_d68608ad78df25 104,108,238-316,328-350,353-358,360,362-408,411,414-419,421-425,427-431,434-438,440,442-451,454-467,469-470,474-478,480-481
+  s_0e37bb56c48843::t_e5961cb27fd929 468
+public/robots.txt
+  s_0e37bb56c48843::t_e0a9966aecac59 1-2
+.github/workflows/lighthouse.yml
+  s_0e37bb56c48843::t_773d41a53c3f4a 1-33
+src/pages/CardAssumption/index.tsx
+  s_0e37bb56c48843::t_c382aadde9e3b3 237
+  s_0e37bb56c48843::t_939bf0b40399da 193
+lighthouserc.json
+  s_0e37bb56c48843::t_ee09768b3098b0 1-5,7-17
+  s_0e37bb56c48843::t_76437f85c37d86 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "1a8510d205560e85c7915a6ecf39c832ff241a26",
+  "prompts": {},
+  "sessions": {
+    "s_0e37bb56c48843": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c50d6528-ade2-4cc5-93ef-840b26f423c3",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
