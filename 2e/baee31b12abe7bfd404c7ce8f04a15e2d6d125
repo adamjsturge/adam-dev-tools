@@ -1,0 +1,21 @@
+index.html
+  s_0e37bb56c48843::t_380e398a5a2ec1 2
+src/app.css
+  s_0e37bb56c48843::t_23e74c9db2934e 18-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "2ebaee31b12abe7bfd404c7ce8f04a15e2d6d125",
+  "prompts": {},
+  "sessions": {
+    "s_0e37bb56c48843": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c50d6528-ade2-4cc5-93ef-840b26f423c3",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
