@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../components/Button";
 import TextArea from "../../components/TextArea";
 import classNames from "../../utils/classNames";
 
@@ -67,20 +68,15 @@ const StandingsImport = ({ onImport }: StandingsImportProps) => {
             rows={8}
             aria-label="Standings text input"
           />
-          <button
+          <Button
             type="button"
+            size="sm"
             onClick={handleParse}
             disabled={!rawText.trim()}
-            className={classNames(
-              "bg-ctp-green text-ctp-base rounded-md px-4 py-2 text-sm font-semibold",
-              "transition-colors duration-100",
-              "hover:bg-ctp-green/90",
-              "disabled:cursor-not-allowed disabled:opacity-50",
-            )}
             aria-label="Parse standings and fill player names"
           >
             Parse & Fill
-          </button>
+          </Button>
         </div>
       )}
     </div>

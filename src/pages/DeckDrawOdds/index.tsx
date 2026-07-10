@@ -1,7 +1,9 @@
-import { useState } from "react";
+import Button from "../../components/Button";
 import Input from "../../components/Input";
+import PageShell from "../../components/PageShell";
 import Section from "../../components/Section";
 import Tile from "../../components/Tile";
+import { useUrlState } from "../../utils/useUrlState";
 
 interface Preset {
   label: string;
@@ -24,27 +26,37 @@ const DeckDrawOdds = () => {
     },
   };
 
-  const [deckSize, setDeckSize] = useState(defaultValues.singleCard.deckSize);
-  const [copiesRan, setCopiesRan] = useState(
+  const [deckSize, setDeckSize] = useUrlState(
+    "deck",
+    defaultValues.singleCard.deckSize,
+  );
+  const [copiesRan, setCopiesRan] = useUrlState(
+    "copies",
     defaultValues.singleCard.copiesRan,
   );
-  const [cardsDrawn, setCardsDrawn] = useState(
+  const [cardsDrawn, setCardsDrawn] = useUrlState(
+    "drawn",
     defaultValues.singleCard.cardsDrawn,
   );
-  const [oddsToHave, setOddsToHave] = useState(
+  const [oddsToHave, setOddsToHave] = useUrlState(
+    "odds",
     defaultValues.singleCard.oddsToHave,
   );
 
-  const [mvDeckSize, setMvDeckSize] = useState(
+  const [mvDeckSize, setMvDeckSize] = useUrlState(
+    "mvDeck",
     defaultValues.multiCard.deckSize,
   );
-  const [copiesCardA, setCopiesCardA] = useState(
+  const [copiesCardA, setCopiesCardA] = useUrlState(
+    "copiesA",
     defaultValues.multiCard.copiesCardA,
   );
-  const [copiesCardB, setCopiesCardB] = useState(
+  const [copiesCardB, setCopiesCardB] = useUrlState(
+    "copiesB",
     defaultValues.multiCard.copiesCardB,
   );
-  const [mvDrawSize, setMvDrawSize] = useState(
+  const [mvDrawSize, setMvDrawSize] = useUrlState(
+    "mvDrawn",
     defaultValues.multiCard.drawSize,
   );
 
@@ -231,11 +243,11 @@ const DeckDrawOdds = () => {
   };
 
   return (
-    <main className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-4 text-center text-2xl font-bold">
-        Deck Draw Odds Calculator
-      </h1>
-
+    <PageShell
+      title="Deck Draw Odds Calculator"
+      subtitle="Hypergeometric odds of drawing the cards you need"
+      wide
+    >
       <Section title="Single Card Probability Calculator" customClass="mb-8">
         <div className="mb-4 flex flex-col gap-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -244,13 +256,14 @@ const DeckDrawOdds = () => {
             </span>
             <div className="flex flex-wrap gap-2">
               {gameStatePresets.map((preset) => (
-                <button
+                <Button
                   key={preset.label}
+                  variant="secondary"
+                  size="sm"
                   onClick={() => applyPreset(preset)}
-                  className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded-md px-4 py-2 text-sm font-medium transition-colors"
                 >
                   {preset.label}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
@@ -260,23 +273,21 @@ const DeckDrawOdds = () => {
             </span>
             <div className="flex flex-wrap gap-2">
               {drawSizePresets.map((preset) => (
-                <button
+                <Button
                   key={preset.label}
+                  variant="secondary"
+                  size="sm"
                   onClick={() => applyPreset(preset)}
-                  className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded-md px-4 py-2 text-sm font-medium transition-colors"
                 >
                   {preset.label}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
           <div className="flex justify-end">
-            <button
-              className="bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base rounded-md px-4 py-2 text-sm font-medium"
-              onClick={resetSingleCard}
-            >
+            <Button size="sm" onClick={resetSingleCard}>
               Reset Single Card
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -323,12 +334,9 @@ const DeckDrawOdds = () => {
 
       <Section title="Multi Card Probability Calculator">
         <div className="mb-4 flex justify-end">
-          <button
-            className="bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base rounded-md px-4 py-2 text-sm font-medium"
-            onClick={resetMultiCard}
-          >
+          <Button size="sm" onClick={resetMultiCard}>
             Reset Multi Card
-          </button>
+          </Button>
         </div>
 
         <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -371,7 +379,7 @@ const DeckDrawOdds = () => {
           <Tile title="With One Mulligan" value={mvMulliganProbability} />
         </div>
       </Section>
-    </main>
+    </PageShell>
   );
 };
 

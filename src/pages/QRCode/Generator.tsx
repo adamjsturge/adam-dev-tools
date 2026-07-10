@@ -1,5 +1,7 @@
 import QRCode from "qrcode";
 import { useRef, useState } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
 import { useReactPersist } from "../../utils/Storage";
 import {
   useUrlBooleanState,
@@ -354,48 +356,37 @@ const QRCodeGenerator = () => {
   };
 
   return (
-    <main className="min-h-[calc(100vh-4rem)]">
-      <div className="container mx-auto px-4 pt-8 pb-6 sm:pt-10 sm:pb-8">
-        <div className="mb-8 text-center">
-          <h1 className="text-ctp-text mb-3 text-3xl font-bold sm:text-4xl">
-            QR Code Generator
-          </h1>
-          <p className="text-ctp-subtext0 text-lg">
-            Generate high-quality QR codes instantly
-          </p>
-
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <button
-              onClick={() => setIsAdvancedMode(false)}
-              className={
-                isAdvancedMode
-                  ? "bg-ctp-surface1 text-ctp-subtext0 hover:bg-ctp-surface2 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
-                  : "bg-ctp-blue text-ctp-base rounded-lg px-4 py-2 text-sm font-medium transition-colors"
-              }
-            >
-              Simple Mode
-            </button>
-            <button
-              onClick={() => setIsAdvancedMode(true)}
-              className={
-                isAdvancedMode
-                  ? "bg-ctp-blue text-ctp-base rounded-lg px-4 py-2 text-sm font-medium transition-colors"
-                  : "bg-ctp-surface1 text-ctp-subtext0 hover:bg-ctp-surface2 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
-              }
-            >
-              Advanced Mode
-            </button>
-          </div>
+    <PageShell
+      title="QR Code Generator"
+      subtitle="Generate high-quality QR codes instantly"
+      wide
+    >
+      <div>
+        <div className="mb-6 flex items-center gap-4">
+          <Button
+            variant={isAdvancedMode ? "secondary" : "primary"}
+            size="sm"
+            onClick={() => setIsAdvancedMode(false)}
+          >
+            Simple Mode
+          </Button>
+          <Button
+            variant={isAdvancedMode ? "primary" : "secondary"}
+            size="sm"
+            onClick={() => setIsAdvancedMode(true)}
+          >
+            Advanced Mode
+          </Button>
         </div>
 
-        <div className="mx-auto max-w-6xl">
+        <div>
           <div
             className={
               isAdvancedMode ? "grid gap-6 lg:grid-cols-2" : "grid gap-6"
             }
           >
             <div>
-              <div className="bg-ctp-surface0 mb-6 rounded-2xl p-6 shadow-lg sm:p-8">
+              <div className="bg-ctp-surface0 mb-6 rounded-md p-6 sm:p-8">
                 <div className="mb-6">
                   <label
                     htmlFor="url-input"
@@ -409,7 +400,7 @@ const QRCodeGenerator = () => {
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     placeholder="https://example.com or any text"
-                    className="border-ctp-surface2 bg-ctp-base text-ctp-text placeholder:text-ctp-subtext0 focus:border-ctp-blue focus:ring-ctp-blue focus:ring-opacity-20 w-full rounded-xl border px-4 py-3 focus:ring-2 focus:outline-none"
+                    className="border-ctp-surface2 bg-ctp-base text-ctp-text placeholder:text-ctp-subtext0 focus:border-ctp-blue focus:ring-ctp-blue focus:ring-opacity-20 w-full rounded-md border px-4 py-3 focus:ring-2 focus:outline-none"
                   />
                 </div>
 
@@ -429,7 +420,7 @@ const QRCodeGenerator = () => {
                             <button
                               key={preset.name}
                               onClick={() => applyColorPreset(preset)}
-                              className="border-ctp-surface2 text-ctp-text hover:bg-ctp-surface1 rounded-lg border px-2 py-1.5 text-xs font-medium transition-colors"
+                              className="border-ctp-surface2 text-ctp-text hover:bg-ctp-surface1 rounded-md border px-2 py-1.5 text-xs font-medium transition-colors"
                               style={{
                                 background: `linear-gradient(to right, ${preset.dark} 50%, ${preset.light} 50%)`,
                               }}
@@ -456,13 +447,13 @@ const QRCodeGenerator = () => {
                               type="color"
                               value={darkColor}
                               onChange={(e) => setDarkColor(e.target.value)}
-                              className="border-ctp-surface2 h-10 w-full cursor-pointer rounded-lg border"
+                              className="border-ctp-surface2 h-10 w-full cursor-pointer rounded-md border"
                             />
                             <input
                               type="text"
                               value={darkColor}
                               onChange={(e) => setDarkColor(e.target.value)}
-                              className="border-ctp-surface2 bg-ctp-base text-ctp-text w-24 rounded-lg border px-2 py-1.5 text-xs"
+                              className="border-ctp-surface2 bg-ctp-base text-ctp-text w-24 rounded-md border px-2 py-1.5 text-xs"
                             />
                           </div>
                         </div>
@@ -479,13 +470,13 @@ const QRCodeGenerator = () => {
                               type="color"
                               value={lightColor}
                               onChange={(e) => setLightColor(e.target.value)}
-                              className="border-ctp-surface2 h-10 w-full cursor-pointer rounded-lg border"
+                              className="border-ctp-surface2 h-10 w-full cursor-pointer rounded-md border"
                             />
                             <input
                               type="text"
                               value={lightColor}
                               onChange={(e) => setLightColor(e.target.value)}
-                              className="border-ctp-surface2 bg-ctp-base text-ctp-text w-24 rounded-lg border px-2 py-1.5 text-xs"
+                              className="border-ctp-surface2 bg-ctp-base text-ctp-text w-24 rounded-md border px-2 py-1.5 text-xs"
                             />
                           </div>
                         </div>
@@ -506,17 +497,17 @@ const QRCodeGenerator = () => {
                             <img
                               src={logoDataUrl}
                               alt="Logo preview"
-                              className="border-ctp-surface2 h-16 w-16 rounded-lg border object-contain"
+                              className="border-ctp-surface2 h-16 w-16 rounded-md border object-contain"
                             />
                             <button
                               onClick={removeLogo}
-                              className="bg-ctp-red text-ctp-base hover:bg-ctp-maroon rounded-lg px-3 py-1.5 text-xs font-medium transition-colors"
+                              className="bg-ctp-red text-ctp-base hover:bg-ctp-red/90 rounded-md px-3 py-1.5 text-xs font-medium transition-colors"
                             >
                               Remove Logo
                             </button>
                           </div>
 
-                          <div className="border-ctp-yellow/30 bg-ctp-yellow/10 rounded-lg border p-3">
+                          <div className="border-ctp-yellow/30 bg-ctp-yellow/10 rounded-md border p-3">
                             <div className="flex items-start gap-2">
                               <svg
                                 className="text-ctp-yellow mt-0.5 h-4 w-4 shrink-0"
@@ -564,7 +555,7 @@ const QRCodeGenerator = () => {
                               onChange={(e) =>
                                 setLogoPosition(e.target.value as LogoPosition)
                               }
-                              className="border-ctp-surface2 bg-ctp-base text-ctp-text w-full rounded-lg border px-3 py-2 text-xs"
+                              className="border-ctp-surface2 bg-ctp-base text-ctp-text w-full rounded-md border px-3 py-2 text-xs"
                             >
                               <option value="center">Center</option>
                               <option value="top-left">Top Left</option>
@@ -623,7 +614,7 @@ const QRCodeGenerator = () => {
                                   onChange={(e) =>
                                     setLogoPadding(Number(e.target.value))
                                   }
-                                  className="border-ctp-surface2 bg-ctp-base text-ctp-text w-16 rounded-lg border px-2 py-1 text-xs"
+                                  className="border-ctp-surface2 bg-ctp-base text-ctp-text w-16 rounded-md border px-2 py-1 text-xs"
                                 />
                               </div>
                             )}
@@ -637,7 +628,7 @@ const QRCodeGenerator = () => {
                           <button
                             type="button"
                             onClick={() => logoInputRef.current?.click()}
-                            className="border-ctp-surface2 bg-ctp-surface1 hover:border-ctp-blue hover:bg-ctp-surface2 w-full cursor-pointer rounded-xl border-2 border-dashed p-4 text-center transition-colors"
+                            className="border-ctp-surface2 bg-ctp-surface1 hover:border-ctp-blue hover:bg-ctp-surface2 w-full cursor-pointer rounded-md border-2 border-dashed p-4 text-center transition-colors"
                           >
                             <svg
                               className="text-ctp-subtext0 mx-auto mb-2 h-8 w-8"
@@ -695,7 +686,7 @@ const QRCodeGenerator = () => {
                                 e.target.value as ErrorCorrectionLevel,
                               )
                             }
-                            className="border-ctp-surface2 bg-ctp-base text-ctp-text w-full rounded-lg border px-3 py-2 text-xs"
+                            className="border-ctp-surface2 bg-ctp-base text-ctp-text w-full rounded-md border px-3 py-2 text-xs"
                           >
                             <option value="L">Low (7%)</option>
                             <option value="M">Medium (15%)</option>
@@ -785,7 +776,7 @@ const QRCodeGenerator = () => {
 
                     <button
                       onClick={resetAdvancedSettings}
-                      className="bg-ctp-surface2 text-ctp-text hover:bg-ctp-overlay0 w-full rounded-lg px-4 py-2 text-xs font-medium transition-colors"
+                      className="bg-ctp-surface2 text-ctp-text hover:bg-ctp-overlay0 w-full rounded-md px-4 py-2 text-xs font-medium transition-colors"
                     >
                       Reset to Defaults
                     </button>
@@ -795,7 +786,7 @@ const QRCodeGenerator = () => {
                 <button
                   onClick={generateQRCode}
                   disabled={!url}
-                  className="bg-ctp-blue text-ctp-base hover:bg-ctp-sapphire focus:ring-ctp-blue focus:ring-offset-ctp-base mt-6 w-full rounded-xl px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                  className="bg-ctp-blue text-ctp-base hover:bg-ctp-blue/90 focus:ring-ctp-blue focus:ring-offset-ctp-base mt-6 w-full rounded-md px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Generate QR Code
                 </button>
@@ -804,14 +795,14 @@ const QRCodeGenerator = () => {
 
             <div className={isAdvancedMode ? "" : "mx-auto max-w-3xl"}>
               {qrCodeDataUrl && (
-                <div className="bg-ctp-surface0 rounded-2xl p-6 shadow-lg sm:p-8">
+                <div className="bg-ctp-surface0 rounded-md p-6 sm:p-8">
                   <h2 className="text-ctp-text mb-4 text-center text-lg font-semibold">
                     Your QR Code
                   </h2>
 
                   <div className="mb-6 flex justify-center">
                     <div
-                      className="rounded-xl p-4"
+                      className="rounded-md p-4"
                       style={{
                         backgroundColor: isAdvancedMode
                           ? lightColor
@@ -832,7 +823,7 @@ const QRCodeGenerator = () => {
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <button
                       onClick={saveQRCode}
-                      className="bg-ctp-green text-ctp-base hover:bg-ctp-teal focus:ring-ctp-green focus:ring-offset-ctp-base flex-1 rounded-xl px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                      className="bg-ctp-blue text-ctp-base hover:bg-ctp-blue/90 focus:ring-ctp-blue focus:ring-offset-ctp-base flex-1 rounded-md px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
                     >
                       <div className="flex items-center justify-center gap-2">
                         <svg
@@ -860,13 +851,13 @@ const QRCodeGenerator = () => {
                           removeLogo();
                         }
                       }}
-                      className="bg-ctp-surface2 text-ctp-text hover:bg-ctp-overlay0 focus:ring-ctp-surface2 focus:ring-offset-ctp-base flex-1 rounded-xl px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                      className="bg-ctp-surface2 text-ctp-text hover:bg-ctp-overlay0 focus:ring-ctp-surface2 focus:ring-offset-ctp-base flex-1 rounded-md px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
                     >
                       Clear
                     </button>
                   </div>
 
-                  <div className="bg-ctp-surface1 mt-6 rounded-xl p-4">
+                  <div className="bg-ctp-surface1 mt-6 rounded-md p-4">
                     <div className="flex items-start gap-3">
                       <svg
                         className="text-ctp-blue mt-0.5 h-5 w-5 shrink-0"
@@ -930,7 +921,7 @@ const QRCodeGenerator = () => {
           </div>
         </div>
       </div>
-    </main>
+    </PageShell>
   );
 };
 

@@ -2,167 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ToolLink from "../../components/ToolLink";
 import { fuzzySearch } from "../../utils/fuzzySearch";
 import storage from "../../utils/Storage";
-
-interface Tool {
-  href: string;
-  title: string;
-  desc?: string;
-  meta: string;
-  category: string;
-  hidden?: boolean;
-}
-
-const tools: Tool[] = [
-  {
-    href: "/base64/encode",
-    title: "Base64 Encode",
-    meta: "encode,base64,tool",
-    category: "encoding",
-  },
-  {
-    href: "/base64/decode",
-    title: "Base64 Decode",
-    meta: "decode,base64,tool",
-    category: "encoding",
-  },
-  {
-    href: "/qr-code",
-    title: "QR Code Generator",
-    meta: "qr,code,tool",
-    category: "encoding",
-  },
-  {
-    href: "/qr-code/scan",
-    title: "QR Code Scanner",
-    meta: "qr,code,scan,tool",
-    category: "encoding",
-  },
-  {
-    href: "/url/encode",
-    title: "URL Encode",
-    meta: "encode,url,tool",
-    category: "encoding",
-  },
-  {
-    href: "/url/decode",
-    title: "URL Decode",
-    meta: "decode,url,tool",
-    category: "encoding",
-  },
-  {
-    href: "/webp",
-    title: "WebP Converter",
-    meta: "webp,convert,tool",
-    category: "media",
-  },
-  // {
-  //   href: "/background-removal",
-  //   title: "Background Removal",
-  //   meta: "background,remove,ai,transparent,png,tool",
-  //   category: "media",
-  // },
-  {
-    href: "/color-background-removal",
-    title: "Color Background Removal",
-    meta: "color,background,remove,magic,wand,eraser,dropper,picker,transparent,png,tool",
-    category: "media",
-  },
-  {
-    href: "/textbin",
-    title: "TextBin",
-    meta: "text,bin,tool",
-    category: "text",
-  },
-  {
-    href: "/extra-line-removal",
-    title: "Extra Line Removal",
-    meta: "text,whitespace,lines,tool",
-    category: "text",
-  },
-  {
-    href: "/word-counter",
-    title: "Word Counter",
-    meta: "word,count,tool",
-    category: "text",
-  },
-  {
-    href: "/unzip",
-    title: "Unzip Files",
-    meta: "unzip,extract,zip,tool",
-    category: "utilities",
-  },
-  {
-    href: "/deck-draw-odds",
-    title: "Deck Draw Odds",
-    meta: "deck,cards,probability,odds,tool",
-    category: "games",
-  },
-  {
-    href: "/card-assumption",
-    title: "Card Assumption",
-    meta: "cards,probability,assumption,tool",
-    category: "games",
-  },
-  {
-    href: "/sim-code-converter",
-    title: "Sim Code Converter",
-    meta: "sim,code,convert,tool,one-piece-tcg,otcg",
-    category: "utilities",
-    hidden: true,
-  },
-  {
-    href: "/deckbuilder-links",
-    title: "Deckbuilder Links",
-    meta: "deck,deckbuilder,links,egman,cardkaizoku,gumgum,tool,one-piece-tcg,otcg",
-    category: "games",
-    hidden: true,
-  },
-  {
-    href: "/multi-deck-converter",
-    title: "Multi-Deck Converter",
-    meta: "deck,deckbuilder,links,convert,bulk,tool,one-piece-tcg,otcg",
-    category: "games",
-    hidden: true,
-  },
-  {
-    href: "/deck-price",
-    title: "Deck Price Calculator",
-    meta: "deck,price,calculator,cost,money,value,tool,one-piece-tcg,otcg",
-    category: "games",
-    hidden: true,
-  },
-  {
-    href: "/bracket-maker",
-    title: "Bracket Maker",
-    meta: "bracket,tournament,seeding,elimination,matchup,tool",
-    category: "games",
-  },
-  {
-    href: "/compare",
-    title: "Text Compare",
-    meta: "text,compare,diff,tool",
-    category: "text",
-  },
-  {
-    href: "/ev-charging",
-    title: "EV Charging",
-    meta: "ev,charging,tool",
-    category: "utilities",
-  },
-  {
-    href: "/opacifier",
-    title: "Opacifier",
-    // desc: "Get hex codes for disabled buttons and more",
-    meta: "color,opacity,alpha,hex,rgba,transparency,tool",
-    category: "design",
-  },
-  {
-    href: "/jwt",
-    title: "JWT Debugger",
-    meta: "jwt,json,web,token,decode,debug,auth,tool",
-    category: "encoding",
-  },
-];
+import { CATEGORIES, tools } from "./tools";
 
 const EASTER_EGG_KEY = "bounty_unlocked";
 
@@ -225,17 +65,17 @@ const Home = () => {
   );
 
   return (
-    <div className="min-h-[calc(100vh-4rem)]">
+    <div className="flex-1">
       <div className="from-ctp-surface0 via-ctp-base to-ctp-mantle relative overflow-hidden bg-linear-to-br">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(137,180,250,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(245,194,231,0.1),transparent_50%)]" />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="from-ctp-blue via-ctp-mauve to-ctp-pink mb-4 bg-linear-to-r bg-clip-text text-5xl font-bold text-transparent sm:text-6xl">
+            <h1 className="from-ctp-blue via-ctp-mauve to-ctp-pink mb-2 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
               Developer Tools
             </h1>
-            <p className="text-ctp-subtext0 mx-auto mb-8 max-w-2xl text-lg">
+            <p className="text-ctp-subtext0 mx-auto mb-5 max-w-2xl">
               A collection of handy utilities to make your development workflow
               easier
             </p>
@@ -263,7 +103,7 @@ const Home = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onClick={handleSearchClick}
-                className="border-ctp-surface2 bg-ctp-surface0 text-ctp-text placeholder:text-ctp-subtext0 focus:border-ctp-mauve focus:ring-ctp-mauve/20 w-full rounded-xl border-2 py-4 pr-4 pl-12 shadow-lg transition-all duration-200 focus:ring-4 focus:outline-none"
+                className="border-ctp-surface2 bg-ctp-surface0 text-ctp-text placeholder:text-ctp-subtext0 focus:border-ctp-blue focus:ring-ctp-blue/20 w-full rounded-md border-2 py-3 pr-4 pl-12 transition-colors duration-100 focus:ring-4 focus:outline-none"
               />
             </div>
           </div>
@@ -272,7 +112,7 @@ const Home = () => {
 
       {showUnlockMessage && (
         <div className="fixed top-20 left-1/2 z-50 -translate-x-1/2 animate-[slideDown_0.5s_ease-out]">
-          <div className="from-ctp-pink to-ctp-mauve border-ctp-pink/50 rounded-xl border-2 bg-linear-to-r px-6 py-4 shadow-2xl backdrop-blur-sm">
+          <div className="from-ctp-pink to-ctp-mauve border-ctp-pink/50 rounded-md border-2 bg-linear-to-r px-6 py-4 backdrop-blur-sm">
             <div className="flex items-center gap-3">
               <span className="text-3xl">🎴</span>
               <div>
@@ -288,7 +128,7 @@ const Home = () => {
         </div>
       )}
 
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {filteredTools.length === 0 ? (
           <div className="py-12 text-center">
             <p className="text-ctp-subtext0 text-lg">
@@ -296,19 +136,29 @@ const Home = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filteredTools.map((tool) => (
-              <div key={tool.href} className="group relative">
-                <div className="bg-ctp-mauve absolute -inset-0.5 rounded-2xl opacity-0 blur transition duration-300 group-hover:opacity-20" />
-                <ToolLink
-                  href={tool.href}
-                  title={tool.title}
-                  category={tool.category}
-                  desc={tool.desc}
-                />
-              </div>
-            ))}
-          </div>
+          CATEGORIES.map(({ key, label }) => {
+            const categoryTools = filteredTools.filter(
+              (tool) => tool.category === key,
+            );
+            if (categoryTools.length === 0) return null;
+
+            return (
+              <section key={key} className="mb-8 last:mb-0">
+                <h2 className="text-ctp-subtext0 mb-3 text-sm font-semibold tracking-wider uppercase">
+                  {label}
+                </h2>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {categoryTools.map((tool) => (
+                    <ToolLink
+                      key={tool.href}
+                      href={tool.href}
+                      title={tool.title}
+                    />
+                  ))}
+                </div>
+              </section>
+            );
+          })
         )}
       </div>
     </div>

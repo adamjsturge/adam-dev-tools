@@ -1,21 +1,19 @@
-import { ComponentProps } from "react";
+import { SelectHTMLAttributes } from "react";
 import classNames from "../utils/classNames";
 
-interface InputProps extends ComponentProps<"input"> {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   customClass?: string;
   error?: string;
-  helperText?: string;
 }
 
-const Input = ({
+const Select = ({
   label,
   customClass = "",
   id,
   error,
-  helperText,
   ...props
-}: InputProps) => {
+}: SelectProps) => {
   return (
     <div className={customClass}>
       {label && (
@@ -26,11 +24,11 @@ const Input = ({
           {label}
         </label>
       )}
-      <input
+      <select
         id={id}
         className={classNames(
           "w-full rounded-md px-4 py-2.5 transition-colors duration-100",
-          "bg-ctp-surface0 text-ctp-text placeholder:text-ctp-overlay0 border-2",
+          "bg-ctp-surface0 text-ctp-text border-2",
           "focus:ring-offset-ctp-base focus:ring-2 focus:ring-offset-2 focus:outline-none",
           error
             ? "border-ctp-red focus:border-ctp-red focus:ring-ctp-red/50"
@@ -39,9 +37,6 @@ const Input = ({
         )}
         {...props}
       />
-      {helperText && !error && (
-        <p className="text-ctp-overlay1 mt-1.5 text-xs">{helperText}</p>
-      )}
       {error && (
         <p className="text-ctp-red mt-1.5 text-xs font-medium">{error}</p>
       )}
@@ -49,4 +44,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default Select;

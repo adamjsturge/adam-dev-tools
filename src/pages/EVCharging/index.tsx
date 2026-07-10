@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { useReactPersist } from "../../utils/Storage";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import PageShell from "../../components/PageShell";
+import Section from "../../components/Section";
+import { useUrlState, useUrlStringState } from "../../utils/useUrlState";
 
 interface ChargingDataPoint {
   time: number;
@@ -20,19 +24,10 @@ interface GridLine {
 }
 
 const EVCharging = () => {
-  const [currentCharge, setCurrentCharge] = useReactPersist(
-    "ev-current-charge",
-    20,
-  );
-  const [targetCharge, setTargetCharge] = useReactPersist(
-    "ev-target-charge",
-    80,
-  );
-  const [estimatedMinutes, setEstimatedMinutes] = useReactPersist(
-    "ev-estimated-minutes",
-    45,
-  );
-  const [startTime, setStartTime] = useReactPersist("ev-start-time", "");
+  const [currentCharge, setCurrentCharge] = useUrlState("current", 20);
+  const [targetCharge, setTargetCharge] = useUrlState("target", 80);
+  const [estimatedMinutes, setEstimatedMinutes] = useUrlState("minutes", 45);
+  const [startTime, setStartTime] = useUrlStringState("start", "");
   const [showResults, setShowResults] = useState(false);
   const [chargingData, setChargingData] = useState<ChargingDataPoint[]>([]);
   const [hoverInfo, setHoverInfo] = useState({
@@ -231,12 +226,12 @@ const EVCharging = () => {
   };
 
   return (
-    <main className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl flex-col px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-6 text-center text-3xl font-bold">
-        ⚡ EV Charging Estimator
-      </h1>
-
-      <div className="bg-ctp-surface0 text-ctp-blue mb-4 rounded-lg p-4 text-center">
+    <PageShell
+      title="EV Charging Estimator"
+      subtitle="Estimate slow-charging time and completion for your EV"
+      wide
+    >
+      <div className="bg-ctp-surface0 text-ctp-blue mb-4 rounded-md p-4 text-center">
         <p>
           <strong>Slow Charging Model:</strong> This estimator assumes linear
           charging throughout the entire process. Unlike fast charging which
@@ -259,20 +254,17 @@ const EVCharging = () => {
                 Duration: {formatTime(estimatedMinutes)}
               </p>
             </div>
-            <button
-              className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded px-4 py-2"
-              onClick={() => setShowResults(false)}
-            >
+            <Button variant="secondary" onClick={() => setShowResults(false)}>
               Back to Settings
-            </button>
+            </Button>
           </div>
 
-          <div className="bg-ctp-surface0 flex-1 rounded-lg p-6 shadow-lg">
+          <Section customClass="flex-1">
             <div className="relative">
               <svg
                 width="600"
                 height="400"
-                className="border-ctp-surface1 bg-ctp-mantle rounded-lg border"
+                className="border-ctp-surface1 bg-ctp-mantle rounded-md border"
                 role="img"
                 aria-label={`EV charging curve showing linear progression from ${currentCharge}% to ${targetCharge}% over ${formatTime(estimatedMinutes)}`}
                 onMouseMove={handleMouseMove}
@@ -338,7 +330,7 @@ const EVCharging = () => {
               </svg>
 
               {hoverInfo.charge > 0 && (
-                <div className="border-ctp-surface1 bg-ctp-surface2 text-ctp-text absolute top-4 right-4 rounded-lg border p-3 text-sm shadow-lg">
+                <div className="border-ctp-surface1 bg-ctp-surface2 text-ctp-text absolute top-4 right-4 rounded-md border p-3 text-sm">
                   <div>
                     <strong>{Math.round(hoverInfo.charge)}%</strong> charge
                   </div>
@@ -366,13 +358,13 @@ const EVCharging = () => {
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-4 text-center md:grid-cols-3">
-              <div className="border-ctp-blue/30 bg-ctp-blue/20 rounded-lg border p-4">
+              <div className="border-ctp-blue/30 bg-ctp-blue/20 rounded-md border p-4">
                 <div className="text-ctp-blue text-2xl font-bold">
                   {chargeRange}%
                 </div>
                 <div className="text-ctp-subtext0">Charge Added</div>
               </div>
-              <div className="border-ctp-green/30 bg-ctp-green/20 rounded-lg border p-4">
+              <div className="border-ctp-green/30 bg-ctp-green/20 rounded-md border p-4">
                 <div
                   className="text-ctp-green text-2xl font-bold"
                   aria-label={`Total time: ${formatTime(estimatedMinutes)}`}
@@ -385,7 +377,7 @@ const EVCharging = () => {
                 </div>
               </div>
               {startTime ? (
-                <div className="border-ctp-mauve/30 bg-ctp-mauve/20 rounded-lg border p-4">
+                <div className="border-ctp-mauve/30 bg-ctp-mauve/20 rounded-md border p-4">
                   <div className="text-ctp-mauve text-2xl font-bold">
                     {formatTimeAmPm(
                       addMinutesToTime(startTime, estimatedMinutes),
@@ -394,7 +386,7 @@ const EVCharging = () => {
                   <div className="text-ctp-subtext0">Completion Time</div>
                 </div>
               ) : (
-                <div className="border-ctp-surface2 bg-ctp-surface1 rounded-lg border p-4">
+                <div className="border-ctp-surface2 bg-ctp-surface1 rounded-md border p-4">
                   <div className="text-ctp-subtext1 text-lg">
                     Set start time
                   </div>
@@ -402,128 +394,79 @@ const EVCharging = () => {
                 </div>
               )}
             </div>
-          </div>
+          </Section>
         </div>
       ) : (
         <>
-          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="bg-ctp-surface0 rounded-xl p-6">
-              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
-                Battery Information
-              </h2>
+          <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
+            <Section title="Battery Information">
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="currentCharge"
-                    className="text-ctp-text mb-2 block text-sm font-medium"
-                  >
-                    Current Charge (%)
-                  </label>
-                  <input
-                    id="currentCharge"
-                    type="number"
-                    min={0}
-                    max={100}
-                    value={currentCharge}
-                    onChange={(e) => setCurrentCharge(Number(e.target.value))}
-                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="targetCharge"
-                    className="text-ctp-text mb-2 block text-sm font-medium"
-                  >
-                    Target Charge (%)
-                  </label>
-                  <input
-                    id="targetCharge"
-                    type="number"
-                    min={0}
-                    max={100}
-                    value={targetCharge}
-                    onChange={(e) => setTargetCharge(Number(e.target.value))}
-                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
-                  />
-                </div>
+                <Input
+                  id="currentCharge"
+                  label="Current Charge (%)"
+                  type="number"
+                  min={0}
+                  max={100}
+                  value={currentCharge}
+                  onChange={(e) => setCurrentCharge(Number(e.target.value))}
+                />
+                <Input
+                  id="targetCharge"
+                  label="Target Charge (%)"
+                  type="number"
+                  min={0}
+                  max={100}
+                  value={targetCharge}
+                  onChange={(e) => setTargetCharge(Number(e.target.value))}
+                />
               </div>
-            </div>
+            </Section>
 
-            <div className="bg-ctp-surface0 rounded-xl p-6">
-              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
-                Charging Time
-              </h2>
-              <label
-                htmlFor="estimatedMinutes"
-                className="text-ctp-text mb-2 block text-sm font-medium"
-              >
-                Estimated Time (minutes)
-              </label>
-              <input
+            <Section title="Charging Time">
+              <Input
                 id="estimatedMinutes"
+                label="Estimated Time (minutes)"
                 type="number"
                 min={1}
                 value={estimatedMinutes}
                 onChange={(e) => setEstimatedMinutes(Number(e.target.value))}
                 placeholder="45"
-                className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
               />
               <p className="text-ctp-subtext1 mt-2 text-sm">
                 Time your car estimates to reach target charge
               </p>
-            </div>
+            </Section>
 
-            <div className="bg-ctp-surface0 rounded-xl p-6 md:col-span-2">
-              <h2 className="text-ctp-text mb-4 text-lg font-semibold">
-                Start Time
-              </h2>
+            <Section title="Start Time" customClass="md:col-span-2">
               <div className="flex items-end gap-2">
-                <div className="flex-1">
-                  <label
-                    htmlFor="startTime"
-                    className="text-ctp-text mb-2 block text-sm font-medium"
-                  >
-                    Start Time (optional)
-                  </label>
-                  <input
-                    id="startTime"
-                    type="time"
-                    value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                    className="border-ctp-surface2 bg-ctp-surface1 text-ctp-text w-full rounded border p-2"
-                  />
-                </div>
-                <button
-                  className="bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base h-10 rounded px-4 py-2"
-                  onClick={setCurrentTime}
-                >
+                <Input
+                  id="startTime"
+                  label="Start Time (optional)"
+                  type="time"
+                  value={startTime}
+                  onChange={(e) => setStartTime(e.target.value)}
+                  customClass="flex-1"
+                />
+                <Button variant="secondary" onClick={setCurrentTime}>
                   Now
-                </button>
+                </Button>
               </div>
               <p className="text-ctp-subtext1 mt-2 text-sm">
                 Set to see actual completion times (times will display in AM/PM
                 format)
               </p>
-            </div>
+            </Section>
           </div>
 
           <div className="mt-8 flex justify-center gap-4">
-            <button
-              className="bg-ctp-green hover:bg-ctp-teal text-ctp-base rounded-lg px-6 py-3 font-semibold"
-              onClick={calculateCharging}
-            >
-              Calculate Charging
-            </button>
-            <button
-              className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded-lg px-6 py-3"
-              onClick={reset}
-            >
+            <Button onClick={calculateCharging}>Calculate Charging</Button>
+            <Button variant="secondary" onClick={reset}>
               Reset
-            </button>
+            </Button>
           </div>
         </>
       )}
-    </main>
+    </PageShell>
   );
 };
 

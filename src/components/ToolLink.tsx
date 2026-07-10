@@ -3,47 +3,30 @@ import { Link } from "wouter";
 interface ToolLinkProps {
   href: string;
   title: string;
-  desc?: string;
-  category?: string;
 }
 
-const ToolLink = ({ href, title, desc }: ToolLinkProps) => {
+const ToolLink = ({ href, title }: ToolLinkProps) => {
   return (
     <Link
       href={href}
-      className="group/link bg-ctp-surface0 relative block h-full overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      className="group/link bg-ctp-surface0 hover:bg-ctp-surface1 flex h-full items-center justify-between gap-3 rounded-md px-4 py-3 transition-colors duration-100"
     >
-      <div className="relative h-full p-6">
-        <div className="flex h-full flex-col">
-          <h3 className="text-ctp-text group-hover/link:text-ctp-mauve grow text-lg font-bold transition-colors">
-            {title}
-          </h3>
-          {/* Looks pretty ugly since it makes the tile taller than other tiles and all tiles on its own row. */}
-          {desc && (
-            <p className="text-ctp-overlay0 mt-2 text-xs leading-relaxed">
-              {desc}
-            </p>
-          )}
-          <div className="text-ctp-subtext0 group-hover/link:text-ctp-mauve mt-4 flex items-center gap-2 text-sm font-medium transition-all group-hover/link:gap-3">
-            <span>Open</span>
-            <svg
-              className="h-4 w-4 transition-transform group-hover/link:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-        </div>
-
-        <div className="absolute top-0 left-0 h-1 w-0 transition-all duration-300 group-hover/link:w-full" />
-      </div>
+      <span className="text-ctp-text group-hover/link:text-ctp-blue font-semibold transition-colors duration-100">
+        {title}
+      </span>
+      <svg
+        className="text-ctp-subtext0 group-hover/link:text-ctp-blue h-4 w-4 shrink-0 transition-colors duration-100"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 5l7 7-7 7"
+        />
+      </svg>
     </Link>
   );
 };

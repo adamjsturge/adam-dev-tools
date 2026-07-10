@@ -2,7 +2,7 @@
 @import "@catppuccin/tailwindcss/mocha.css";
 
 @theme {
-  --font-sans: "Inter", sans-serif;
+  --font-sans: "Open Sans", system-ui, sans-serif;
 }
 
 body {

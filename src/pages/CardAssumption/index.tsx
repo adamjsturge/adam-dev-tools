@@ -1,7 +1,9 @@
-import { useState } from "react";
+import Button from "../../components/Button";
 import Input from "../../components/Input";
+import PageShell from "../../components/PageShell";
 import Section from "../../components/Section";
 import Tile from "../../components/Tile";
+import { useUrlState } from "../../utils/useUrlState";
 
 interface Preset {
   label: string;
@@ -17,15 +19,18 @@ const CardAssumption = () => {
     knownRelevantInHand: 0,
   };
 
-  const [deckSize, setDeckSize] = useState(defaultValues.deckSize);
-  const [relevantCards, setRelevantCards] = useState(
+  const [deckSize, setDeckSize] = useUrlState("deck", defaultValues.deckSize);
+  const [relevantCards, setRelevantCards] = useUrlState(
+    "relevant",
     defaultValues.relevantCards,
   );
-  const [handSize, setHandSize] = useState(defaultValues.handSize);
-  const [discardedCards, setDiscardedCards] = useState(
+  const [handSize, setHandSize] = useUrlState("hand", defaultValues.handSize);
+  const [discardedCards, setDiscardedCards] = useUrlState(
+    "discarded",
     defaultValues.discardedCards,
   );
-  const [knownRelevantInHand, setKnownRelevantInHand] = useState(
+  const [knownRelevantInHand, setKnownRelevantInHand] = useUrlState(
+    "known",
     defaultValues.knownRelevantInHand,
   );
 
@@ -137,11 +142,11 @@ const CardAssumption = () => {
   };
 
   return (
-    <main className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-4 text-center text-2xl font-bold">
-        Card Assumption Calculator
-      </h1>
-
+    <PageShell
+      title="Card Assumption Calculator"
+      subtitle="Estimate how many relevant cards your opponent is holding"
+      wide
+    >
       <Section title="Calculate Opponent's Hand Probabilities">
         <div className="mb-4 flex flex-col gap-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -150,13 +155,14 @@ const CardAssumption = () => {
             </span>
             <div className="flex flex-wrap gap-2">
               {gameStatePresets.map((preset) => (
-                <button
+                <Button
                   key={preset.label}
+                  variant="secondary"
+                  size="sm"
                   onClick={() => applyPreset(preset)}
-                  className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded-md px-4 py-2 text-sm font-medium transition-colors"
                 >
                   {preset.label}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
@@ -166,23 +172,21 @@ const CardAssumption = () => {
             </span>
             <div className="flex flex-wrap gap-2">
               {relevantCardPresets.map((preset) => (
-                <button
+                <Button
                   key={preset.label}
+                  variant="secondary"
+                  size="sm"
                   onClick={() => applyPreset(preset)}
-                  className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded-md px-4 py-2 text-sm font-medium transition-colors"
                 >
                   {preset.label}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
           <div className="flex justify-end">
-            <button
-              className="bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base rounded-md px-4 py-2 text-sm font-medium"
-              onClick={resetToDefault}
-            >
+            <Button size="sm" onClick={resetToDefault}>
               Reset to Default
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -241,7 +245,7 @@ const CardAssumption = () => {
           ))}
         </div>
       </Section>
-    </main>
+    </PageShell>
   );
 };
 

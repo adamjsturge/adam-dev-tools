@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
 import TextArea from "../../components/TextArea";
 import { useReactPersist } from "../../utils/Storage";
 
@@ -22,25 +24,21 @@ const ExtraLineRemoval = () => {
   };
 
   return (
-    <main className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl flex-col px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-4 text-2xl font-bold">
-        Extra Line Removal
-      </h1>
+    <PageShell
+      title="Extra Line Removal"
+      subtitle="Strip blank lines from any block of text"
+      wide
+    >
       <div className="mb-4 flex justify-end">
-        <button
-          className="bg-ctp-blue text-ctp-base hover:bg-ctp-sapphire rounded px-4 py-2"
-          onClick={removeExtraLines}
-        >
-          Remove Extra Lines
-        </button>
+        <Button onClick={removeExtraLines}>Remove Extra Lines</Button>
       </div>
       <TextArea
         ref={textAreaRef}
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        customClass="h-[70vh] w-full"
+        fill
       />
-    </main>
+    </PageShell>
   );
 };
 

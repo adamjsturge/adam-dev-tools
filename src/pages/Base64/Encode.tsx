@@ -12,6 +12,7 @@ const Base64Encode = () => {
   return (
     <IOwithCopy
       title="Base64 Encoder"
+      subtitle="Encode any text to Base64"
       inputPlaceholder="Enter string to encode"
       buttonText="Encode"
       onButtonClick={encodeBase64}

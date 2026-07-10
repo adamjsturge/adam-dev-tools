@@ -12,6 +12,7 @@ const URLDecode = () => {
   return (
     <IOwithCopy
       title="URL Decoder"
+      subtitle="Decode percent-encoded URLs back to plain text"
       inputPlaceholder="Enter string to decode"
       buttonText="Decode"
       onButtonClick={decodeUrl}
