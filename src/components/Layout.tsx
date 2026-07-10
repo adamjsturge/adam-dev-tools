@@ -47,9 +47,9 @@ const Layout = ({ children }: LayoutProps) => {
           </a>
         </div>
       </nav>
-      <div id="main-content" className="flex flex-1 flex-col">
+      <main id="main-content" className="flex flex-1 flex-col">
         {children}
-      </div>
+      </main>
     </div>
   );
 };
