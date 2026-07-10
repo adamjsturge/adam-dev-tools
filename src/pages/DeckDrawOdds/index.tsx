@@ -248,137 +248,139 @@ const DeckDrawOdds = () => {
       subtitle="Hypergeometric odds of drawing the cards you need"
       wide
     >
-      <Section title="Single Card Probability Calculator" customClass="mb-8">
-        <div className="mb-4 flex flex-col gap-4">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-ctp-text text-sm font-medium">
-              Game State:
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {gameStatePresets.map((preset) => (
-                <Button
-                  key={preset.label}
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => applyPreset(preset)}
-                >
-                  {preset.label}
-                </Button>
-              ))}
+      <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
+        <Section title="Single Card Probability Calculator">
+          <div className="mb-4 flex flex-col gap-4">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="text-ctp-text text-sm font-medium">
+                Game State:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {gameStatePresets.map((preset) => (
+                  <Button
+                    key={preset.label}
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => applyPreset(preset)}
+                  >
+                    {preset.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="text-ctp-text text-sm font-medium">
+                Cards Drawn:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {drawSizePresets.map((preset) => (
+                  <Button
+                    key={preset.label}
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => applyPreset(preset)}
+                  >
+                    {preset.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <Button size="sm" onClick={resetSingleCard}>
+                Reset Single Card
+              </Button>
             </div>
           </div>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-ctp-text text-sm font-medium">
-              Cards Drawn:
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {drawSizePresets.map((preset) => (
-                <Button
-                  key={preset.label}
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => applyPreset(preset)}
-                >
-                  {preset.label}
-                </Button>
-              ))}
-            </div>
+
+          <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <Input
+              id="deckSize"
+              label="Deck Size"
+              type="number"
+              value={deckSize}
+              onChange={(e) => setDeckSize(Number(e.target.value))}
+            />
+            <Input
+              id="copiesRan"
+              label="Copies Ran"
+              type="number"
+              max={deckSize}
+              value={copiesRan}
+              onChange={(e) => setCopiesRan(Number(e.target.value))}
+            />
+            <Input
+              id="cardsDrawn"
+              label="Cards Drawn"
+              type="number"
+              max={deckSize}
+              value={cardsDrawn}
+              onChange={(e) => setCardsDrawn(Number(e.target.value))}
+            />
+            <Input
+              id="oddsToHave"
+              label="Odds to Have"
+              type="number"
+              max={Math.min(copiesRan, cardsDrawn)}
+              value={oddsToHave}
+              onChange={(e) => setOddsToHave(Number(e.target.value))}
+            />
           </div>
-          <div className="flex justify-end">
-            <Button size="sm" onClick={resetSingleCard}>
-              Reset Single Card
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <Tile title="Exact Probability" value={exactProbability} />
+            <Tile title="At Least Probability" value={atLeastProbability} />
+            <Tile title="With One Mulligan" value={mulliganProbability} />
+          </div>
+        </Section>
+
+        <Section title="Multi Card Probability Calculator">
+          <div className="mb-4 flex justify-end">
+            <Button size="sm" onClick={resetMultiCard}>
+              Reset Multi Card
             </Button>
           </div>
-        </div>
 
-        <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Input
-            id="deckSize"
-            label="Deck Size"
-            type="number"
-            value={deckSize}
-            onChange={(e) => setDeckSize(Number(e.target.value))}
-          />
-          <Input
-            id="copiesRan"
-            label="Copies Ran"
-            type="number"
-            max={deckSize}
-            value={copiesRan}
-            onChange={(e) => setCopiesRan(Number(e.target.value))}
-          />
-          <Input
-            id="cardsDrawn"
-            label="Cards Drawn"
-            type="number"
-            max={deckSize}
-            value={cardsDrawn}
-            onChange={(e) => setCardsDrawn(Number(e.target.value))}
-          />
-          <Input
-            id="oddsToHave"
-            label="Odds to Have"
-            type="number"
-            max={Math.min(copiesRan, cardsDrawn)}
-            value={oddsToHave}
-            onChange={(e) => setOddsToHave(Number(e.target.value))}
-          />
-        </div>
+          <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <Input
+              id="mvDeckSize"
+              label="Deck Size"
+              type="number"
+              value={mvDeckSize}
+              onChange={(e) => setMvDeckSize(Number(e.target.value))}
+            />
+            <Input
+              id="copiesCardA"
+              label="Copies of Card A"
+              type="number"
+              max={mvDeckSize}
+              value={copiesCardA}
+              onChange={(e) => setCopiesCardA(Number(e.target.value))}
+            />
+            <Input
+              id="copiesCardB"
+              label="Copies of Card B"
+              type="number"
+              max={mvDeckSize}
+              value={copiesCardB}
+              onChange={(e) => setCopiesCardB(Number(e.target.value))}
+            />
+            <Input
+              id="mvDrawSize"
+              label="Draw Size"
+              type="number"
+              min={2}
+              max={mvDeckSize}
+              value={mvDrawSize}
+              onChange={(e) => setMvDrawSize(Number(e.target.value))}
+            />
+          </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <Tile title="Exact Probability" value={exactProbability} />
-          <Tile title="At Least Probability" value={atLeastProbability} />
-          <Tile title="With One Mulligan" value={mulliganProbability} />
-        </div>
-      </Section>
-
-      <Section title="Multi Card Probability Calculator">
-        <div className="mb-4 flex justify-end">
-          <Button size="sm" onClick={resetMultiCard}>
-            Reset Multi Card
-          </Button>
-        </div>
-
-        <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Input
-            id="mvDeckSize"
-            label="Deck Size"
-            type="number"
-            value={mvDeckSize}
-            onChange={(e) => setMvDeckSize(Number(e.target.value))}
-          />
-          <Input
-            id="copiesCardA"
-            label="Copies of Card A"
-            type="number"
-            max={mvDeckSize}
-            value={copiesCardA}
-            onChange={(e) => setCopiesCardA(Number(e.target.value))}
-          />
-          <Input
-            id="copiesCardB"
-            label="Copies of Card B"
-            type="number"
-            max={mvDeckSize}
-            value={copiesCardB}
-            onChange={(e) => setCopiesCardB(Number(e.target.value))}
-          />
-          <Input
-            id="mvDrawSize"
-            label="Draw Size"
-            type="number"
-            min={2}
-            max={mvDeckSize}
-            value={mvDrawSize}
-            onChange={(e) => setMvDrawSize(Number(e.target.value))}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Tile title="Probability of Drawing Both" value={mvProbability} />
-          <Tile title="With One Mulligan" value={mvMulliganProbability} />
-        </div>
-      </Section>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <Tile title="Probability of Drawing Both" value={mvProbability} />
+            <Tile title="With One Mulligan" value={mvMulliganProbability} />
+          </div>
+        </Section>
+      </div>
     </PageShell>
   );
 };

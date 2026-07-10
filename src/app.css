@@ -1,8 +1,24 @@
 @import "tailwindcss";
 @import "@catppuccin/tailwindcss/mocha.css";
 
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("/fonts/OpenSansVariable.woff2") format("woff2");
+}
+
 @theme {
   --font-sans: "Open Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-ctp-blue);
+    outline-offset: 2px;
+  }
 }
 
 body {

@@ -29,44 +29,40 @@ const WordCounter = () => {
 
   const stats = useMemo(() => calculateStats(text), [text]);
 
+  const statEntries = [
+    { label: "Characters", value: stats.characters },
+    { label: "Characters (no spaces)", value: stats.charactersNoSpaces },
+    { label: "Words", value: stats.words },
+    { label: "Lines", value: stats.lines },
+    { label: "Sentences", value: stats.sentences },
+    { label: "Paragraphs", value: stats.paragraphs },
+  ];
+
   return (
     <PageShell
       title="Ultimate Word Counter"
       subtitle="Count characters, words, lines, sentences, and paragraphs as you type"
+      wide
     >
-      <TextArea
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        customClass="h-[40vh] w-full mb-4"
-        placeholder="Start typing or paste your text here..."
-      />
+      <div className="grid flex-1 grid-cols-1 content-start gap-4 lg:grid-cols-[minmax(0,1fr)_16rem] lg:grid-rows-[minmax(0,1fr)]">
+        <div className="flex min-h-[45vh] flex-col lg:min-h-0">
+          <TextArea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Start typing or paste your text here..."
+            fill
+          />
+        </div>
 
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-        <div className="bg-ctp-surface0 rounded-md p-4">
-          <h3 className="text-ctp-text mb-2 font-bold">Characters</h3>
-          <p className="text-ctp-text">{stats.characters}</p>
-        </div>
-        <div className="bg-ctp-surface0 rounded-md p-4">
-          <h3 className="text-ctp-text mb-2 font-bold">
-            Characters (no spaces)
-          </h3>
-          <p className="text-ctp-text">{stats.charactersNoSpaces}</p>
-        </div>
-        <div className="bg-ctp-surface0 rounded-md p-4">
-          <h3 className="text-ctp-text mb-2 font-bold">Words</h3>
-          <p className="text-ctp-text">{stats.words}</p>
-        </div>
-        <div className="bg-ctp-surface0 rounded-md p-4">
-          <h3 className="text-ctp-text mb-2 font-bold">Lines</h3>
-          <p className="text-ctp-text">{stats.lines}</p>
-        </div>
-        <div className="bg-ctp-surface0 rounded-md p-4">
-          <h3 className="text-ctp-text mb-2 font-bold">Sentences</h3>
-          <p className="text-ctp-text">{stats.sentences}</p>
-        </div>
-        <div className="bg-ctp-surface0 rounded-md p-4">
-          <h3 className="text-ctp-text mb-2 font-bold">Paragraphs</h3>
-          <p className="text-ctp-text">{stats.paragraphs}</p>
+        <div className="grid grid-cols-2 content-start gap-3 sm:grid-cols-3 lg:grid-cols-1">
+          {statEntries.map((entry) => (
+            <div key={entry.label} className="bg-ctp-surface0 rounded-md p-4">
+              <h3 className="text-ctp-subtext0 text-sm font-medium">
+                {entry.label}
+              </h3>
+              <p className="text-ctp-text text-xl font-bold">{entry.value}</p>
+            </div>
+          ))}
         </div>
       </div>
     </PageShell>

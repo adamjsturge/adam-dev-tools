@@ -22,7 +22,6 @@ const H1_OVERRIDES: Record<string, string> = {
   "/deck-draw-odds": "Deck Draw Odds Calculator",
   "/card-assumption": "Card Assumption Calculator",
   "/ev-charging": "EV Charging Estimator",
-  "/opacifier": "Color Opacity (Beta)",
   "/color-background-removal": "Color Background Removal",
   "/multi-deck-converter": "Multi-Deck Link Converter",
   "/deckbuilder-links": "Deckbuilder Links Generator",

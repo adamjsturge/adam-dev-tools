@@ -87,7 +87,7 @@ const ColorOpacity = () => {
 
   return (
     <PageShell
-      title="Color Opacity (Beta)"
+      title="Opacifier"
       subtitle="Enter a color (hex, RGB, or name) and see it at every opacity level"
     >
       <div className="mb-8">
@@ -122,7 +122,7 @@ const ColorOpacity = () => {
           <h2 className="text-ctp-text mb-4 text-xl font-bold">
             Opacity Variations
           </h2>
-          <div className="grid grid-cols-1 gap-3">
+          <div className="bg-ctp-surface0 divide-ctp-surface1 divide-y rounded-md">
             {opacityLevels.map((opacity, index) => {
               const hexCode = rgbaToHex(
                 parsedColor.r,
@@ -132,25 +132,18 @@ const ColorOpacity = () => {
               );
 
               return (
-                <div
-                  key={index}
-                  className="bg-ctp-surface0 border-ctp-surface1 flex items-center gap-4 rounded-md border p-3"
-                >
-                  <div className="text-ctp-text w-20 text-center font-semibold">
+                <div key={index} className="flex items-center gap-3 px-4 py-2">
+                  <div className="text-ctp-text w-12 text-sm font-semibold">
                     {Math.round(opacity * 100)}%
                   </div>
                   <div
-                    className="border-ctp-surface2 h-16 w-16 rounded-md border-2"
+                    className="border-ctp-surface2 h-8 w-8 rounded border"
                     style={{ backgroundColor: hexCode }}
                   ></div>
-                  <div className="flex flex-1 flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <code className="bg-ctp-surface1 text-ctp-text flex-1 rounded-md px-3 py-2 font-mono text-sm">
-                        {hexCode}
-                      </code>
-                      <CopyButton text={hexCode} size="sm" />
-                    </div>
-                  </div>
+                  <code className="text-ctp-text flex-1 font-mono text-sm">
+                    {hexCode}
+                  </code>
+                  <CopyButton text={hexCode} size="sm" />
                 </div>
               );
             })}
