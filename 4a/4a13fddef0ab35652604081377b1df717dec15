@@ -1,0 +1,26 @@
+src/App.tsx
+  s_89a5eac825a7c7::t_ee198ec9f39148 1,6,8-12,14-31,33-36,38-42,44-45,47-48,50-51,53-83
+  s_89a5eac825a7c7::t_35b50321654ad9 13
+src/routes.ts
+  s_89a5eac825a7c7::t_07310ee1ab9b9b 69-70
+  s_89a5eac825a7c7::t_e847b53f86175d 1-37,39-41,44-68,71-78
+  s_89a5eac825a7c7::t_3a4fb06dc12e27 38,42-43
+src/components/ToolLink.tsx
+  s_89a5eac825a7c7::t_70f18ed47a4534 2,10-11,15-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4a4a13fddef0ab35652604081377b1df717dec15",
+  "prompts": {},
+  "sessions": {
+    "s_89a5eac825a7c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c595196f-bd4a-4f77-8bf7-c475be777ae9",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
