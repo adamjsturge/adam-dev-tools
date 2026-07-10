@@ -22,7 +22,7 @@ const PageShell = ({
   }, [title]);
 
   return (
-    <main
+    <div
       className={classNames(
         "mx-auto flex w-full flex-1 flex-col px-4 py-8",
         wide ? "max-w-7xl" : "max-w-4xl",
@@ -42,7 +42,7 @@ const PageShell = ({
         {actions && <div className="flex shrink-0 gap-3">{actions}</div>}
       </div>
       {children}
-    </main>
+    </div>
   );
 };
 
