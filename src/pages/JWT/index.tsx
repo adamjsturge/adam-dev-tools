@@ -1,4 +1,7 @@
 import { useEffect, useMemo } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
+import Section from "../../components/Section";
 import TextArea from "../../components/TextArea";
 import { useReactPersist } from "../../utils/Storage";
 
@@ -125,29 +128,25 @@ const JWTDebugger = () => {
   };
 
   return (
-    <main className="container mx-auto min-h-[calc(100vh-4rem)] max-w-[1600px] px-4 pt-8 pb-4">
-      <div className="mb-6">
-        <h1 className="text-ctp-text mb-2 text-3xl font-bold">JWT Debugger</h1>
-        <p className="text-ctp-subtext0">
-          Decode and inspect JSON Web Tokens in real-time
-        </p>
-      </div>
-
+    <PageShell
+      title="JWT Debugger"
+      subtitle="Decode and inspect JSON Web Tokens in real-time"
+      wide
+      actions={
+        token ? (
+          <Button variant="secondary" size="sm" onClick={() => setToken("")}>
+            Clear
+          </Button>
+        ) : undefined
+      }
+    >
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="flex flex-col">
-          <div className="bg-ctp-surface0 flex h-full flex-col rounded-xl p-6 shadow-lg">
+          <Section customClass="flex h-full flex-col">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-ctp-text text-lg font-semibold">
                 Encoded JWT
               </h2>
-              {token && (
-                <button
-                  onClick={() => setToken("")}
-                  className="text-ctp-subtext0 hover:text-ctp-red text-sm transition-colors"
-                >
-                  Clear
-                </button>
-              )}
             </div>
             <TextArea
               value={token}
@@ -156,7 +155,7 @@ const JWTDebugger = () => {
               customClass="flex-1 min-h-[400px] font-mono text-sm"
             />
             {decoded?.isValid && (
-              <div className="border-ctp-green/20 bg-ctp-green/10 mt-4 flex items-center gap-2 rounded-lg border px-3 py-2">
+              <div className="border-ctp-green/20 bg-ctp-green/10 mt-4 flex items-center gap-2 rounded-md border px-3 py-2">
                 <svg
                   className="text-ctp-green h-5 w-5 flex-shrink-0"
                   fill="none"
@@ -175,12 +174,12 @@ const JWTDebugger = () => {
                 </span>
               </div>
             )}
-          </div>
+          </Section>
         </div>
 
         <div className="flex flex-col gap-6">
           {!decoded && (
-            <div className="bg-ctp-surface0 flex h-full items-center justify-center rounded-xl p-12 text-center shadow-lg">
+            <div className="bg-ctp-surface0 flex h-full items-center justify-center rounded-md p-12 text-center">
               <div>
                 <svg
                   className="text-ctp-overlay0 mx-auto mb-4 h-16 w-16"
@@ -203,7 +202,7 @@ const JWTDebugger = () => {
           )}
 
           {decoded?.error && (
-            <div className="bg-ctp-surface0 rounded-xl p-6 shadow-lg">
+            <Section>
               <div className="flex items-start gap-3">
                 <svg
                   className="text-ctp-red h-6 w-6 flex-shrink-0"
@@ -225,12 +224,12 @@ const JWTDebugger = () => {
                   <p className="text-ctp-subtext0 text-sm">{decoded.error}</p>
                 </div>
               </div>
-            </div>
+            </Section>
           )}
 
           {decoded?.isValid && (
             <>
-              <div className="bg-ctp-surface0 rounded-xl p-6 shadow-lg">
+              <Section>
                 <h2 className="text-ctp-mauve mb-4 flex items-center gap-2 text-lg font-bold">
                   <svg
                     className="h-5 w-5"
@@ -260,9 +259,9 @@ const JWTDebugger = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Section>
 
-              <div className="bg-ctp-surface0 rounded-xl p-6 shadow-lg">
+              <Section>
                 <h2 className="text-ctp-green mb-4 flex items-center gap-2 text-lg font-bold">
                   <svg
                     className="h-5 w-5"
@@ -292,9 +291,9 @@ const JWTDebugger = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Section>
 
-              <div className="bg-ctp-surface0 rounded-xl p-6 shadow-lg">
+              <Section>
                 <h2 className="text-ctp-peach mb-4 flex items-center gap-2 text-lg font-bold">
                   <svg
                     className="h-5 w-5"
@@ -311,7 +310,7 @@ const JWTDebugger = () => {
                   </svg>
                   Signature
                 </h2>
-                <div className="bg-ctp-mantle text-ctp-text rounded-lg p-3 font-mono text-xs break-all">
+                <div className="bg-ctp-mantle text-ctp-text rounded-md p-3 font-mono text-xs break-all">
                   {decoded.signature}
                 </div>
                 <p className="text-ctp-subtext0 mt-3 text-xs leading-relaxed">
@@ -319,12 +318,12 @@ const JWTDebugger = () => {
                   key (for asymmetric algorithms) along with the algorithm
                   specified in the header.
                 </p>
-              </div>
+              </Section>
             </>
           )}
         </div>
       </div>
-    </main>
+    </PageShell>
   );
 };
 

@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
 
 const ColorBackgroundRemoval = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -223,11 +225,10 @@ const ColorBackgroundRemoval = () => {
   };
 
   return (
-    <main className="container mx-auto max-w-4xl px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-6 text-2xl font-bold">
-        Color Background Removal
-      </h1>
-
+    <PageShell
+      title="Color Background Removal"
+      subtitle="Click any color in an image to remove it and similar connected pixels"
+    >
       <div className="flex flex-col gap-6">
         {/* File Input */}
         <div className="w-full">
@@ -235,7 +236,7 @@ const ColorBackgroundRemoval = () => {
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-lg border p-2 file:mr-4 file:rounded-lg file:border-0 file:px-4 file:py-2"
+            className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-md border p-2 file:mr-4 file:rounded-md file:border-0 file:px-4 file:py-2"
           />
           <p className="text-ctp-subtext0 mt-2 text-sm">
             Upload an image, then click on any color to remove it and all
@@ -256,7 +257,7 @@ const ColorBackgroundRemoval = () => {
                 max="100"
                 value={tolerance}
                 onChange={(e) => setTolerance(Number.parseInt(e.target.value))}
-                className="accent-ctp-mauve w-full"
+                className="accent-ctp-blue w-full"
               />
               <span className="text-ctp-subtext0 mt-1 text-xs">
                 Higher tolerance removes more similar colors
@@ -269,7 +270,7 @@ const ColorBackgroundRemoval = () => {
                   type="checkbox"
                   checked={useCustomBackground}
                   onChange={(e) => setUseCustomBackground(e.target.checked)}
-                  className="accent-ctp-mauve"
+                  className="accent-ctp-blue"
                 />
                 <span className="text-ctp-text text-sm">
                   Use custom background color
@@ -289,7 +290,7 @@ const ColorBackgroundRemoval = () => {
                     type="color"
                     value={backgroundColor}
                     onChange={(e) => setBackgroundColor(e.target.value)}
-                    className="border-ctp-surface2 h-10 w-20 cursor-pointer rounded border-2"
+                    className="border-ctp-surface2 h-10 w-20 cursor-pointer rounded-md border-2"
                   />
                   <span className="text-ctp-subtext0 text-xs">
                     {backgroundColor}
@@ -302,7 +303,7 @@ const ColorBackgroundRemoval = () => {
                   type="checkbox"
                   checked={aggressiveCleanup}
                   onChange={(e) => setAggressiveCleanup(e.target.checked)}
-                  className="accent-ctp-mauve"
+                  className="accent-ctp-blue"
                 />
                 <span className="text-ctp-text text-sm">
                   🧪 Aggressive cleanup (experimental)
@@ -322,27 +323,23 @@ const ColorBackgroundRemoval = () => {
         {file && (
           <div className="flex flex-col gap-4">
             <div className="flex gap-4">
-              <button
+              <Button
+                variant={isPickerMode ? "primary" : "secondary"}
                 onClick={() => setIsPickerMode(!isPickerMode)}
-                className={`rounded-lg px-4 py-2 transition-colors duration-200 ${
-                  isPickerMode
-                    ? "bg-ctp-green text-ctp-base"
-                    : "bg-ctp-surface0 text-ctp-text hover:bg-ctp-surface1"
-                }`}
               >
                 {isPickerMode ? "✓ Picker Active" : "Activate Color Picker"}
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="secondary"
                 onClick={resetCanvas}
                 disabled={!resultUrl}
-                className="bg-ctp-surface0 text-ctp-text hover:bg-ctp-surface1 rounded-lg px-4 py-2 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Reset Image
-              </button>
+              </Button>
             </div>
 
             <div
-              className="rounded-lg p-4"
+              className="rounded-md p-4"
               style={{
                 background: useCustomBackground
                   ? backgroundColor
@@ -352,13 +349,13 @@ const ColorBackgroundRemoval = () => {
               <canvas
                 ref={canvasRef}
                 onClick={handleCanvasClick}
-                className={`max-w-full rounded ${isPickerMode ? "cursor-crosshair" : ""}`}
+                className={`max-w-full rounded-md ${isPickerMode ? "cursor-crosshair" : ""}`}
                 style={{ display: "block" }}
               />
             </div>
 
             {isPickerMode && (
-              <div className="bg-ctp-blue/20 border-ctp-blue rounded-lg border p-3">
+              <div className="bg-ctp-blue/20 border-ctp-blue rounded-md border p-3">
                 <p className="text-ctp-text text-sm">
                   🎨 Click on any color in the image to remove it and all
                   connected pixels of similar color. Adjust tolerance to control
@@ -376,24 +373,16 @@ const ColorBackgroundRemoval = () => {
         {file && (
           <div className="flex flex-wrap gap-4">
             {resultUrl && (
-              <button
-                onClick={downloadResult}
-                className="bg-ctp-green text-ctp-base hover:bg-ctp-teal rounded-lg px-4 py-2 transition-colors duration-200"
-              >
-                Download PNG
-              </button>
+              <Button onClick={downloadResult}>Download PNG</Button>
             )}
-            <button
-              onClick={reset}
-              className="bg-ctp-surface0 text-ctp-text hover:bg-ctp-surface1 rounded-lg px-4 py-2 transition-colors duration-200"
-            >
+            <Button variant="secondary" onClick={reset}>
               Process Another Image
-            </button>
+            </Button>
           </div>
         )}
 
         {/* Info Section */}
-        <div className="bg-ctp-surface0 rounded-lg p-4">
+        <div className="bg-ctp-surface0 rounded-md p-4">
           <h3 className="text-ctp-text mb-2 text-lg font-semibold">
             How to use
           </h3>
@@ -420,7 +409,7 @@ const ColorBackgroundRemoval = () => {
           </ol>
         </div>
       </div>
-    </main>
+    </PageShell>
   );
 };
 

@@ -1,7 +1,12 @@
 import QrScanner from "qr-scanner";
 import { useState } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
+import Section from "../../components/Section";
+import { useClipboard } from "../../utils/useClipboard";
 
 const QRCodeScanner = () => {
+  const { copy, copied } = useClipboard();
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -83,16 +88,6 @@ const QRCodeScanner = () => {
     }
   };
 
-  const copyResult = async () => {
-    if (result) {
-      try {
-        await navigator.clipboard.writeText(result);
-      } catch (error_) {
-        console.error("Failed to copy to clipboard:", error_);
-      }
-    }
-  };
-
   const clearScan = () => {
     setResult("");
     setError("");
@@ -103,20 +98,14 @@ const QRCodeScanner = () => {
   };
 
   return (
-    <main className="min-h-[calc(100vh-4rem)]" onPaste={handlePaste}>
-      <div className="container mx-auto px-4 pt-8 pb-6 sm:pt-10 sm:pb-8">
-        <div className="mb-8 text-center">
-          <h1 className="text-ctp-text mb-3 text-3xl font-bold sm:text-4xl">
-            QR Code Scanner
-          </h1>
-          <p className="text-ctp-subtext0 text-lg">
-            Scan QR codes from images instantly
-          </p>
-        </div>
-
+    <PageShell
+      title="QR Code Scanner"
+      subtitle="Scan QR codes from images instantly"
+    >
+      <div onPaste={handlePaste}>
         <div className="mx-auto max-w-3xl">
-          <div className="bg-ctp-surface0 mb-6 rounded-2xl p-6 shadow-lg sm:p-8">
-            <div className="bg-ctp-surface1 mb-6 rounded-xl p-4 sm:p-5">
+          <Section customClass="mb-6 sm:p-8">
+            <div className="bg-ctp-surface1 mb-6 rounded-md p-4 sm:p-5">
               <div className="mb-3 flex items-center gap-2">
                 <div className="bg-ctp-blue flex h-8 w-8 items-center justify-center rounded-full">
                   <svg
@@ -150,7 +139,7 @@ const QRCodeScanner = () => {
                     </p>
                     <p className="text-ctp-subtext0 text-sm">
                       Use button below or{" "}
-                      <kbd className="bg-ctp-surface2 text-ctp-text rounded px-2 py-1 font-mono text-xs">
+                      <kbd className="bg-ctp-surface2 text-ctp-text rounded-md px-2 py-1 font-mono text-xs">
                         Ctrl+V
                       </kbd>
                     </p>
@@ -177,7 +166,7 @@ const QRCodeScanner = () => {
             <div className="mb-6 flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={handleClipboardRead}
-                className="bg-ctp-surface2 hover:bg-ctp-overlay0 focus:ring-ctp-surface2 focus:ring-offset-ctp-base flex flex-1 items-center justify-center gap-3 rounded-xl p-4 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                className="bg-ctp-surface2 hover:bg-ctp-overlay0 focus:ring-ctp-surface2 focus:ring-offset-ctp-base flex flex-1 items-center justify-center gap-3 rounded-md p-4 transition-colors duration-100 focus:ring-2 focus:ring-offset-2 focus:outline-none"
               >
                 <svg
                   className="text-ctp-blue h-6 w-6"
@@ -214,7 +203,7 @@ const QRCodeScanner = () => {
                   onChange={handleFileChange}
                   className="peer absolute inset-0 h-full w-full cursor-pointer opacity-0"
                 />
-                <div className="border-ctp-surface2 bg-ctp-base hover:border-ctp-blue hover:bg-ctp-surface1 peer-focus:border-ctp-blue peer-focus:ring-ctp-blue peer-focus:ring-opacity-20 flex min-h-[120px] items-center justify-center rounded-xl border-2 border-dashed p-6 transition-all duration-200 peer-focus:ring-2 sm:min-h-[140px]">
+                <div className="border-ctp-surface2 bg-ctp-base hover:border-ctp-blue hover:bg-ctp-surface1 peer-focus:border-ctp-blue peer-focus:ring-ctp-blue peer-focus:ring-opacity-20 flex min-h-[120px] items-center justify-center rounded-md border-2 border-dashed p-6 transition-colors duration-100 peer-focus:ring-2 sm:min-h-[140px]">
                   <div className="text-center">
                     <svg
                       className="text-ctp-subtext0 group-hover:text-ctp-blue mx-auto mb-3 h-12 w-12"
@@ -241,14 +230,14 @@ const QRCodeScanner = () => {
             </div>
 
             {isScanning && (
-              <div className="bg-ctp-blue/10 mb-6 flex flex-col items-center justify-center rounded-xl p-6">
+              <div className="bg-ctp-blue/10 mb-6 flex flex-col items-center justify-center rounded-md p-6">
                 <div className="border-ctp-blue mb-3 h-8 w-8 animate-spin rounded-full border-3 border-t-transparent"></div>
                 <p className="text-ctp-blue font-medium">Scanning QR code...</p>
               </div>
             )}
 
             {error && (
-              <div className="border-ctp-red/30 bg-ctp-red/10 mb-6 rounded-xl border p-4">
+              <div className="border-ctp-red/30 bg-ctp-red/10 mb-6 rounded-md border p-4">
                 <div className="flex items-center gap-3">
                   <svg
                     className="text-ctp-red h-5 w-5 shrink-0"
@@ -267,25 +256,25 @@ const QRCodeScanner = () => {
                 </div>
               </div>
             )}
-          </div>
+          </Section>
 
           {imageSrc && (
-            <div className="bg-ctp-surface0 mb-6 rounded-2xl p-6 shadow-lg">
+            <Section customClass="mb-6">
               <h3 className="text-ctp-text mb-4 text-lg font-semibold">
                 Uploaded Image
               </h3>
-              <div className="overflow-hidden rounded-xl">
+              <div className="overflow-hidden rounded-md">
                 <img
                   src={imageSrc}
                   alt="Uploaded QR code"
                   className="mx-auto max-h-80 w-full max-w-full object-contain"
                 />
               </div>
-            </div>
+            </Section>
           )}
 
           {result && (
-            <div className="bg-ctp-green/10 mb-6 rounded-2xl p-6 shadow-lg">
+            <div className="bg-ctp-green/10 mb-6 rounded-md p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="bg-ctp-green flex h-8 w-8 items-center justify-center rounded-full">
                   <svg
@@ -306,15 +295,15 @@ const QRCodeScanner = () => {
                   QR Code Content
                 </h3>
               </div>
-              <div className="border-ctp-surface2 bg-ctp-base mb-4 rounded-xl border p-4">
+              <div className="border-ctp-surface2 bg-ctp-base mb-4 rounded-md border p-4">
                 <code className="text-ctp-text block text-sm break-all sm:text-base">
                   {result}
                 </code>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <button
-                  onClick={copyResult}
-                  className="bg-ctp-blue hover:bg-ctp-sapphire focus:ring-ctp-blue focus:ring-offset-ctp-base text-ctp-base flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                <Button
+                  onClick={() => copy(result)}
+                  customClass="flex items-center justify-center gap-2"
                 >
                   <svg
                     className="h-4 w-4"
@@ -329,15 +318,15 @@ const QRCodeScanner = () => {
                       d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
                     />
                   </svg>
-                  Copy to Clipboard
-                </button>
+                  {copied ? "✓ Copied!" : "Copy to Clipboard"}
+                </Button>
                 {(result.startsWith("http://") ||
                   result.startsWith("https://")) && (
                   <a
                     href={result}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-ctp-mauve hover:bg-ctp-pink focus:ring-ctp-mauve focus:ring-offset-ctp-base text-ctp-base flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                    className="bg-ctp-surface1 hover:bg-ctp-surface2 focus:ring-ctp-blue focus:ring-offset-ctp-base text-ctp-text flex items-center justify-center gap-2 rounded-md px-4 py-2 font-semibold transition-colors duration-100 focus:ring-2 focus:ring-offset-2 focus:outline-none"
                   >
                     <svg
                       className="h-4 w-4"
@@ -361,17 +350,14 @@ const QRCodeScanner = () => {
 
           {(result || error || imageSrc) && (
             <div className="text-center">
-              <button
-                onClick={clearScan}
-                className="bg-ctp-surface2 hover:bg-ctp-overlay0 focus:ring-ctp-surface2 focus:ring-offset-ctp-base text-ctp-text rounded-xl px-6 py-3 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
-              >
+              <Button variant="secondary" onClick={clearScan}>
                 Clear Results
-              </button>
+              </Button>
             </div>
           )}
         </div>
       </div>
-    </main>
+    </PageShell>
   );
 };
 

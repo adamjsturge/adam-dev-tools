@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import PageShell from "../../components/PageShell";
 import TextArea from "../../components/TextArea";
 import { useReactPersist } from "../../utils/Storage";
 
@@ -18,15 +19,13 @@ const TextBin = () => {
   };
 
   return (
-    <main className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl flex-col px-4 pt-8 pb-4">
-      <h1 className="mb-4 text-2xl font-bold">Text Bin</h1>
-      <TextArea
-        ref={textAreaRef}
-        value={content}
-        onChange={handleInput}
-        customClass="h-[70vh] w-full"
-      />
-    </main>
+    <PageShell
+      title="Text Bin"
+      subtitle="A scratchpad that persists in your browser"
+      wide
+    >
+      <TextArea ref={textAreaRef} value={content} onChange={handleInput} fill />
+    </PageShell>
   );
 };
 

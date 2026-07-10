@@ -1,9 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
 import { useLocation, useSearch } from "wouter";
+import Button from "../../components/Button";
+import CopyButton from "../../components/CopyButton";
 import Input from "../../components/Input";
+import PageShell from "../../components/PageShell";
 import Section from "../../components/Section";
 import TextArea from "../../components/TextArea";
-import classNames from "../../utils/classNames";
 import { useReactPersist } from "../../utils/Storage";
 import BracketDisplay from "./BracketDisplay";
 import {
@@ -60,7 +62,6 @@ const BracketMaker = () => {
     "",
   );
   const [playerCount, setPlayerCount] = useState(32);
-  const [isCopied, setIsCopied] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
 
   const bracket: BracketData | null = useMemo(
@@ -100,12 +101,6 @@ const BracketMaker = () => {
     setLocation("/bracket-maker");
   }, [savedPlayers, setLocation, setNamesText]);
 
-  const handleCopyLink = useCallback(async () => {
-    await navigator.clipboard.writeText(globalThis.location.href);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
-  }, []);
-
   const handleImport = useCallback(
     (names: string[]) => {
       setNamesText(names.join("\n"));
@@ -130,126 +125,118 @@ const BracketMaker = () => {
 
   if (bracket) {
     return (
-      <div className="mx-auto max-w-7xl space-y-6 px-4 py-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-ctp-text text-2xl font-bold">
-            Tournament Bracket
-          </h1>
-          <div className="flex gap-3">
-            <button
-              type="button"
-              onClick={handleCopyLink}
-              className={classNames(
-                "rounded-md px-4 py-2 text-sm font-semibold",
-                "transition-colors duration-100",
-                isCopied
-                  ? "bg-ctp-green text-ctp-base"
-                  : "bg-ctp-blue text-ctp-base hover:bg-ctp-blue/90",
-              )}
+      <PageShell
+        title="Tournament Bracket"
+        subtitle="Single-elimination bracket — share the URL to share the bracket"
+        wide
+        actions={
+          <>
+            <CopyButton
+              text={() => globalThis.location.href}
+              label="Copy Link"
+              copiedLabel="Copied!"
+              variant="primary"
+              size="sm"
               aria-label="Copy shareable link"
-            >
-              {isCopied ? "Copied!" : "Copy Link"}
-            </button>
-            <button
-              type="button"
+            />
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={handleEdit}
-              className={classNames(
-                "bg-ctp-surface1 text-ctp-text rounded-md px-4 py-2 text-sm font-semibold",
-                "transition-colors duration-100",
-                "hover:bg-ctp-surface2",
-              )}
               aria-label="Edit player list"
             >
               Edit Players
-            </button>
-          </div>
-        </div>
-        <Section>
-          <p className="text-ctp-subtext0 mb-4 text-sm">
-            Click a player name in the first round to see their path through the
-            bracket.
-          </p>
-          <BracketDisplay
-            bracket={bracket}
-            selectedPlayer={selectedPlayer}
-            onSelectPlayer={setSelectedPlayer}
-          />
-        </Section>
-        {selectedPlayer && playerPath.length > 0 && (
-          <Section title={`${selectedPlayer}'s Path`}>
-            <div className="space-y-1">
-              {playerPath.map((round, index) => (
-                <div key={round.roundName}>
-                  <div className="flex items-start gap-3 py-2">
-                    <span className="text-ctp-subtext1 w-28 shrink-0 text-right text-sm font-semibold">
-                      {round.roundName}
-                    </span>
-                    <span className="text-ctp-text text-sm">
-                      {round.isBye
-                        ? "BYE (auto-advance)"
-                        : `vs. ${formatOpponentList(round.opponents)}`}
-                    </span>
-                  </div>
-                  {index < playerPath.length - 1 && (
-                    <div className="flex">
-                      <span className="text-ctp-overlay0 w-28 shrink-0 text-right">
-                        &darr;
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-6">
+          <Section>
+            <p className="text-ctp-subtext0 mb-4 text-sm">
+              Click a player name in the first round to see their path through
+              the bracket.
+            </p>
+            <BracketDisplay
+              bracket={bracket}
+              selectedPlayer={selectedPlayer}
+              onSelectPlayer={setSelectedPlayer}
+            />
+          </Section>
+          {selectedPlayer && playerPath.length > 0 && (
+            <Section title={`${selectedPlayer}'s Path`}>
+              <div className="space-y-1">
+                {playerPath.map((round, index) => (
+                  <div key={round.roundName}>
+                    <div className="flex items-start gap-3 py-2">
+                      <span className="text-ctp-subtext1 w-28 shrink-0 text-right text-sm font-semibold">
+                        {round.roundName}
+                      </span>
+                      <span className="text-ctp-text text-sm">
+                        {round.isBye
+                          ? "BYE (auto-advance)"
+                          : `vs. ${formatOpponentList(round.opponents)}`}
                       </span>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </Section>
-        )}
-      </div>
+                    {index < playerPath.length - 1 && (
+                      <div className="flex">
+                        <span className="text-ctp-overlay0 w-28 shrink-0 text-right">
+                          &darr;
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Section>
+          )}
+        </div>
+      </PageShell>
     );
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6 px-4 py-8">
-      <h1 className="text-ctp-text text-2xl font-bold">Bracket Maker</h1>
-      <Section title="Players">
-        <div className="space-y-4">
-          <Input
-            label="Number of Players"
-            type="number"
-            min={2}
-            max={MAX_PLAYERS}
-            value={playerCount}
-            onChange={handlePlayerCountChange}
-            aria-label="Number of players"
-          />
-          <TextArea
-            label="Player Names (one per line)"
-            value={namesText}
-            onChange={(e) => setNamesText(e.target.value)}
-            placeholder={`Enter up to ${playerCount} player names, one per line...`}
-            rows={Math.min(playerCount, 16)}
-            aria-label="Player names input"
-          />
-          <p className="text-ctp-subtext0 text-sm">
-            {nameCount} player{nameCount === 1 ? "" : "s"} entered
-            {nameCount < 2 && " (minimum 2)"}
-          </p>
-          <StandingsImport onImport={handleImport} />
-          <button
-            type="button"
-            onClick={handleGenerate}
-            disabled={!isValid}
-            className={classNames(
-              "bg-ctp-blue text-ctp-base w-full rounded-md py-3 text-sm font-semibold",
-              "transition-colors duration-100",
-              "hover:bg-ctp-blue/90",
-              "disabled:cursor-not-allowed disabled:opacity-50",
-            )}
-            aria-label="Generate tournament bracket"
-          >
-            Generate Bracket
-          </button>
-        </div>
-      </Section>
-    </div>
+    <PageShell
+      title="Bracket Maker"
+      subtitle="Generate a shareable single-elimination tournament bracket"
+    >
+      <div className="mx-auto w-full max-w-3xl">
+        <Section title="Players">
+          <div className="space-y-4">
+            <Input
+              label="Number of Players"
+              type="number"
+              min={2}
+              max={MAX_PLAYERS}
+              value={playerCount}
+              onChange={handlePlayerCountChange}
+              aria-label="Number of players"
+            />
+            <TextArea
+              label="Player Names (one per line)"
+              value={namesText}
+              onChange={(e) => setNamesText(e.target.value)}
+              placeholder={`Enter up to ${playerCount} player names, one per line...`}
+              rows={Math.min(playerCount, 16)}
+              aria-label="Player names input"
+            />
+            <p className="text-ctp-subtext0 text-sm">
+              {nameCount} player{nameCount === 1 ? "" : "s"} entered
+              {nameCount < 2 && " (minimum 2)"}
+            </p>
+            <StandingsImport onImport={handleImport} />
+            <Button
+              type="button"
+              onClick={handleGenerate}
+              disabled={!isValid}
+              customClass="w-full"
+              aria-label="Generate tournament bracket"
+            >
+              Generate Bracket
+            </Button>
+          </div>
+        </Section>
+      </div>
+    </PageShell>
   );
 };
 

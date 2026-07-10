@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
 import TextArea from "../../components/TextArea";
 import { useReactPersist } from "../../utils/Storage";
 
@@ -92,22 +94,16 @@ const TextCompare = () => {
   };
 
   return (
-    <main className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl flex-col px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-4 text-2xl font-bold">Text Compare</h1>
-
+    <PageShell
+      title="Text Compare"
+      subtitle="Compare two blocks of text line by line"
+      wide
+    >
       <div className="mb-4 flex gap-2">
-        <button
-          className="bg-ctp-blue text-ctp-base hover:bg-ctp-sapphire rounded px-4 py-2"
-          onClick={compareTexts}
-        >
-          Compare Texts
-        </button>
-        <button
-          className="bg-ctp-surface2 text-ctp-text hover:bg-ctp-overlay0 rounded px-4 py-2"
-          onClick={clearAll}
-        >
+        <Button onClick={compareTexts}>Compare Texts</Button>
+        <Button variant="secondary" onClick={clearAll}>
           Clear All
-        </button>
+        </Button>
       </div>
 
       {showDiff ? (
@@ -116,12 +112,13 @@ const TextCompare = () => {
             <h2 className="text-ctp-text text-lg font-semibold">
               Comparison Result
             </h2>
-            <button
-              className="bg-ctp-surface2 text-ctp-text hover:bg-ctp-overlay0 rounded px-3 py-1 text-sm"
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={() => setShowDiff(false)}
             >
               Back to Edit
-            </button>
+            </Button>
           </div>
 
           <div className="text-ctp-subtext1 mb-4 text-sm">
@@ -133,7 +130,7 @@ const TextCompare = () => {
             Unchanged
           </div>
 
-          <div className="bg-ctp-surface0 border-ctp-surface1 rounded-lg border p-4 font-mono text-sm whitespace-pre-wrap">
+          <div className="bg-ctp-surface0 border-ctp-surface1 rounded-md border p-4 font-mono text-sm whitespace-pre-wrap">
             {diffResult.map((line, index) => {
               if (line.type === "equal") {
                 return (
@@ -167,8 +164,8 @@ const TextCompare = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-1 gap-4">
-          <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col gap-4 md:flex-row">
+          <div className="flex min-h-[40vh] flex-1 flex-col md:min-h-0">
             <h2 className="text-ctp-text mb-2 text-lg font-semibold">
               Text 1 (Original)
             </h2>
@@ -179,11 +176,11 @@ const TextCompare = () => {
                 setText1(e.target.value);
                 setShowDiff(false);
               }}
-              customClass="h-full"
+              fill
               placeholder="Paste your first text here..."
             />
           </div>
-          <div className="flex flex-1 flex-col">
+          <div className="flex min-h-[40vh] flex-1 flex-col md:min-h-0">
             <h2 className="text-ctp-text mb-2 text-lg font-semibold">
               Text 2 (Compare to)
             </h2>
@@ -193,13 +190,13 @@ const TextCompare = () => {
                 setText2(e.target.value);
                 setShowDiff(false);
               }}
-              customClass="h-full"
+              fill
               placeholder="Paste your second text here..."
             />
           </div>
         </div>
       )}
-    </main>
+    </PageShell>
   );
 };
 

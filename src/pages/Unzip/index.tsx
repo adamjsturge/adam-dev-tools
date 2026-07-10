@@ -1,5 +1,7 @@
 import JSZip from "jszip";
 import { useState } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
 
 interface ExtractedFile {
   name: string;
@@ -128,17 +130,16 @@ const Unzip = () => {
   };
 
   return (
-    <main className="container mx-auto min-h-[calc(100vh-4rem)] px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-4 text-2xl font-bold" id="page-title">
-        Unzip Files
-      </h1>
-
+    <PageShell
+      title="Unzip Files"
+      subtitle="Extract ZIP archives right in your browser"
+    >
       <section aria-labelledby="upload-section">
         <h2 className="sr-only" id="upload-section">
           File Upload Section
         </h2>
         <div
-          className="border-ctp-surface2 hover:border-ctp-overlay0 bg-ctp-surface0 cursor-pointer rounded-lg border-2 border-dashed p-8 text-center transition-colors"
+          className="border-ctp-surface2 hover:border-ctp-overlay0 bg-ctp-surface0 cursor-pointer rounded-md border-2 border-dashed p-8 text-center transition-colors duration-100"
           onDragOver={handleDragOver}
           onDrop={handleDrop}
           role="button"
@@ -197,37 +198,33 @@ const Unzip = () => {
             >
               Extracted Files ({extractedFiles.length})
             </h2>
-            <button
-              className="bg-ctp-green hover:bg-ctp-teal focus:ring-ctp-green text-ctp-base rounded px-4 py-2 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
-              onClick={downloadAll}
-              aria-label="Download all files"
-            >
+            <Button onClick={downloadAll} aria-label="Download all files">
               Download All
-            </button>
+            </Button>
           </div>
           <div className="grid gap-4" role="list">
             {extractedFiles.map((file) => (
               <div
                 key={file.name}
-                className="bg-ctp-surface0 flex items-center justify-between rounded-lg p-4"
+                className="bg-ctp-surface0 flex items-center justify-between rounded-md p-4"
                 role="listitem"
               >
                 <span className="text-ctp-text truncate" title={file.name}>
                   {file.name}
                 </span>
-                <button
-                  className="bg-ctp-blue hover:bg-ctp-sapphire focus:ring-ctp-blue text-ctp-base rounded px-4 py-2 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                <Button
+                  variant="secondary"
                   onClick={() => downloadFile(file.name, file.content)}
                   aria-label={`Download ${file.name}`}
                 >
                   Download
-                </button>
+                </Button>
               </div>
             ))}
           </div>
         </section>
       )}
-    </main>
+    </PageShell>
   );
 };
 

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useReactPersist } from "../../utils/Storage";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
+import { useUrlBooleanState, useUrlState } from "../../utils/useUrlState";
 
 const WebPConverter = () => {
   const [files, setFiles] = useState<FileList | null>(null);
-  const [quality, setQuality] = useReactPersist("webp-quality", 1);
-  const [appendQuality, setAppendQuality] = useReactPersist(
-    "webp-append-quality",
-    false,
-  );
+  const [qualityPercent, setQualityPercent] = useUrlState("q", 100);
+  const [appendQuality, setAppendQuality] = useUrlBooleanState("append", false);
+  const quality = qualityPercent / 100;
   const [converting, setConverting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [totalFiles, setTotalFiles] = useState(0);
@@ -67,9 +67,10 @@ const WebPConverter = () => {
   };
 
   return (
-    <main className="container mx-auto max-w-2xl px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-6 text-2xl font-bold">WebP Converter</h1>
-
+    <PageShell
+      title="WebP Converter"
+      subtitle="Batch-convert images to WebP at any quality"
+    >
       <div className="flex flex-col gap-6">
         <div className="w-full">
           <input
@@ -77,7 +78,7 @@ const WebPConverter = () => {
             accept="image/*"
             multiple
             onChange={(e) => setFiles(e.target.files)}
-            className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-lg border p-2 file:mr-4 file:rounded-lg file:border-0 file:px-4 file:py-2"
+            className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-md border p-2 file:mr-4 file:rounded-md file:border-0 file:px-4 file:py-2"
           />
         </div>
 
@@ -85,16 +86,18 @@ const WebPConverter = () => {
           <div className="flex flex-col gap-2">
             <label className="flex flex-col">
               <span className="text-sm font-medium">
-                Quality: {Math.round(quality * 100)}%
+                Quality: {qualityPercent}%
               </span>
               <input
                 type="range"
-                min="0.1"
-                max="1"
-                step="0.1"
-                value={quality}
-                onChange={(e) => setQuality(Number.parseFloat(e.target.value))}
-                className="accent-ctp-mauve w-full"
+                min="10"
+                max="100"
+                step="10"
+                value={qualityPercent}
+                onChange={(e) =>
+                  setQualityPercent(Number.parseInt(e.target.value, 10))
+                }
+                className="accent-ctp-blue w-full"
               />
             </label>
           </div>
@@ -104,23 +107,19 @@ const WebPConverter = () => {
               type="checkbox"
               checked={appendQuality}
               onChange={(e) => setAppendQuality(e.target.checked)}
-              className="accent-ctp-mauve"
+              className="accent-ctp-blue"
             />
             <span className="text-sm">Append quality to filename</span>
           </label>
         </div>
 
-        <button
-          onClick={convertToWebP}
-          disabled={!files || converting}
-          className="bg-ctp-mauve text-ctp-base hover:bg-ctp-pink rounded-lg px-4 py-2 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50"
-        >
+        <Button onClick={convertToWebP} disabled={!files || converting}>
           {converting
             ? `Converting... (${progress}/${totalFiles})`
             : "Convert to WebP"}
-        </button>
+        </Button>
       </div>
-    </main>
+    </PageShell>
   );
 };
 

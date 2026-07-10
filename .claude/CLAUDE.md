@@ -9,7 +9,7 @@ Adam Dev Tools is a React-based web application providing developer utility tool
 ## Build & Development Commands
 
 ```bash
-npm run dev          # Start dev server at localhost:5173
+npm run dev          # Start dev server at localhost:5000
 npm run build        # TypeScript check + Vite production build
 npm run lint:check   # Check ESLint issues
 npm run lint         # Fix ESLint issues

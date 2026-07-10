@@ -1,5 +1,7 @@
 import { removeBackground } from "@imgly/background-removal";
 import { useState } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
 
 const BackgroundRemoval = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -76,11 +78,10 @@ const BackgroundRemoval = () => {
   };
 
   return (
-    <main className="container mx-auto max-w-4xl px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-6 text-2xl font-bold">
-        Background Removal
-      </h1>
-
+    <PageShell
+      title="Background Removal"
+      subtitle="Remove image backgrounds with AI, entirely in your browser"
+    >
       <div className="flex flex-col gap-6">
         {/* File Input */}
         <div className="w-full">
@@ -89,7 +90,7 @@ const BackgroundRemoval = () => {
             accept="image/*"
             onChange={handleFileChange}
             disabled={processing}
-            className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-lg border p-2 file:mr-4 file:rounded-lg file:border-0 file:px-4 file:py-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-md border p-2 file:mr-4 file:rounded-md file:border-0 file:px-4 file:py-2 disabled:cursor-not-allowed disabled:opacity-50"
           />
           <p className="text-ctp-subtext0 mt-2 text-sm">
             Upload an image to remove its background using AI. The result will
@@ -103,11 +104,11 @@ const BackgroundRemoval = () => {
             {/* Original Preview */}
             <div className="flex flex-col gap-2">
               <h2 className="text-ctp-text text-lg font-semibold">Original</h2>
-              <div className="bg-ctp-surface0 rounded-lg p-4">
+              <div className="bg-ctp-surface0 rounded-md p-4">
                 <img
                   src={previewUrl}
                   alt="Original"
-                  className="h-auto w-full rounded"
+                  className="h-auto w-full rounded-md"
                 />
               </div>
             </div>
@@ -118,7 +119,7 @@ const BackgroundRemoval = () => {
                 Background Removed
               </h2>
               <div
-                className="rounded-lg p-4"
+                className="rounded-md p-4"
                 style={{
                   background:
                     "repeating-conic-gradient(#808080 0% 25%, #ffffff 0% 50%) 50% / 20px 20px",
@@ -128,10 +129,10 @@ const BackgroundRemoval = () => {
                   <img
                     src={resultUrl}
                     alt="Result"
-                    className="h-auto w-full rounded"
+                    className="h-auto w-full rounded-md"
                   />
                 ) : (
-                  <div className="bg-ctp-surface0/50 flex h-64 items-center justify-center rounded">
+                  <div className="bg-ctp-surface0/50 flex h-64 items-center justify-center rounded-md">
                     <span className="text-ctp-subtext0">
                       {processing
                         ? `Processing... ${progress}%`
@@ -146,34 +147,25 @@ const BackgroundRemoval = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-4">
-          <button
+          <Button
             onClick={processImage}
             disabled={!file || processing || !!resultUrl}
-            className="bg-ctp-mauve text-ctp-base hover:bg-ctp-pink rounded-lg px-4 py-2 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {processing ? `Processing... ${progress}%` : "Remove Background"}
-          </button>
+          </Button>
 
           {resultUrl && (
             <>
-              <button
-                onClick={downloadResult}
-                className="bg-ctp-green text-ctp-base hover:bg-ctp-teal rounded-lg px-4 py-2 transition-colors duration-200"
-              >
-                Download PNG
-              </button>
-              <button
-                onClick={reset}
-                className="bg-ctp-surface0 text-ctp-text hover:bg-ctp-surface1 rounded-lg px-4 py-2 transition-colors duration-200"
-              >
+              <Button onClick={downloadResult}>Download PNG</Button>
+              <Button variant="secondary" onClick={reset}>
                 Process Another Image
-              </button>
+              </Button>
             </>
           )}
         </div>
 
         {/* Info Section */}
-        <div className="bg-ctp-surface0 rounded-lg p-4">
+        <div className="bg-ctp-surface0 rounded-md p-4">
           <h3 className="text-ctp-text mb-2 text-lg font-semibold">
             About this tool
           </h3>
@@ -188,7 +180,7 @@ const BackgroundRemoval = () => {
           </ul>
         </div>
       </div>
-    </main>
+    </PageShell>
   );
 };
 

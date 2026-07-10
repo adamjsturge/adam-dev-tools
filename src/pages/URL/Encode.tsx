@@ -12,6 +12,7 @@ const URLEncode = () => {
   return (
     <IOwithCopy
       title="URL Encoder"
+      subtitle="Percent-encode text for safe use in URLs"
       inputPlaceholder="Enter string to encode"
       buttonText="Encode"
       onButtonClick={encodeURL}

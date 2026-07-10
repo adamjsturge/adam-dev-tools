@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import Button from "../../components/Button";
+import PageShell from "../../components/PageShell";
+import Section from "../../components/Section";
 import TextArea from "../../components/TextArea";
 import classNames from "../../utils/classNames";
 import { parseBatchInput } from "../../utils/multiDeckParser";
@@ -145,141 +148,134 @@ const DeckPrice = () => {
   }, [content, cardData]);
 
   return (
-    <main className="min-h-[calc(100vh-4rem)]">
-      <div className="container mx-auto max-w-7xl px-6 pt-8 pb-6">
-        <h1 className="text-ctp-text mb-8 text-3xl font-bold">
-          Deck Price Calculator
-        </h1>
-
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div className="space-y-6">
-            <div className="bg-ctp-surface0 rounded-xl p-6 shadow-lg">
-              <h2 className="text-ctp-text mb-4 text-xl font-semibold">
-                Input Links
-              </h2>
-              <p className="text-ctp-subtext0 mb-4 text-sm">
-                Paste your deck links or custom card lists here.
-              </p>
-              <TextArea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="https://gumgum.gg/deckbuilder?deck=...&#10;My Deck:&#10;4xOP01-001&#10;..."
-                customClass="h-96 font-mono text-sm resize-none"
-              />
-            </div>
-          </div>
-
-          <div className="bg-ctp-surface0 flex flex-col rounded-xl p-6 shadow-lg">
-            <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <h2 className="text-ctp-text text-xl font-semibold">
-                  Prices{" "}
-                  {isLoading && (
-                    <span className="text-ctp-overlay0 ml-2 animate-pulse text-sm">
-                      (Loading...)
-                    </span>
-                  )}
-                </h2>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileUpload}
-                  className="hidden"
-                  accept=".json"
-                />
-                <button
-                  onClick={isCustomData ? loadDefaultData : triggerFileUpload}
-                  className="bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text rounded px-3 py-1 text-xs transition-colors"
-                >
-                  {isCustomData
-                    ? "Reset to Default Data"
-                    : "Upload Custom JSON"}
-                </button>
-              </div>
-              <div className="text-ctp-subtext0 text-sm">
-                Source:{" "}
-                {isCustomData ? "Custom Data" : "CardKaizoku / TCGPlayer"}
-              </div>
-            </div>
-
-            {results.length > 0 ? (
-              <div className="max-h-[calc(100vh-20rem)] space-y-4 overflow-y-auto pr-2">
-                {results.map((result, index) => (
-                  <div
-                    key={index}
-                    className={classNames(
-                      "rounded-lg border p-4",
-                      result.valid
-                        ? "border-ctp-surface2 bg-ctp-surface1"
-                        : "border-ctp-red/30 bg-ctp-red/10",
-                    )}
-                  >
-                    <div className="text-ctp-subtext0 mb-2 truncate text-xs">
-                      {result.title &&
-                      result.title !== "Untitled Deck" &&
-                      result.title !== "Imported Deck (Link)"
-                        ? `${result.title} (${result.original.slice(0, 20)}...)`
-                        : result.original.slice(0, 50)}
-                    </div>
-
-                    {result.valid ? (
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="text-ctp-text text-lg font-bold">
-                            ${result.totalPrice.toFixed(2)}
-                          </div>
-                          {result.leader && (
-                            <div className="text-ctp-green text-sm font-medium">
-                              {result.leader.set} {result.leader.name} ($
-                              {result.leader.price.toFixed(2)})
-                            </div>
-                          )}
-                          <div className="text-ctp-overlay0 text-xs">
-                            {result.cardCount} Cards
-                          </div>
-                        </div>
-                        <a
-                          href={
-                            result.original.startsWith("http")
-                              ? result.original
-                              : "#"
-                          }
-                          target={
-                            result.original.startsWith("http") ? "_blank" : ""
-                          }
-                          rel="noopener noreferrer"
-                          className={classNames(
-                            "rounded px-3 py-1.5 text-sm transition-colors",
-                            result.original.startsWith("http")
-                              ? "bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text"
-                              : "bg-ctp-surface0 text-ctp-subtext0 cursor-default",
-                          )}
-                        >
-                          {result.original.startsWith("http")
-                            ? "Open Deck"
-                            : "Custom List"}
-                        </a>
-                      </div>
-                    ) : (
-                      <div className="text-ctp-red text-sm">
-                        {result.error || "Invalid link"}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-1 flex-col items-center justify-center py-12 text-center">
-                <div className="text-ctp-overlay0 mb-4 text-5xl">💰</div>
-                <p className="text-ctp-subtext0">
-                  Paste links on the left to see estimated prices here
-                </p>
-              </div>
-            )}
-          </div>
+    <PageShell
+      title="Deck Price Calculator"
+      subtitle="Estimate the market price of any deck list or deckbuilder link"
+      wide
+    >
+      <div className="grid gap-8 lg:grid-cols-2">
+        <div className="space-y-6">
+          <Section title="Input Links">
+            <p className="text-ctp-subtext0 mb-4 text-sm">
+              Paste your deck links or custom card lists here.
+            </p>
+            <TextArea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="https://gumgum.gg/deckbuilder?deck=...&#10;My Deck:&#10;4xOP01-001&#10;..."
+              customClass="h-96 font-mono text-sm resize-none"
+            />
+          </Section>
         </div>
+
+        <Section customClass="flex flex-col">
+          <div className="mb-4 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <h2 className="text-ctp-text text-xl font-semibold">
+                Prices{" "}
+                {isLoading && (
+                  <span className="text-ctp-overlay0 ml-2 animate-pulse text-sm">
+                    (Loading...)
+                  </span>
+                )}
+              </h2>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                className="hidden"
+                accept=".json"
+              />
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={isCustomData ? loadDefaultData : triggerFileUpload}
+              >
+                {isCustomData ? "Reset to Default Data" : "Upload Custom JSON"}
+              </Button>
+            </div>
+            <div className="text-ctp-subtext0 text-sm">
+              Source: {isCustomData ? "Custom Data" : "CardKaizoku / TCGPlayer"}
+            </div>
+          </div>
+
+          {results.length > 0 ? (
+            <div className="max-h-[calc(100vh-20rem)] space-y-4 overflow-y-auto pr-2">
+              {results.map((result, index) => (
+                <div
+                  key={index}
+                  className={classNames(
+                    "rounded-md border p-4",
+                    result.valid
+                      ? "border-ctp-surface2 bg-ctp-surface1"
+                      : "border-ctp-red/30 bg-ctp-red/10",
+                  )}
+                >
+                  <div className="text-ctp-subtext0 mb-2 truncate text-xs">
+                    {result.title &&
+                    result.title !== "Untitled Deck" &&
+                    result.title !== "Imported Deck (Link)"
+                      ? `${result.title} (${result.original.slice(0, 20)}...)`
+                      : result.original.slice(0, 50)}
+                  </div>
+
+                  {result.valid ? (
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-ctp-text text-lg font-bold">
+                          ${result.totalPrice.toFixed(2)}
+                        </div>
+                        {result.leader && (
+                          <div className="text-ctp-green text-sm font-medium">
+                            {result.leader.set} {result.leader.name} ($
+                            {result.leader.price.toFixed(2)})
+                          </div>
+                        )}
+                        <div className="text-ctp-overlay0 text-xs">
+                          {result.cardCount} Cards
+                        </div>
+                      </div>
+                      <a
+                        href={
+                          result.original.startsWith("http")
+                            ? result.original
+                            : "#"
+                        }
+                        target={
+                          result.original.startsWith("http") ? "_blank" : ""
+                        }
+                        rel="noopener noreferrer"
+                        className={classNames(
+                          "rounded-md px-3 py-1.5 text-sm transition-colors duration-100",
+                          result.original.startsWith("http")
+                            ? "bg-ctp-surface2 hover:bg-ctp-overlay0 text-ctp-text"
+                            : "bg-ctp-surface0 text-ctp-subtext0 cursor-default",
+                        )}
+                      >
+                        {result.original.startsWith("http")
+                          ? "Open Deck"
+                          : "Custom List"}
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="text-ctp-red text-sm">
+                      {result.error || "Invalid link"}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-1 flex-col items-center justify-center py-12 text-center">
+              <div className="text-ctp-overlay0 mb-4 text-5xl">💰</div>
+              <p className="text-ctp-subtext0">
+                Paste links on the left to see estimated prices here
+              </p>
+            </div>
+          )}
+        </Section>
       </div>
-    </main>
+    </PageShell>
   );
 };
 

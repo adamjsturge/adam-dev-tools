@@ -25,6 +25,7 @@ export function useUrlState(
         queryString
           ? `${globalThis.location.pathname}?${queryString}`
           : globalThis.location.pathname,
+        { replace: true },
       );
     },
     [key, setLocation, defaultValue],
@@ -56,6 +57,7 @@ export function useUrlStringState(
         queryString
           ? `${globalThis.location.pathname}?${queryString}`
           : globalThis.location.pathname,
+        { replace: true },
       );
     },
     [key, setLocation, defaultValue],
@@ -88,6 +90,7 @@ export function useUrlBooleanState(
         queryString
           ? `${globalThis.location.pathname}?${queryString}`
           : globalThis.location.pathname,
+        { replace: true },
       );
     },
     [key, setLocation, defaultValue],

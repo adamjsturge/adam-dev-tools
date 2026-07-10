@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import PageShell from "../../components/PageShell";
 import TextArea from "../../components/TextArea";
 
 interface TextStats {
@@ -29,11 +30,10 @@ const WordCounter = () => {
   const stats = useMemo(() => calculateStats(text), [text]);
 
   return (
-    <main className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-4xl flex-col px-4 pt-8 pb-4">
-      <h1 className="text-ctp-text mb-4 text-2xl font-bold">
-        Ultimate Word Counter
-      </h1>
-
+    <PageShell
+      title="Ultimate Word Counter"
+      subtitle="Count characters, words, lines, sentences, and paragraphs as you type"
+    >
       <TextArea
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -42,34 +42,34 @@ const WordCounter = () => {
       />
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-        <div className="bg-ctp-surface0 rounded-lg p-4">
+        <div className="bg-ctp-surface0 rounded-md p-4">
           <h3 className="text-ctp-text mb-2 font-bold">Characters</h3>
           <p className="text-ctp-text">{stats.characters}</p>
         </div>
-        <div className="bg-ctp-surface0 rounded-lg p-4">
+        <div className="bg-ctp-surface0 rounded-md p-4">
           <h3 className="text-ctp-text mb-2 font-bold">
             Characters (no spaces)
           </h3>
           <p className="text-ctp-text">{stats.charactersNoSpaces}</p>
         </div>
-        <div className="bg-ctp-surface0 rounded-lg p-4">
+        <div className="bg-ctp-surface0 rounded-md p-4">
           <h3 className="text-ctp-text mb-2 font-bold">Words</h3>
           <p className="text-ctp-text">{stats.words}</p>
         </div>
-        <div className="bg-ctp-surface0 rounded-lg p-4">
+        <div className="bg-ctp-surface0 rounded-md p-4">
           <h3 className="text-ctp-text mb-2 font-bold">Lines</h3>
           <p className="text-ctp-text">{stats.lines}</p>
         </div>
-        <div className="bg-ctp-surface0 rounded-lg p-4">
+        <div className="bg-ctp-surface0 rounded-md p-4">
           <h3 className="text-ctp-text mb-2 font-bold">Sentences</h3>
           <p className="text-ctp-text">{stats.sentences}</p>
         </div>
-        <div className="bg-ctp-surface0 rounded-lg p-4">
+        <div className="bg-ctp-surface0 rounded-md p-4">
           <h3 className="text-ctp-text mb-2 font-bold">Paragraphs</h3>
           <p className="text-ctp-text">{stats.paragraphs}</p>
         </div>
       </div>
-    </main>
+    </PageShell>
   );
 };
 
