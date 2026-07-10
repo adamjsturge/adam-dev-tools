@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { preloadRoute } from "../routes";
 
 interface ToolLinkProps {
   href: string;
@@ -6,9 +7,14 @@ interface ToolLinkProps {
 }
 
 const ToolLink = ({ href, title }: ToolLinkProps) => {
+  const handlePreload = () => preloadRoute(href);
+
   return (
     <Link
       href={href}
+      onMouseEnter={handlePreload}
+      onFocus={handlePreload}
+      onTouchStart={handlePreload}
       className="group/link bg-ctp-surface0 hover:bg-ctp-surface1 flex h-full items-center justify-between gap-3 rounded-md px-4 py-3 transition-colors duration-100"
     >
       <span className="text-ctp-text group-hover/link:text-ctp-blue font-semibold transition-colors duration-100">
