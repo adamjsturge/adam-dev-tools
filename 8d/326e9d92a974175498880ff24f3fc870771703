@@ -1,0 +1,63 @@
+src/pages/HTMLEntities/Decode.tsx
+  s_7850ea5efd82d0::t_3f416bb131239f 1-19
+src/pages/UUIDGenerator/index.tsx
+  s_7850ea5efd82d0::t_5fad76b1c55ff3 14,16-18
+  s_7850ea5efd82d0::t_9910f75d3a9f86 1-13,15,19-82,84-109
+  s_7850ea5efd82d0::t_e9088d9bb94d55 83
+src/pages/HTMLEntities/Encode.tsx
+  s_7850ea5efd82d0::t_181472f1368908 1-23
+src/routes.ts
+  s_7850ea5efd82d0::t_8c2ffa91a856ed 40-43
+  s_7850ea5efd82d0::t_047ad79bb43379 55
+  s_7850ea5efd82d0::t_078023babaed54 51
+  s_7850ea5efd82d0::t_0fe388e96be744 32
+e2e/new-tools-spot-check.spec.ts
+  s_7850ea5efd82d0::t_5261b9ca349934 41-45
+  s_7850ea5efd82d0::t_b12715ae2297ba 1-2,5-40,46-111
+  s_7850ea5efd82d0::t_9d117b167fb8e8 3-4
+playwright.config.ts
+  s_7850ea5efd82d0::t_a52aa6d6efdc09 9
+src/pages/CaseConverter/index.tsx
+  s_7850ea5efd82d0::t_585b0bbf6a1ca3 1-106
+src/App.tsx
+  s_7850ea5efd82d0::t_33aaf7130bace0 13
+  s_7850ea5efd82d0::t_c3ae0cd7961749 84-88
+  s_7850ea5efd82d0::t_9182621366b7f3 22-25
+  s_7850ea5efd82d0::t_310c2d0e81c2c2 32,36
+  s_7850ea5efd82d0::t_c0c5063152a52b 60-62
+src/pages/Timestamp/index.tsx
+  s_7850ea5efd82d0::t_193456336b9f82 1-68,71-110,115-155
+  s_7850ea5efd82d0::t_e9088d9bb94d55 69-70,111-114
+src/pages/HashGenerator/index.tsx
+  s_7850ea5efd82d0::t_e9088d9bb94d55 62-65
+  s_7850ea5efd82d0::t_e376a93574d8f4 1-23,31-33,36-47,49-61,66-82
+  s_7850ea5efd82d0::t_766607870a19af 24-30,34-35
+  s_7850ea5efd82d0::t_ec43fe420d3b87 48
+src/pages/Home/tools.ts
+  s_7850ea5efd82d0::t_74faeb92b5f8a0 176-217
+src/components/TextArea.tsx
+  s_7850ea5efd82d0::t_f5bcb48da4b085 13,19-22,27
+src/pages/JSONFormatter/index.tsx
+  s_7850ea5efd82d0::t_c13d14009063f4 1-27
+src/components/IOwithCopy.tsx
+  s_7850ea5efd82d0::t_1d5a7bd9240db4 43
+  s_7850ea5efd82d0::t_5b2a9ac3b01528 52-61
+  s_7850ea5efd82d0::t_88cb4d15bab5a2 66
+  s_7850ea5efd82d0::t_4e8d97db9ba168 7-11,16-18,27,32-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "8d326e9d92a974175498880ff24f3fc870771703",
+  "prompts": {},
+  "sessions": {
+    "s_7850ea5efd82d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a98a787c-9769-485d-89a2-b8ebd401caf6",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
