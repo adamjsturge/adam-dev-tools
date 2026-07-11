@@ -1,0 +1,19 @@
+vite.config.ts
+  s_0b85104dc51c02::t_aca5e58a05040b 6,9-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "681bbfc8124301bd9a9ae23a5b7db3e0a1e5e803",
+  "prompts": {},
+  "sessions": {
+    "s_0b85104dc51c02": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "23e7730d-bce4-4047-ba05-450e8968de03",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
