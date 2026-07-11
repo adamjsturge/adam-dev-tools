@@ -10,17 +10,21 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ customClass = "", label, error, fill = false, ...props }, ref) => {
+  ({ customClass = "", label, error, fill = false, id, ...props }, ref) => {
     return (
       <div
         className={classNames("flex flex-col", fill ? "min-h-0 flex-1" : "")}
       >
         {label && (
-          <label className="text-ctp-text mb-2 block text-sm font-semibold tracking-wide">
+          <label
+            htmlFor={id}
+            className="text-ctp-text mb-2 block text-sm font-semibold tracking-wide"
+          >
             {label}
           </label>
         )}
         <textarea
+          id={id}
           ref={ref}
           className={classNames(
             "w-full resize rounded-md px-4 py-3 font-mono text-sm transition-colors duration-100",
