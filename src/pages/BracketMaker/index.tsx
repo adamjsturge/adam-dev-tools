@@ -203,21 +203,21 @@ const BracketMaker = () => {
         <Section title="Players">
           <div className="space-y-4">
             <Input
+              id="player-count"
               label="Number of Players"
               type="number"
               min={2}
               max={MAX_PLAYERS}
               value={playerCount}
               onChange={handlePlayerCountChange}
-              aria-label="Number of players"
             />
             <TextArea
+              id="player-names"
               label="Player Names (one per line)"
               value={namesText}
               onChange={(e) => setNamesText(e.target.value)}
               placeholder={`Enter up to ${playerCount} player names, one per line...`}
               rows={Math.min(playerCount, 16)}
-              aria-label="Player names input"
             />
             <p className="text-ctp-subtext0 text-sm">
               {nameCount} player{nameCount === 1 ? "" : "s"} entered

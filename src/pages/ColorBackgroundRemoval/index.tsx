@@ -2,6 +2,125 @@ import { useRef, useState } from "react";
 import Button from "../../components/Button";
 import PageShell from "../../components/PageShell";
 
+const colorMatch = (
+  data: Uint8ClampedArray,
+  index: number,
+  r: number,
+  g: number,
+  b: number,
+  tolerance: number,
+) => {
+  const rDiff = Math.abs(data[index] - r);
+  const gDiff = Math.abs(data[index + 1] - g);
+  const bDiff = Math.abs(data[index + 2] - b);
+  return rDiff <= tolerance && gDiff <= tolerance && bDiff <= tolerance;
+};
+
+const floodFill = (
+  imageData: ImageData,
+  x: number,
+  y: number,
+  tolerance: number,
+  aggressive: boolean = false,
+) => {
+  const width = imageData.width;
+  const height = imageData.height;
+  const data = new Uint8ClampedArray(imageData.data);
+
+  const targetIndex = (y * width + x) * 4;
+  const targetR = data[targetIndex];
+  const targetG = data[targetIndex + 1];
+  const targetB = data[targetIndex + 2];
+
+  // 1 byte per pixel — far cheaper than a Set<number> and O(1) to index.
+  const visited = new Uint8Array(width * height);
+
+  // Index-pointer queue over pixel keys (y * width + x). `queue.shift()`
+  // is O(n) per dequeue (O(n^2) for the whole fill); reading at an
+  // advancing head index is O(1). Checks happen BEFORE push, so the queue
+  // never holds out-of-bounds, visited, or non-matching pixels.
+  const queue: number[] = [];
+
+  if (
+    x >= 0 &&
+    x < width &&
+    y >= 0 &&
+    y < height &&
+    colorMatch(data, targetIndex, targetR, targetG, targetB, tolerance)
+  ) {
+    const startKey = y * width + x;
+    visited[startKey] = 1;
+    queue.push(startKey);
+  }
+
+  let head = 0;
+  while (head < queue.length) {
+    const key = queue[head++];
+    const currentX = key % width;
+    const currentY = (key - currentX) / width;
+    const index = key * 4;
+
+    // Make pixel transparent
+    data[index + 3] = 0;
+
+    // Left
+    if (currentX > 0) {
+      const neighborKey = key - 1;
+      if (
+        !visited[neighborKey] &&
+        colorMatch(data, neighborKey * 4, targetR, targetG, targetB, tolerance)
+      ) {
+        visited[neighborKey] = 1;
+        queue.push(neighborKey);
+      }
+    }
+    // Right
+    if (currentX < width - 1) {
+      const neighborKey = key + 1;
+      if (
+        !visited[neighborKey] &&
+        colorMatch(data, neighborKey * 4, targetR, targetG, targetB, tolerance)
+      ) {
+        visited[neighborKey] = 1;
+        queue.push(neighborKey);
+      }
+    }
+    // Up
+    if (currentY > 0) {
+      const neighborKey = key - width;
+      if (
+        !visited[neighborKey] &&
+        colorMatch(data, neighborKey * 4, targetR, targetG, targetB, tolerance)
+      ) {
+        visited[neighborKey] = 1;
+        queue.push(neighborKey);
+      }
+    }
+    // Down
+    if (currentY < height - 1) {
+      const neighborKey = key + width;
+      if (
+        !visited[neighborKey] &&
+        colorMatch(data, neighborKey * 4, targetR, targetG, targetB, tolerance)
+      ) {
+        visited[neighborKey] = 1;
+        queue.push(neighborKey);
+      }
+    }
+  }
+
+  // Aggressive cleanup: Remove ALL matching pixels, not just connected ones
+  if (aggressive) {
+    for (let i = 0; i < data.length; i += 4) {
+      if (colorMatch(data, i, targetR, targetG, targetB, tolerance)) {
+        data[i + 3] = 0;
+      }
+    }
+  }
+
+  return new ImageData(data, width, height);
+};
+
 const ColorBackgroundRemoval = () => {
   const [file, setFile] = useState<File | null>(null);
   const [imageData, setImageData] = useState<ImageData | null>(null);
@@ -55,87 +174,6 @@ const ColorBackgroundRemoval = () => {
       });
       reader.readAsDataURL(selectedFile);
     }
-  };
-
-  const colorMatch = (
-    data: Uint8ClampedArray,
-    index: number,
-    r: number,
-    g: number,
-    b: number,
-    tolerance: number,
-  ) => {
-    const rDiff = Math.abs(data[index] - r);
-    const gDiff = Math.abs(data[index + 1] - g);
-    const bDiff = Math.abs(data[index + 2] - b);
-    return rDiff <= tolerance && gDiff <= tolerance && bDiff <= tolerance;
-  };
-
-  const floodFill = (
-    imageData: ImageData,
-    x: number,
-    y: number,
-    tolerance: number,
-    aggressive: boolean = false,
-  ) => {
-    const width = imageData.width;
-    const height = imageData.height;
-    const data = new Uint8ClampedArray(imageData.data);
-    const visited = new Set<number>();
-
-    const targetIndex = (y * width + x) * 4;
-    const targetR = data[targetIndex];
-    const targetG = data[targetIndex + 1];
-    const targetB = data[targetIndex + 2];
-
-    const queue: Array<[number, number]> = [[x, y]];
-
-    while (queue.length > 0) {
-      const current = queue.shift();
-      if (!current) continue;
-
-      const [currentX, currentY] = current;
-      const index = (currentY * width + currentX) * 4;
-      const key = currentY * width + currentX;
-
-      if (
-        currentX < 0 ||
-        currentX >= width ||
-        currentY < 0 ||
-        currentY >= height ||
-        visited.has(key)
-      ) {
-        continue;
-      }
-
-      if (!colorMatch(data, index, targetR, targetG, targetB, tolerance)) {
-        continue;
-      }
-
-      visited.add(key);
-      // Make pixel transparent
-      data[index + 3] = 0;
-
-      // Add neighbors to queue
-      queue.push(
-        [currentX + 1, currentY],
-        [currentX - 1, currentY],
-        [currentX, currentY + 1],
-        [currentX, currentY - 1],
-      );
-    }
-
-    // Aggressive cleanup: Remove ALL matching pixels, not just connected ones
-    if (aggressive) {
-      for (let i = 0; i < data.length; i += 4) {
-        if (colorMatch(data, i, targetR, targetG, targetB, tolerance)) {
-          data[i + 3] = 0;
-        }
-      }
-    }
-
-    const newImageData = new ImageData(data, width, height);
-    return newImageData;
   };
 
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -235,6 +273,7 @@ const ColorBackgroundRemoval = () => {
           <input
             type="file"
             accept="image/*"
+            aria-label="Choose image to remove a color from"
             onChange={handleFileChange}
             className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-md border p-2 file:mr-4 file:rounded-md file:border-0 file:px-4 file:py-2"
           />
@@ -255,6 +294,7 @@ const ColorBackgroundRemoval = () => {
                 type="range"
                 min="0"
                 max="100"
+                aria-label="Tolerance"
                 value={tolerance}
                 onChange={(e) => setTolerance(Number.parseInt(e.target.value))}
                 className="accent-ctp-blue w-full"
@@ -268,6 +308,7 @@ const ColorBackgroundRemoval = () => {
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
+                  aria-label="Use custom background color"
                   checked={useCustomBackground}
                   onChange={(e) => setUseCustomBackground(e.target.checked)}
                   className="accent-ctp-blue"
@@ -287,6 +328,7 @@ const ColorBackgroundRemoval = () => {
                   </label>
                   <input
                     id="bg-color-picker"
+                    aria-label="Background color"
                     type="color"
                     value={backgroundColor}
                     onChange={(e) => setBackgroundColor(e.target.value)}
@@ -301,6 +343,7 @@ const ColorBackgroundRemoval = () => {
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
+                  aria-label="Aggressive cleanup (experimental)"
                   checked={aggressiveCleanup}
                   onChange={(e) => setAggressiveCleanup(e.target.checked)}
                   className="accent-ctp-blue"
@@ -348,6 +391,7 @@ const ColorBackgroundRemoval = () => {
             >
               <canvas
                 ref={canvasRef}
+                aria-label="Image preview. Click a color to remove it"
                 onClick={handleCanvasClick}
                 className={`max-w-full rounded-md ${isPickerMode ? "cursor-crosshair" : ""}`}
                 style={{ display: "block" }}
@@ -367,7 +411,11 @@ const ColorBackgroundRemoval = () => {
         )}
 
         {/* Hidden original canvas */}
-        <canvas ref={originalCanvasRef} style={{ display: "none" }} />
+        <canvas
+          ref={originalCanvasRef}
+          aria-hidden="true"
+          style={{ display: "none" }}
+        />
 
         {/* Action Buttons */}
         {file && (

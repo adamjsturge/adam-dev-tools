@@ -13,6 +13,10 @@ export default defineConfig({
       registerType: "autoUpdate",
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,woff2}"],
+        // The background-removal runtime (~880 KB of ONNX/imgly JS) is
+        // pay-per-use: excluded from the precache manifest and fetched
+        // over the network only when /background-removal is visited.
+        globIgnores: ["**/ort*.js", "**/imgly-*.js"],
         navigateFallback: "index.html",
         runtimeCaching: [
           {
@@ -51,5 +55,17 @@ export default defineConfig({
   ],
   build: {
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // Give the background-removal runtime a stable chunk name so
+          // globIgnores above can target it — without this the @imgly
+          // library builds as a generic index-<hash>.js chunk.
+          if (id.includes("@imgly") || id.includes("onnxruntime")) {
+            return "imgly";
+          }
+        },
+      },
+    },
   },
 });

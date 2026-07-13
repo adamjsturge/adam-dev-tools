@@ -88,6 +88,7 @@ const BackgroundRemoval = () => {
           <input
             type="file"
             accept="image/*"
+            aria-label="Choose image to remove background from"
             onChange={handleFileChange}
             disabled={processing}
             className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-md border p-2 file:mr-4 file:rounded-md file:border-0 file:px-4 file:py-2 disabled:cursor-not-allowed disabled:opacity-50"

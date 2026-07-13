@@ -34,6 +34,7 @@ const ExtraLineRemoval = () => {
       </div>
       <TextArea
         ref={textAreaRef}
+        aria-label="Text to remove extra lines from"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         fill

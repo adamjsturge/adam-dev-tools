@@ -47,6 +47,7 @@ const WordCounter = () => {
       <div className="grid flex-1 grid-cols-1 content-start gap-4 lg:grid-cols-[minmax(0,1fr)_16rem] lg:grid-rows-[minmax(0,1fr)]">
         <div className="flex min-h-[45vh] flex-col lg:min-h-0">
           <TextArea
+            aria-label="Text to count"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Start typing or paste your text here..."

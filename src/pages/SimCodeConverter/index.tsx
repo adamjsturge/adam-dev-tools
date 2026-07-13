@@ -27,7 +27,13 @@ const SimCodeConverter = () => {
       subtitle="Paste a deck list to auto-convert it to standard format (4 OP01-001 → 4xOP01-001)"
       wide
     >
-      <TextArea ref={textAreaRef} value={content} onChange={handleInput} fill />
+      <TextArea
+        ref={textAreaRef}
+        aria-label="Deck list to convert"
+        value={content}
+        onChange={handleInput}
+        fill
+      />
     </PageShell>
   );
 };

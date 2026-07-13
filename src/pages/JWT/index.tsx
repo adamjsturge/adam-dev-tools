@@ -149,6 +149,7 @@ const JWTDebugger = () => {
               </h2>
             </div>
             <TextArea
+              aria-label="Encoded JWT"
               value={token}
               onChange={(e) => setToken(e.target.value)}
               placeholder="Paste your JWT token here...&#10;&#10;Example:&#10;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"

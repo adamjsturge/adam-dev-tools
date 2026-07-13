@@ -171,6 +171,7 @@ const TextCompare = () => {
             </h2>
             <TextArea
               ref={textArea1Ref}
+              aria-label="Text 1 (Original)"
               value={text1}
               onChange={(e) => {
                 setText1(e.target.value);
@@ -185,6 +186,7 @@ const TextCompare = () => {
               Text 2 (Compare to)
             </h2>
             <TextArea
+              aria-label="Text 2 (Compare to)"
               value={text2}
               onChange={(e) => {
                 setText2(e.target.value);

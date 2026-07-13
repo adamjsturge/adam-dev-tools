@@ -508,6 +508,7 @@ const QRCodeGenerator = () => {
             <div className="flex items-center gap-2">
               <input
                 id="dark-color"
+                aria-label="Foreground Color"
                 type="color"
                 value={darkColor}
                 onChange={(e) => setDarkColor(e.target.value)}
@@ -532,6 +533,7 @@ const QRCodeGenerator = () => {
             <div className="flex items-center gap-2">
               <input
                 id="light-color"
+                aria-label="Background Color"
                 type="color"
                 value={lightColor}
                 onChange={(e) => setLightColor(e.target.value)}
@@ -594,6 +596,7 @@ const QRCodeGenerator = () => {
               </label>
               <input
                 id="logo-size"
+                aria-label="Logo Size"
                 type="range"
                 min="10"
                 max="40"
@@ -607,6 +610,7 @@ const QRCodeGenerator = () => {
               <label className="text-ctp-text flex items-center gap-2 text-xs">
                 <input
                   type="checkbox"
+                  aria-label="Add background to logo"
                   checked={logoBackground}
                   onChange={(e) => setLogoBackground(e.target.checked)}
                   className="accent-ctp-blue rounded"
@@ -623,6 +627,7 @@ const QRCodeGenerator = () => {
                   </label>
                   <input
                     id="logo-padding"
+                    aria-label="Padding"
                     type="number"
                     min="0"
                     max="20"
@@ -665,6 +670,7 @@ const QRCodeGenerator = () => {
             <input
               ref={logoInputRef}
               id="logo-input"
+              aria-label="Upload logo image"
               type="file"
               accept="image/*"
               onChange={handleLogoUpload}
@@ -703,6 +709,7 @@ const QRCodeGenerator = () => {
             </label>
             <input
               id="qr-size"
+              aria-label="Size"
               type="range"
               min="256"
               max="2048"
@@ -722,6 +729,7 @@ const QRCodeGenerator = () => {
             </label>
             <input
               id="qr-margin"
+              aria-label="Quiet Zone"
               type="range"
               min="0"
               max="10"
@@ -742,6 +750,7 @@ const QRCodeGenerator = () => {
             </label>
             <input
               id="corner-radius"
+              aria-label="Corner Softness"
               type="range"
               min="0"
               max="50"
@@ -754,6 +763,7 @@ const QRCodeGenerator = () => {
           <label className="text-ctp-text flex items-center gap-2 text-xs">
             <input
               type="checkbox"
+              aria-label="Round corner detection patterns"
               checked={cornerDots}
               onChange={(e) => setCornerDots(e.target.checked)}
               className="accent-ctp-blue rounded"

@@ -77,6 +77,7 @@ const WebPConverter = () => {
             type="file"
             accept="image/*"
             multiple
+            aria-label="Choose images to convert to WebP"
             onChange={(e) => setFiles(e.target.files)}
             className="file:bg-ctp-surface0 file:text-ctp-text hover:file:bg-ctp-surface1 border-ctp-surface2 w-full rounded-md border p-2 file:mr-4 file:rounded-md file:border-0 file:px-4 file:py-2"
           />
@@ -93,6 +94,7 @@ const WebPConverter = () => {
                 min="10"
                 max="100"
                 step="10"
+                aria-label="Quality"
                 value={qualityPercent}
                 onChange={(e) =>
                   setQualityPercent(Number.parseInt(e.target.value, 10))
@@ -105,6 +107,7 @@ const WebPConverter = () => {
           <label className="flex items-center gap-2">
             <input
               type="checkbox"
+              aria-label="Append quality to filename"
               checked={appendQuality}
               onChange={(e) => setAppendQuality(e.target.checked)}
               className="accent-ctp-blue"
