@@ -1,0 +1,21 @@
+src/pages/EVCharging/index.tsx
+  s_d7e8cc21a92427::t_e1f6a68c4d2259 289
+  s_d7e8cc21a92427::t_e01bb0eaa1eb86 277-288,290-309
+  s_d7e8cc21a92427::t_2101bd4dd50c86 42-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "7a86a0fb6e0c654f52554753849016142eb2cec2",
+  "prompts": {},
+  "sessions": {
+    "s_d7e8cc21a92427": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f8d3842c-147d-42fe-8067-8847124b5b09",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
