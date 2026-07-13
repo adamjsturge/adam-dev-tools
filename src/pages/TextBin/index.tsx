@@ -24,7 +24,13 @@ const TextBin = () => {
       subtitle="A scratchpad that persists in your browser"
       wide
     >
-      <TextArea ref={textAreaRef} value={content} onChange={handleInput} fill />
+      <TextArea
+        ref={textAreaRef}
+        aria-label="Text Bin scratchpad"
+        value={content}
+        onChange={handleInput}
+        fill
+      />
     </PageShell>
   );
 };

@@ -166,6 +166,7 @@ const QRCodeScanner = () => {
             <div className="mb-6 flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={handleClipboardRead}
+                aria-label="Paste from Clipboard"
                 className="bg-ctp-surface2 hover:bg-ctp-overlay0 focus:ring-ctp-surface2 focus:ring-offset-ctp-base flex flex-1 items-center justify-center gap-3 rounded-md p-4 transition-colors duration-100 focus:ring-2 focus:ring-offset-2 focus:outline-none"
               >
                 <svg
@@ -200,6 +201,7 @@ const QRCodeScanner = () => {
                 <input
                   type="file"
                   accept="image/*"
+                  aria-label="Upload image file"
                   onChange={handleFileChange}
                   className="peer absolute inset-0 h-full w-full cursor-pointer opacity-0"
                 />

@@ -98,7 +98,8 @@ const Home = () => {
               </div>
               <input
                 ref={searchInputRef}
-                type="text"
+                type="search"
+                aria-label="Search tools"
                 placeholder="Search tools..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}

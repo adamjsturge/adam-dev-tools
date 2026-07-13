@@ -1,5 +1,6 @@
 import { Suspense, useDeferredValue, useEffect } from "react";
 import { Redirect, Route, Switch, useLocation } from "wouter";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -97,13 +98,17 @@ const AppRoutes = () => {
 };
 
 const App = () => {
+  const [location] = useLocation();
+
   useEffect(() => {
     prefetchAllRoutes();
   }, []);
 
   return (
     <Layout>
-      <AppRoutes />
+      <ErrorBoundary resetKey={location}>
+        <AppRoutes />
+      </ErrorBoundary>
     </Layout>
   );
 };

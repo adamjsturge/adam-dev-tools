@@ -33,7 +33,7 @@ const Tile = ({ title, value, highlight = false, subtitle }: TileProps) => {
       >
         {(value * 100).toFixed(2)}%
       </p>
-      {subtitle && <p className="text-ctp-overlay0 mt-2 text-xs">{subtitle}</p>}
+      {subtitle && <p className="text-ctp-subtext0 mt-2 text-xs">{subtitle}</p>}
     </div>
   );
 };

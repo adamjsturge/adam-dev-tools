@@ -65,6 +65,7 @@ const MultiDeckConverter = () => {
               Paste your deck links or custom card lists here.
             </p>
             <TextArea
+              aria-label="Input Links"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="https://gumgum.gg/deckbuilder?deck=...&#10;My Deck:&#10;4xOP01-001&#10;..."

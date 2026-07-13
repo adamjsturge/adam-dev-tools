@@ -44,6 +44,7 @@ export default tseslint.config({
       },
     ],
     ...jsxA11y.flatConfigs.strict.rules,
+    "jsx-a11y/control-has-associated-label": "warn",
     ...reactHooks.configs.recommended.rules,
     "react-refresh/only-export-components": [
       "warn",

@@ -1,4 +1,4 @@
-import { ComponentProps } from "react";
+import { ComponentProps, useId } from "react";
 import classNames from "../utils/classNames";
 
 interface InputProps extends ComponentProps<"input"> {
@@ -16,21 +16,28 @@ const Input = ({
   helperText,
   ...props
 }: InputProps) => {
+  const autoId = useId();
+  const inputId = id ?? autoId;
+  const helperId = `${inputId}-helper`;
+  const errorId = `${inputId}-error`;
+
   return (
     <div className={customClass}>
       {label && (
         <label
-          htmlFor={id}
+          htmlFor={inputId}
           className="text-ctp-text mb-2 block text-sm font-semibold tracking-wide"
         >
           {label}
         </label>
       )}
       <input
-        id={id}
+        id={inputId}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : helperText ? helperId : undefined}
         className={classNames(
           "w-full rounded-md px-4 py-2.5 transition-colors duration-100",
-          "bg-ctp-surface0 text-ctp-text placeholder:text-ctp-overlay0 border-2",
+          "bg-ctp-surface0 text-ctp-text placeholder:text-ctp-subtext0 border-2",
           "focus:ring-offset-ctp-base focus:ring-2 focus:ring-offset-2 focus:outline-none",
           error
             ? "border-ctp-red focus:border-ctp-red focus:ring-ctp-red/50"
@@ -40,10 +47,14 @@ const Input = ({
         {...props}
       />
       {helperText && !error && (
-        <p className="text-ctp-overlay1 mt-1.5 text-xs">{helperText}</p>
+        <p id={helperId} className="text-ctp-subtext0 mt-1.5 text-xs">
+          {helperText}
+        </p>
       )}
       {error && (
-        <p className="text-ctp-red mt-1.5 text-xs font-medium">{error}</p>
+        <p id={errorId} className="text-ctp-red mt-1.5 text-xs font-medium">
+          {error}
+        </p>
       )}
     </div>
   );

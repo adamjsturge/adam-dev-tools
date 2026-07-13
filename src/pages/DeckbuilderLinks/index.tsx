@@ -81,6 +81,7 @@ const DeckbuilderLinks = () => {
               etc.)
             </p>
             <TextArea
+              aria-label="Deck List Input"
               value={content}
               onChange={handleInput}
               placeholder="1xOP12-001&#10;4xOP01-016&#10;4xOP03-008&#10;4xOP12-006&#10;4xOP12-014&#10;4xST01-011&#10;2xOP01-025&#10;4xOP10-005&#10;2xEB01-003&#10;4xOP12-015&#10;3xOP12-016&#10;4xOP12-017&#10;4xOP12-018&#10;3xOP12-019&#10;2xOP06-018&#10;2xST21-017"

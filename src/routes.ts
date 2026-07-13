@@ -76,6 +76,10 @@ const whenIdle = (callback: () => void) => {
 
 let hasStartedPrefetch = false;
 
+// Routable but delisted tools whose chunks are too heavy to speculatively
+// download for every visitor; they load on actual navigation instead.
+const PREFETCH_SKIP = new Set<string>(["/background-removal"]);
+
 export const prefetchAllRoutes = () => {
   if (hasStartedPrefetch) return;
   hasStartedPrefetch = true;
@@ -89,7 +93,12 @@ export const prefetchAllRoutes = () => {
     return;
   }
 
-  const loaders = Object.values<RouteLoader>(routeLoaders);
+  const loaders: RouteLoader[] = [];
+  for (const [path, loader] of Object.entries<RouteLoader>(routeLoaders)) {
+    if (!PREFETCH_SKIP.has(path)) {
+      loaders.push(loader);
+    }
+  }
   let index = 0;
   const loadNext = () => {
     if (index >= loaders.length) return;

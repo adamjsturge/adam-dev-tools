@@ -1,4 +1,4 @@
-import { SelectHTMLAttributes } from "react";
+import { SelectHTMLAttributes, useId } from "react";
 import classNames from "../utils/classNames";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -14,18 +14,24 @@ const Select = ({
   error,
   ...props
 }: SelectProps) => {
+  const autoId = useId();
+  const selectId = id ?? autoId;
+  const errorId = `${selectId}-error`;
+
   return (
     <div className={customClass}>
       {label && (
         <label
-          htmlFor={id}
+          htmlFor={selectId}
           className="text-ctp-text mb-2 block text-sm font-semibold tracking-wide"
         >
           {label}
         </label>
       )}
       <select
-        id={id}
+        id={selectId}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : undefined}
         className={classNames(
           "w-full rounded-md px-4 py-2.5 transition-colors duration-100",
           "bg-ctp-surface0 text-ctp-text border-2",
@@ -38,7 +44,9 @@ const Select = ({
         {...props}
       />
       {error && (
-        <p className="text-ctp-red mt-1.5 text-xs font-medium">{error}</p>
+        <p id={errorId} className="text-ctp-red mt-1.5 text-xs font-medium">
+          {error}
+        </p>
       )}
     </div>
   );
