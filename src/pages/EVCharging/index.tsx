@@ -39,6 +39,16 @@ const EVCharging = () => {
   const chargeRange = targetCharge - currentCharge;
   const isValidInputs = currentCharge < targetCharge && estimatedMinutes > 0;
 
+  const estimatedHoursPart = Math.floor(estimatedMinutes / 60);
+  const estimatedMinutesPart = estimatedMinutes % 60;
+
+  const setEstimatedTime = (hours: number, minutes: number) => {
+    const safeHours = Number.isNaN(hours) ? 0 : Math.max(0, hours);
+    const safeMinutes = Number.isNaN(minutes) ? 0 : Math.max(0, minutes);
+    setEstimatedMinutes(safeHours * 60 + safeMinutes);
+    setShowResults(false);
+  };
+
   const formatTime = (minutes: number): string => {
     const hours = Math.floor(minutes / 60);
     const mins = Math.round(minutes % 60);
@@ -264,20 +274,39 @@ const EVCharging = () => {
             />
           </div>
 
-          <Input
-            id="estimatedMinutes"
-            label="Estimated Time (minutes)"
-            type="number"
-            min={1}
-            value={estimatedMinutes}
-            onChange={(e) => {
-              setEstimatedMinutes(Number(e.target.value));
-              setShowResults(false);
-            }}
-            placeholder="45"
-            helperText="Time your car estimates to reach target charge"
-            customClass="mt-4"
-          />
+          <fieldset className="mt-4">
+            <legend className="text-ctp-text mb-2 text-sm font-semibold tracking-wide">
+              Estimated Time
+            </legend>
+            <div className="grid grid-cols-2 gap-4">
+              <Input
+                id="estimatedHours"
+                label="Hours"
+                type="number"
+                min={0}
+                value={estimatedHoursPart}
+                onChange={(e) =>
+                  setEstimatedTime(Number(e.target.value), estimatedMinutesPart)
+                }
+                placeholder="0"
+              />
+              <Input
+                id="estimatedMinutesPart"
+                label="Minutes"
+                type="number"
+                min={0}
+                value={estimatedMinutesPart}
+                onChange={(e) =>
+                  setEstimatedTime(estimatedHoursPart, Number(e.target.value))
+                }
+                placeholder="45"
+              />
+            </div>
+            <p className="text-ctp-overlay1 mt-1.5 text-xs">
+              Time your car estimates to reach target charge. Minutes over 59
+              roll into hours automatically.
+            </p>
+          </fieldset>
 
           <div className="mt-4 flex items-start gap-2">
             <Input
