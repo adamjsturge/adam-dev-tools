@@ -1,0 +1,68 @@
+src/components/Select.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 1,17-20,25,32-34,47-49
+src/pages/BracketMaker/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 206,215
+src/components/Input.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 1,19-23,28,35-37,40,50-52,55-57
+src/pages/Home/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 101-102
+src/pages/TextBin/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 27-33
+vite.config.ts
+  s_b9966d065848d7::t_ef4d6a95f29fe5 16-19,58-69
+src/pages/WebP/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 80,97,110
+src/pages/MultiDeckConverter/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 68
+src/components/TextArea.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 1,14-17,24,31-33,37,50-52
+src/components/Tile.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 36
+src/pages/SimCodeConverter/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 30-36
+src/pages/JWT/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 152
+src/pages/DeckPrice/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 163,185
+src/pages/Compare/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 174,189
+src/pages/ExtraLineRemoval/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 37
+src/pages/QRCode/Generator.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 511,536,599,613,630,673,712,732,753,766
+src/pages/WordCounter/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 50
+src/routes.ts
+  s_b9966d065848d7::t_75a160c7254639 96-101
+  s_b9966d065848d7::t_ef4d6a95f29fe5 79-82
+src/pages/DeckbuilderLinks/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 84
+eslint.config.js
+  s_b9966d065848d7::t_ef4d6a95f29fe5 47
+src/App.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 3,101-102,109-111
+src/pages/BackgroundRemoval/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 91
+src/pages/ColorBackgroundRemoval/index.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 5-123,276,297,311,331,346,394,414-418
+src/pages/QRCode/Scanner.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 169,204
+src/components/ErrorBoundary.tsx
+  s_b9966d065848d7::t_ef4d6a95f29fe5 1-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "07186ef59f383b55455b7787b902560345614336",
+  "prompts": {},
+  "sessions": {
+    "s_b9966d065848d7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "57f0c5aa-3788-4d2a-bda6-c405d193ae28",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
