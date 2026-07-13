@@ -173,4 +173,46 @@ export const tools: Tool[] = [
     meta: "jwt,json,web,token,decode,debug,auth,tool",
     category: "encoding",
   },
+  {
+    href: "/json",
+    title: "JSON Formatter",
+    meta: "json,format,pretty,minify,validate,lint,tool",
+    category: "text",
+  },
+  {
+    href: "/hash",
+    title: "Hash Generator",
+    meta: "hash,sha,sha1,sha256,sha512,checksum,digest,tool",
+    category: "encoding",
+  },
+  {
+    href: "/case-converter",
+    title: "Case Converter",
+    meta: "case,camel,snake,kebab,pascal,title,convert,tool",
+    category: "text",
+  },
+  {
+    href: "/html-entities/encode",
+    title: "HTML Entity Encoder",
+    meta: "html,entity,entities,escape,encode,tool",
+    category: "encoding",
+  },
+  {
+    href: "/html-entities/decode",
+    title: "HTML Entity Decoder",
+    meta: "html,entity,entities,unescape,decode,tool",
+    category: "encoding",
+  },
+  {
+    href: "/timestamp",
+    title: "Unix Timestamp Converter",
+    meta: "unix,timestamp,epoch,date,time,convert,iso,tool",
+    category: "utilities",
+  },
+  {
+    href: "/uuid",
+    title: "UUID / ULID Generator",
+    meta: "uuid,ulid,guid,id,generate,random,v4,v7,tool",
+    category: "utilities",
+  },
 ];
