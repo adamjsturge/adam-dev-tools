@@ -49,6 +49,16 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    proxy: {
+      // Cloudflare answers this path in production; proxy to the deployed
+      // site so the My IP tool also works in local dev
+      "/cdn-cgi/trace": {
+        target: "https://tools.sturge.dev",
+        changeOrigin: true,
+      },
+    },
+  },
   build: {
     sourcemap: true,
   },

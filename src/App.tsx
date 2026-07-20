@@ -25,6 +25,7 @@ const HTMLEntityEncode = lazyRoute("/html-entities/encode");
 const JSONFormatter = lazyRoute("/json");
 const JWTDebugger = lazyRoute("/jwt");
 const MultiDeckConverter = lazyRoute("/multi-deck-converter");
+const MyIP = lazyRoute("/my-ip");
 const QRCodeGenerator = lazyRoute("/qr-code");
 const QRCodeScanner = lazyRoute("/qr-code/scan");
 const SimCodeConverter = lazyRoute("/sim-code-converter");
@@ -86,6 +87,7 @@ const AppRoutes = () => {
         <Route path="/case-converter" component={CaseConverter} />
         <Route path="/timestamp" component={Timestamp} />
         <Route path="/uuid" component={UUIDGenerator} />
+        <Route path="/my-ip" component={MyIP} />
 
         <Route path="/home">
           <Redirect to="/" />

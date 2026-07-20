@@ -43,6 +43,7 @@ export const routeLoaders = {
   "/json": () => import("./pages/JSONFormatter"),
   "/jwt": () => import("./pages/JWT"),
   "/multi-deck-converter": () => import("./pages/MultiDeckConverter"),
+  "/my-ip": () => import("./pages/MyIP"),
   "/opacifier": () => import("./pages/ColorOpacity"),
   "/qr-code": () => import("./pages/QRCode/Generator"),
   "/qr-code/scan": () => import("./pages/QRCode/Scanner"),
