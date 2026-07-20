@@ -1,0 +1,32 @@
+src/pages/MyIP/index.tsx
+  s_772059cdc3b24d::t_df310b4a58563e 39,59-60,62-63,66-67
+  s_772059cdc3b24d::t_6e5348abff288f 73
+  s_772059cdc3b24d::t_cc0edb0bd7e798 1-5,9,18,23,35,37-38,40,58,64-65,68-71,74,107,115,120-125
+  s_772059cdc3b24d::t_8d962aa85d1f37 6-8,10-17,19-22,24-34,36,41-57,61,72,75-106,108-114,116-119
+src/routes.ts
+  s_772059cdc3b24d::t_fbb1ceec9d5ab4 46
+src/pages/Home/tools.ts
+  s_772059cdc3b24d::t_a5c415c7031287 221
+  s_772059cdc3b24d::t_89e16fde83ba8b 218-220,222-223
+vite.config.ts
+  s_772059cdc3b24d::t_3332ee6df1f9b9 52-61
+src/App.tsx
+  s_772059cdc3b24d::t_45ade7cc516af4 28
+  s_772059cdc3b24d::t_ba4312693401e2 90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "918030e594add8849e06f5d4e8f8dd1c3b1306f2",
+  "prompts": {},
+  "sessions": {
+    "s_772059cdc3b24d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "07dfcabd-91c7-4699-ba85-aca940f96f3f",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
