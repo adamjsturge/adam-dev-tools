@@ -1,0 +1,8 @@
+# Never edge-cache the service worker: a stale sw.js keeps clients pinned
+# to an old precache manifest after a deploy, which makes them request
+# hashed chunks that no longer exist
+/sw.js
+  Cache-Control: no-cache
+
+/registerSW.js
+  Cache-Control: no-cache
