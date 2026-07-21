@@ -10,26 +10,15 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
+      // Custom worker (src/sw.ts) instead of the generated one: it
+      // refuses to precache SPA-fallback HTML served under asset URLs,
+      // which otherwise poisons clients that update mid-deploy
+      strategies: "injectManifest",
+      srcDir: "src",
+      filename: "sw.ts",
       registerType: "autoUpdate",
-      workbox: {
+      injectManifest: {
         globPatterns: ["**/*.{js,css,html,svg,woff2}"],
-        navigateFallback: "index.html",
-        runtimeCaching: [
-          {
-            // Background-removal ONNX models (~40MB) fetched on first
-            // use; cache them so the tool keeps working offline
-            urlPattern: /^https:\/\/staticimgly\.com\/.*/,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "imgly-models",
-              expiration: {
-                maxEntries: 40,
-                maxAgeSeconds: 60 * 60 * 24 * 90,
-              },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
-        ],
       },
       manifest: {
         name: "Dev Tools",
