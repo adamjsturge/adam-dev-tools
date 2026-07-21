@@ -1,0 +1,19 @@
+public/_headers
+  s_772059cdc3b24d::t_4a6001b60721fa 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "4cedd5af4c8f3c4d652328ebad08c7c9f8501b02",
+  "prompts": {},
+  "sessions": {
+    "s_772059cdc3b24d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "07dfcabd-91c7-4699-ba85-aca940f96f3f",
+        "model": "claude-fable-5"
+      },
+      "human_author": "adamjsturge <adamjsturge@gmail.com>"
+    }
+  }
+}
